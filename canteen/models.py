@@ -9,6 +9,9 @@ class Dish(models.Model):
     estimated_count = models.IntegerField('good for how many people')
     sold_out = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name_plural = 'dishes'
+
     def __str__(self):
         return self.name
 
@@ -19,7 +22,7 @@ class Order(models.Model):
     id_no = models.CharField(max_length=100)
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
     count = models.IntegerField()
-    amount = models.FloatField()
+    amount = models.FloatField(editable=False)
 
     def __str__(self):
         return f'{self.name} orderred {self.dish}'
