@@ -68,16 +68,18 @@
             <h2>Our menu for today!</h2>
             <div class="w3-row">
                 {% for dish in dishes %}
-                <div class="w3-col m6 l4 dish {% if dish.sold_out %}sold-out{% endif %}">
-                    <div class="w3-center w3-card-4 w3-border w3-border-purple w3-bottombar w3-round">
-                        <div class="dish-image w3-purple"></div>
-                        <div class="w3-padding">
-                            <h4 class="{% if dish.sold_out %}w3-text-red{% endif %}">
-                                {{ dish.name }}
-                            </h4>
+                <a href="{% url 'canteen:dish-detail' dish.id %}">
+                    <div class="w3-col m6 l4 dish {% if dish.sold_out %}sold-out{% endif %}">
+                        <div class="w3-center w3-card-4 w3-border w3-border-purple w3-bottombar w3-round">
+                            <div class="dish-image w3-purple"></div>
+                            <div class="w3-padding">
+                                <h4 class="{% if dish.sold_out %}w3-text-red{% endif %}">
+                                    {{ dish.name }}
+                                </h4>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
                 {% endfor %}
             </div>
         </div>
