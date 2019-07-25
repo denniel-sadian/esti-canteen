@@ -1,5 +1,59 @@
-<ul>
-    {% for dish in dishes %}
-    <li>{{ dish.name }}</li>
-    {% endfor %}
-</ul>
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        header {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 50px;
+        }
+
+        @media only screen and (min-width: 600px) {
+            header h1 {
+                font-size: 70px;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            header h1 {
+                font-size: 90px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="w3-purple">
+        <div class="w3-container w3-center">
+            <h1>Welcome to ESTI Canteen!</h1>
+            <h4 class="w3-opacity">It's so good to eat, especially if you paid well.</h4>
+        </div>
+    </header>
+
+    <article class="w3-container w3-padding-32 w3-margin">
+        <div class="w3-content">
+            <h2>Our menu for today!</h2>
+
+        </div>
+    </article>
+</body>
+
+</html>
