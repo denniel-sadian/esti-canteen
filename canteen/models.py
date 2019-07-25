@@ -2,7 +2,7 @@ from django.db import models
 
 
 
-class Dish(model.Model):
+class Dish(models.Model):
     name = models.CharField(max_length=20)
     price = models.FloatField()
     date = models.DateField(auto_now=True)
@@ -12,7 +12,7 @@ class Dish(model.Model):
         return self.name
 
 
-class Order(model.Model):
+class Order(models.Model):
     date = models.DateField(auto_now=True)
     custumer_name = models.CharField(max_length=100)
     custumer_id_no = models.CharField(max_length=100)
