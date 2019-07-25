@@ -22,7 +22,7 @@ class Order(models.Model):
     amount = models.FloatField()
 
     def __str__(self):
-        return f'{self.customer_name} orderred {self.dish}'
+        return f'{self.name} orderred {self.dish}'
     
     def save(self, *args, **kwargs):
         self.amount = self.count * self.dish.price
