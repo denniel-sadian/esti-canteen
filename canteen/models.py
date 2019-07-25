@@ -15,8 +15,8 @@ class Dish(models.Model):
 
 class Order(models.Model):
     date = models.DateField(auto_now=True)
-    custumer_name = models.CharField(max_length=100)
-    custumer_id_no = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    id_no = models.CharField(max_length=100)
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
     count = models.IntegerField()
     amount = models.FloatField()
