@@ -7,6 +7,7 @@ class Dish(models.Model):
     price = models.FloatField()
     date = models.DateField(auto_now=True)
     estimated_count = models.IntegerField('good for how many people')
+    sold_out = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
