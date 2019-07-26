@@ -1,40 +1,56 @@
-{% extends "canteen/base.html" %}
+{% load static %}
 
-{% block title %}
-{{ dish.name|title }}
-{% endblock %}
+<!DOCTYPE html>
+<html>
 
-{% block header %}
-<div class="w3-container w3-center">
-    <h1>{{ dish.name|title }}</h1>
-    <h4 class="w3-opacity">It's so good to eat, especially if you've paid well.</h4>
-    <p>
-        <a href="#article" class="w3-button w3-padding w3-round">Details</a>
-    </p>
-</div>
-{% endblock %}
+<head>
+    <title>ESTI Canteen - {{ dish.name|title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            padding: 0px;
+            margin: 0px;
+        }
 
-{% block article %}
-{% if dish.sold_out %}
-<div class="w3-center w3-red w3-card-4 w3-round w3-padding">
-    <h1>{{ dish.name|title }} is sold out!</h1>
-    <p>You did not order quickly. How about picking other dishes?</p>
-</div>
-{% else %}
-<h1>{{ dish.name|title }}!</h1>
-<p class="w3-padding">
-    <span class="w3-large w3-border w3-border-red w3-padding w3-round w3-text-red">{{ dish.price }}
-        pesos</span>
-</p>
-<p class="w3-padding">
-    <span class="w3-large w3-border w3-border-blue w3-padding w3-round w3-text-blue">{{ orders }}
-        orders</span>
-</p>
-<p>{{ dish.description }}</p>
-{% endif %}
-<hr />
-<div class="w3-container">
-    <a href="{% url 'canteen:order' dish.id %}" class="w3-right w3-margin w3-button w3-round w3-purple">Order</a>
-    <a href="{% url 'canteen:home' %}" class="w3-right w3-margin w3-button w3-round w3-purple">Home</a>
-</div>
-{% endblock %}
+        body>div {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        span {
+            padding: 5px;
+        }
+
+        @media only screen and (min-width: 600px) {
+            h1 {
+                font-size: 70px;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            h1 {
+                font-size: 90px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w3-container w3-center w3-grey">
+        <h1>{{ dish.name|title }}</h1>
+        <p>It costs <span class="w3-red w3-round-xxlarge">{{ dish.price }} pessos</span>. {{ dish.description }}</p>
+        <div>
+            <a href="{% url 'canteen:home' %}" class="w3-button w3-round w3-purple">Home</a>
+            <a href="{% url 'canteen:order' dish.id %}" class="w3-button w3-round w3-purple">Order</a>
+        </div>
+    </div>
+</body>
+
+</html>
