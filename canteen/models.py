@@ -18,7 +18,7 @@ class Dish(models.Model):
 
 
 class Order(models.Model):
-    date = models.DateField(auto_now=True)
+    datetime = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100)
     id_no = models.CharField(max_length=100)
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
