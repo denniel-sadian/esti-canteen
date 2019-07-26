@@ -33,6 +33,8 @@
 <p>{{ dish.description }}</p>
 {% endif %}
 <hr />
-<a href="{% url 'canteen:order' dish.id %}" class="w3-right w3-button w3-round w3-purple">Order</a>
-<a href="{% url 'canteen:home' %}" class="w3-right w3-button w3-round w3-purple">Home</a>
+<div class="w3-container">
+    <a href="{% url 'canteen:order' dish.id %}" class="w3-right w3-margin w3-button w3-round w3-purple">Order</a>
+    <a href="{% url 'canteen:home' %}" class="w3-right w3-margin w3-button w3-round w3-purple">Home</a>
+</div>
 {% endblock %}
