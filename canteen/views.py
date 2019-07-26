@@ -29,7 +29,8 @@ class OrderView(CreateView):
     fields = ['name', 'id_no', 'count']
 
     def form_valid(self, form):
-        form.instance.dish = self.request.kwargs['dish']
+        print(dir(self.request))
+        form.instance.dish = Dish.objects.get(id=self.kwargs['dish'])
         return super().form_valid(form)
     
     def get_context_data(self, **kwargs):
