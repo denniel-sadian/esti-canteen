@@ -9,7 +9,7 @@ class DishAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('name', 'id_no', 'dish', 'count', 'amount', 'datetime')
+    list_display = ('name', 'id_no', 'dish', 'count', 'amount', 'date')
 
 
 admin.site.register(Dish, DishAdmin)
