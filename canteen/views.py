@@ -1,7 +1,9 @@
+from django.views.generic import TemplateView
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView
 from django.utils.timezone import datetime
+from django.urls import reverse_lazy
 
 from .models import Dish
 from .models import Order
@@ -27,6 +29,7 @@ class DishView(DetailView):
 class OrderView(CreateView):
     model = Order
     fields = ['name', 'id_no', 'count']
+    success_url = reverse_lazy('canteen:thanks')
 
     def form_valid(self, form):
         print(dir(self.request))
@@ -38,3 +41,6 @@ class OrderView(CreateView):
         context['dish'] = Dish.objects.get(id=self.kwargs['dish'])
         return context
 
+
+class ThanksView(TemplateView):
+    template_name = 'canteen/thanks.html'
