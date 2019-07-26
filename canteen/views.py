@@ -18,7 +18,7 @@ class DishView(DetailView):
     model = Dish
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data( ** kwargs)
+        context = super().get_context_data(**kwargs)
         context['orders'] = Order.objects.filter(
             date=datetime.now(), dish=self.object).count()
         return context
@@ -31,4 +31,9 @@ class OrderView(CreateView):
     def form_valid(self, form):
         form.instance.dish = self.request.kwargs['dish']
         return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['dish'] = Dish.objects.get(id=self.kwargs['dish'])
+        return context
 
