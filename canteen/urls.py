@@ -6,5 +6,5 @@ app_name = 'canteen'
 urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
     path('<int:pk>/', views.DishView.as_view(), name='dish-detail'),
-    path('order/<int:dish>/', views.OrderView.as_view(), name='order-create')
+    path('order/<int:dish>/', views.OrderView.as_view(), name='order')
 ]
