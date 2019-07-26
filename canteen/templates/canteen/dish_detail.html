@@ -1,7 +1,17 @@
 {% extends "canteen/base.html" %}
 
 {% block title %}
-{{ dish.name }}
+{{ dish.name|title }}
+{% endblock %}
+
+{% block header %}
+<div class="w3-container w3-center">
+    <h1>{{ dish.name|title }}</h1>
+    <h4 class="w3-opacity">It's so good to eat, especially if you've paid well.</h4>
+    <p>
+        <a href="#article" class="w3-button w3-padding w3-round">Details</a>
+    </p>
+</div>
 {% endblock %}
 
 {% block article %}
@@ -12,8 +22,14 @@
 </div>
 {% else %}
 <h1>{{ dish.name|title }}!</h1>
-<p><span class="w3-large w3-border w3-border-red w3-padding w3-round w3-text-red">{{ dish.price }}
-        pesos</span></p>
+<p class="w3-padding">
+    <span class="w3-large w3-border w3-border-red w3-padding w3-round w3-text-red">{{ dish.price }}
+        pesos</span>
+</p>
+<p class="w3-padding">
+    <span class="w3-large w3-border w3-border-red w3-padding w3-round w3-text-red">{{ dish.estimated_count }}
+        estimated orders</span>
+</p>
 <p>{{ dish.description }}</p>
 <p>
     The estimated number of orders for this is {{ dish.estimated_count }}.

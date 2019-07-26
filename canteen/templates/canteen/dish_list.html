@@ -1,61 +1,12 @@
 {% extends "canteen/base.html" %}
 
-
-{% block styles %}
-<style>
-    html,
-    body {
-        height: 100%;
-        padding: 0px;
-        margin: 0px;
-    }
-
-    header {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    header h1 {
-        font-size: 50px;
-    }
-
-    .dish {
-        padding-left: 5px;
-        padding-right: 5px;
-        padding-bottom: 30px;
-    }
-
-    .dish-image {
-        width: 100%;
-        height: 200px;
-    }
-
-    .sold-out {
-        opacity: 0.5;
-    }
-
-    @media only screen and (min-width: 600px) {
-        header h1 {
-            font-size: 70px;
-        }
-    }
-
-    @media only screen and (min-width: 768px) {
-        header h1 {
-            font-size: 90px;
-        }
-    }
-</style>
-{% endblock %}
-
-
 {% block header %}
 <div class="w3-container w3-center">
     <h1>Welcome to ESTI Canteen!</h1>
     <h4 class="w3-opacity">It's so good to eat, especially if you've paid well.</h4>
+    <p>
+        <a href="#article" class="w3-button w3-padding w3-round">Check the menu</a>
+    </p>
 </div>
 {% endblock %}
 
