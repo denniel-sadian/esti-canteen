@@ -14,7 +14,7 @@
             width: 100%;
             padding: 0px;
             margin: 0px;
-            background: url({% static 'canteen/halsey.jpg' %}) no-repeat center fixed;
+            background: url({% static 'canteen/hands.png' %}) no-repeat center fixed;
             background-size: cover;
         }
 
@@ -24,6 +24,10 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+
+        h1 {
+            font-size: 50px;
         }
 
         @media only screen and (min-width: 600px) {
@@ -41,8 +45,8 @@
 </head>
 
 <body>
-    <div class="w3-container w3-center w3-animate-bottomGo">
-        <h1>How lovely! Enjoy your meal!</h1>
+    <div class="w3-container w3-center w3-animate-bottom">
+        <h1>Enjoy your meal!</h1>
         <a href="{% url 'canteen:home' %}" class="w3-margin w3-button w3-round w3-purple">Home</a>
     </div>
 </body>
