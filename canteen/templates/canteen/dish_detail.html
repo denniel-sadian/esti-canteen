@@ -27,22 +27,10 @@
         pesos</span>
 </p>
 <p class="w3-padding">
-    <span class="w3-large w3-border w3-border-red w3-padding w3-round w3-text-red">{{ dish.estimated_count }}
-        estimated orders</span>
+    <span class="w3-large w3-border w3-border-blue w3-padding w3-round w3-text-blue">{{ orders }}
+        orders</span>
 </p>
 <p>{{ dish.description }}</p>
-<p>
-    The estimated number of orders for this is {{ dish.estimated_count }}.
-    {% if orders > 0 %}
-    {% if orders == 1 %}
-    Someone has ordered it already.
-    {% else %}
-    And as of now, there are already {{ orders }} orders of it.
-    {% endif %}
-    {% else %}
-    And as of now, no one has ordered it yet.
-    {% endif %}
-</p>
 {% endif %}
 <hr />
 <a href="{% url 'canteen:home' %}" class="w3-right w3-button w3-round w3-purple">Home</a>
