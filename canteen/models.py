@@ -6,7 +6,6 @@ class Dish(models.Model):
     name = models.CharField(max_length=20)
     price = models.FloatField()
     date = models.DateField(auto_now=True)
-    estimated_count = models.IntegerField('good for how many people')
     description = models.TextField(
         default="It's so yummy, you might forget your name.")
     sold_out = models.BooleanField(default=False)
