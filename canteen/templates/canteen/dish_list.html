@@ -1,6 +1,67 @@
 {% extends "canteen/base.html" %}
 
+
+{% block styles %}
+<style>
+    html,
+    body {
+        height: 100%;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    header {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    header h1 {
+        font-size: 50px;
+    }
+
+    .dish {
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-bottom: 30px;
+    }
+
+    .dish-image {
+        width: 100%;
+        height: 200px;
+    }
+
+    .sold-out {
+        opacity: 0.5;
+    }
+
+    @media only screen and (min-width: 600px) {
+        header h1 {
+            font-size: 70px;
+        }
+    }
+
+    @media only screen and (min-width: 768px) {
+        header h1 {
+            font-size: 90px;
+        }
+    }
+</style>
+{% endblock %}
+
+
+{% block header %}
+<div class="w3-container w3-center">
+    <h1>Welcome to ESTI Canteen!</h1>
+    <h4 class="w3-opacity">It's so good to eat, especially if you've paid well.</h4>
+</div>
+{% endblock %}
+
+
 {% block article %}
+{% if dishes %}
 <h2>Our menu for today!</h2>
 <div class="w3-row">
     {% for dish in dishes %}
@@ -18,4 +79,10 @@
     </a>
     {% endfor %}
 </div>
+{% else %}
+<div class="w3-card-4 w3-container w3-blue w3-padding w3-center w3-round">
+    <h1>We're not yet cookin' anything.</h1>
+    <p>You came too early! Come back after a few minutes.</p>
+</div>
+{% endif %}
 {% endblock %}
