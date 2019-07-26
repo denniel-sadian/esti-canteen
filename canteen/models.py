@@ -8,7 +8,7 @@ class Dish(models.Model):
     date = models.DateField(auto_now=True)
     estimated_count = models.IntegerField('good for how many people')
     description = models.TextField(
-        default="It's so yummy, that you might forget your name.")
+        default="It's so yummy, you might forget your name.")
     sold_out = models.BooleanField(default=False)
 
     class Meta:
