@@ -1,5 +1,6 @@
 from django.views.generic import ListView
 from django.views.generic import DetailView
+from django.views.generic.edit import CreateView
 from django.utils.timezone import datetime
 
 from .models import Dish
@@ -21,3 +22,13 @@ class DishView(DetailView):
         context['orders'] = Order.objects.filter(
             date=datetime.now(), dish=self.object).count()
         return context
+
+
+class OrderView(CreateView):
+    model = Order
+    fields = ['name', 'id_no', 'count']
+
+    def form_valid(self, form):
+        form.instance.dish = self.request.kwargs['dish']
+        return super().form_valid(form)
+
