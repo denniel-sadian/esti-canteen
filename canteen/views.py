@@ -32,7 +32,6 @@ class OrderView(CreateView):
     success_url = reverse_lazy('canteen:thanks')
 
     def form_valid(self, form):
-        print(dir(self.request))
         form.instance.dish = Dish.objects.get(id=self.kwargs['dish'])
         return super().form_valid(form)
     
