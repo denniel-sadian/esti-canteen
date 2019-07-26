@@ -6,8 +6,7 @@ class Dish(models.Model):
     name = models.CharField(max_length=20)
     price = models.FloatField()
     date = models.DateField(auto_now=True)
-    description = models.TextField(
-        default="It's so yummy, you might forget your name.")
+    description = models.CharField(max_length=101)
     sold_out = models.BooleanField(default=False)
 
     class Meta:
