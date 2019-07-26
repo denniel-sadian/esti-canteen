@@ -2,8 +2,10 @@ from django.views.generic import TemplateView
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView
+from django.http import JsonResponse
 from django.utils.timezone import datetime
 from django.urls import reverse_lazy
+from django.forms.models import model_to_dict
 
 from .models import Dish
 from .models import Order
@@ -43,3 +45,10 @@ class OrderView(CreateView):
 
 class ThanksView(TemplateView):
     template_name = 'canteen/thanks.html'
+
+
+def json_orders(request):
+    today_orders = Order.objects.filter(date=datetime.now())
+    order_list = [model_to_dict(order) for order in today_orders]
+    return JsonResponse(request, order_list)
+    
