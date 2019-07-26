@@ -1,1 +1,48 @@
-Thanks
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ESTI Canteen - Ordering {{ dish.name|title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        div {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media only screen and (min-width: 600px) {
+            h1 {
+                font-size: 70px;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            h1 {
+                font-size: 90px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w3-container w3-center">
+        <h1>How lovely! Enjoy your meal!</h1>
+        <a href="{% url 'canteen:home' %}" class="w3-margin w3-button w3-round w3-purple">Go Home</a>
+    </div>
+</body>
+
+</html>
