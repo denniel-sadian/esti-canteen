@@ -1,3 +1,59 @@
-{% extends "canteen/base.html" %}
+{% load static %}
 
-{% block title %}Order {{ dish.name|title }}{% endblock %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ESTI Canteen - Ordering {{ dish.name|title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .modal {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal>form {
+            display: block;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="modal">
+        <form method="POST" action="" class="w3-container w3-card-4 w3-purple w3-round">
+            {% csrf_token %}
+            <h2>Ordering {{ dish.name|title }}</h2>
+            <div class="w3-container w3-white w3-padding-16 w3-round">
+                <label for="name" class="w3-opacity">Name:</label>
+                <input type="text" class="w3-input" name="name" />
+                <label for="name" class="w3-opacity">ID number:</label>
+                <input type="text" class="w3-input" name="id_no" />
+                <label for="name" class="w3-opacity">How many orders:</label>
+                <input type="number" class="w3-input" name="count" value="1" min="1" />
+            </div>
+            <div class="w3-right w3-margin-top w3-margin-bottom">
+                <a href="{% url 'canteen:home' %}" class="w3-button w3-blue w3-round">Home</a>
+                <input type="submit" class="w3-button w3-blue w3-round" value="Order" />
+            </div>
+        </form>
+    </div>
+    </div>
+
+</body>
+
+</html>
