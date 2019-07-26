@@ -71,7 +71,7 @@
                 <div class="dish-image w3-purple"></div>
                 <div class="w3-padding">
                     <h4 class="{% if dish.sold_out %}w3-text-red{% endif %}">
-                        {{ dish.name }}
+                        {{ dish.name|title }}
                     </h4>
                 </div>
             </div>
