@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.utils.timezone import datetime
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 
 from .models import Dish
 from .models import Order
