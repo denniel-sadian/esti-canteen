@@ -22,6 +22,7 @@ class Order(models.Model):
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
     count = models.IntegerField()
     amount = models.FloatField(editable=False)
+    served = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.name} orderred {self.dish}'
