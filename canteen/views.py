@@ -63,7 +63,8 @@ def json_orders(request):
             'id_no': order.id_no,
             'date': order.date,
             'count': order.count,
-            'amount': order.amount
+            'amount': order.amount,
+            'served': order.served
         }
         for order in Order.objects.filter(date__lt=datetime.now())
     ]
