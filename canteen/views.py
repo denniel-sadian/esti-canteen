@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.utils.timezone import datetime
 from django.urls import reverse_lazy
 from django.forms.models import model_to_dict
+from django.contrib.auth.decorators import login_required
 
 from .models import Dish
 from .models import Order
@@ -47,6 +48,7 @@ class ThanksView(TemplateView):
     template_name = 'canteen/thanks.html'
 
 
+@login_required
 def json_orders(request):
     orders = [
         {
