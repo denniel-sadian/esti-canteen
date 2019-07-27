@@ -47,7 +47,7 @@ class ThanksView(TemplateView):
     template_name = 'canteen/thanks.html'
 
 
-@login_required
+@login_required(login_url='/admin/login/')
 def json_orders(request):
     orders = [
         {
