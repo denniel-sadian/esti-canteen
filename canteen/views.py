@@ -48,6 +48,10 @@ class ThanksView(TemplateView):
     template_name = 'canteen/thanks.html'
 
 
+class RealTimeOrdersView(TemplateView):
+    template_name = 'canteen/real_time_orders.html'
+
+
 def json_orders(request):
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
