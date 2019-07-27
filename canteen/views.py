@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.utils.timezone import datetime
 from django.urls import reverse_lazy
 from django.http import HttpResponseForbidden
+from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Dish
@@ -69,4 +70,14 @@ def json_orders(request):
         for order in Order.objects.filter(date__lt=datetime.now())
     ]
     return JsonResponse(orders, safe=False)
+
+
+def api_mark_order_served(request, id):
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden("You're not authenticated.")
+    order = Order.objects.get(id=id)
+    if not order.served:
+        order.served = True
+        order.save()
+    return HttpResponse('Marked as served')
     
