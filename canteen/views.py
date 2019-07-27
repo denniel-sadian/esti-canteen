@@ -60,14 +60,17 @@ def json_orders(request):
         return HttpResponseForbidden("You're not authenticated.")
     orders = [
         {
+            'id': order.id,
             'name': order.name,
             'id_no': order.id_no,
             'date': order.date,
+            'dish': order.dish.name,
             'count': order.count,
             'amount': order.amount,
             'served': order.served
         }
-        for order in Order.objects.filter(date__lt=datetime.now())
+        for order in Order.objects.filter(
+            date__lt=datetime.now()).order_by('-date')
     ]
     return JsonResponse(orders, safe=False)
 
@@ -76,8 +79,7 @@ def api_mark_order_served(request, id):
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
     order = Order.objects.get(id=id)
-    if not order.served:
-        order.served = True
-        order.save()
+    order.served = not order.served
+    order.save()
     return HttpResponse('Marked as served')
     
