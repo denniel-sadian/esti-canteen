@@ -49,7 +49,9 @@ class ThanksView(TemplateView):
     template_name = 'canteen/thanks.html'
 
 
-class RealTimeOrdersView(TemplateView):
+class RealTimeOrdersView(LoginRequiredMixin, TemplateView):
+    login_url = '/admin/login/'
+    redirect_field_name = 'next'
     template_name = 'canteen/real_time_orders.html'
 
 
