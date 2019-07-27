@@ -73,7 +73,7 @@
                 {{ form.count.errors }}
             </div>
             <div class="w3-right w3-margin-top w3-margin-bottom">
-                <a href="{% url 'canteen:home' %}" class="w3-button w3-blue w3-round-large">Home</a>
+                <a href="{% url 'canteen:dish-detail' dish.id %}" class="w3-button w3-blue w3-round-large">Go back</a>
                 <input type="submit" class="w3-button w3-blue w3-round-large" value="Order" />
             </div>
         </form>
