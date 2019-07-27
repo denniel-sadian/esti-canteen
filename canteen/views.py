@@ -82,4 +82,10 @@ def api_mark_order_served(request, id):
     order.served = not order.served
     order.save()
     return HttpResponse('Marked as served')
-    
+
+
+def api_delete_order(request, id):
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden("You're not authenticated.")
+    Order.objects.get(id=id).delete()
+    return HttpResponse('Deleted.')
