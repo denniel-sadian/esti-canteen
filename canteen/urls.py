@@ -8,5 +8,5 @@ urlpatterns = [
     path('<int:pk>/', views.DishView.as_view(), name='dish-detail'),
     path('order/<int:dish>/', views.OrderView.as_view(), name='order'),
     path('thanks/', views.ThanksView.as_view(), name='thanks'),
-    path('orders/', views.json_orders, name='json-orders')
+    path('json-orders/', views.json_orders, name='json-orders')
 ]
