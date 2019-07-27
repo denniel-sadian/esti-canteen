@@ -54,23 +54,56 @@
             opacity: 0.5;
         }
 
+        header>div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         h1 {
-            font-size: 50px;
+            line-height: 1em;
             color: white;
+        }
+
+        header>div div:nth-child(2) {
+            width: 40%;
         }
 
         header,
         footer {
-            background: linear-gradient(to bottom right, #f44336, #ff9800, #ffeb3b, #4CAF50, #2196F3, #3f51b5, #9c27b0);
+            background: linear-gradient(to bottom right, #2196F3, violet);
         }
 
-        @media only screen and (min-width: 600px) {
+        @media (max-width:768px) {
+            header h1 {
+                font-size: 50px;
+            }
+
+            header>div {
+                flex-direction: column;
+            }
+
+            header>div div:nth-child(2) {
+                width: 100%;
+            }
+
+            header {
+                text-align: center;
+            }
+
+            #logo {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        @media (max-width:992px) and (min-width:601px) {
             header h1 {
                 font-size: 70px;
             }
         }
 
-        @media only screen and (min-width: 768px) {
+        @media (min-width:993px) {
             header h1 {
                 font-size: 90px;
             }
@@ -80,12 +113,17 @@
 
 <body>
     <header class="w3-animate-top">
-        <div class="w3-container w3-center">
-            <h1>Welcome to ESTI's Canteen!</h1>
-            <h4 class="w3-opacity">It's so good to eat, especially if you've paid well.</h4>
-            <p>
-                <a href="#article" class="w3-button w3-padding w3-round w3-purple">Check the menu</a>
-            </p>
+        <div class="w3-container">
+            <div>
+                <img id="logo" src="{% static 'canteen/vue_nuxt.png' %}" width="300" height="300" />
+            </div>
+            <div>
+                <h1>Welcome to ESTI's Canteen!</h1>
+                <p class="w3-opacity">It's so good to eat, especially if you've paid well.</p>
+                <p>
+                    <a href="#article" class="w3-button w3-padding w3-round w3-purple">Check the menu</a>
+                </p>
+            </div>
         </div>
     </header>
 
@@ -124,7 +162,7 @@
 
     <footer class="w3-container w3-center w3-padding">
         <h1>Hello world</h1>
-        <a href="/admin/" class="w3-button w3-padding w3-round">Manage</a>
+        <a href="/admin/" class="w3-button w3-padding w3-round w3-purple">Manage</a>
     </footer>
 
 </body>
