@@ -7,6 +7,7 @@ from django.utils.timezone import datetime
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Dish
 from .models import Order
