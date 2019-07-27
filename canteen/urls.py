@@ -11,5 +11,7 @@ urlpatterns = [
     path('orders/', views.RealTimeOrdersView.as_view(), name='orders'),
     path('json-orders/', views.json_orders, name='json-orders'),
     path('api-mark-as-served/<int:id>/',views.api_mark_order_served,
-         name='api-served')
+         name='api-served'),
+    path('api-delete-order/<int:id>/', views.api_delete_order,
+         name='api-delete-order')
 ]
