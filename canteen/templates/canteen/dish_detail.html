@@ -73,6 +73,14 @@
             {% else %}
             <p class="w3-margin-bottom">It costs <span class="w3-red w3-tag w3-round-xxlarge">{{ dish.price }}
                     pessos</span>.
+                {% if orders == 0 %}
+                No one is ordering it yet. Be the first to order!
+                {% elif orders == 1 %}
+                It has already one order, as of now.
+                {% else %}
+                It has already <span class="w3-red w3-tag w3-round-xxlarge">{{ orders }}
+                    orders</span>, as of now.
+                {% endif %}
                 {{ dish.description }}</p>
             <div class="w3-margin-top">
                 <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round w3-purple">Other dishes</a>
