@@ -73,12 +73,12 @@
             {% else %}
             <p class="w3-margin-bottom">It costs <span class="w3-red w3-tag w3-round-xxlarge">{{ dish.price }}
                     pessos</span>.
-                {{ dish.description }}.
+                {{ dish.description }}
                 {% if orders == 0 %}
                 No one is ordering it yet. Be the first to order!
                 {% elif orders == 1 %}
                 It has already <span class="w3-blue w3-tag w3-round-xxlarge">{{ orders }}
-                    order</span>, as of now., as of now.
+                    order</span>, as of now.
                 {% else %}
                 It has already <span class="w3-blue w3-tag w3-round-xxlarge">{{ orders }}
                     orders</span>, as of now.
