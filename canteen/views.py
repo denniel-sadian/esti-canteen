@@ -25,7 +25,7 @@ class DishView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['orders'] = Order.objects.filter(
-            date=datetime.now(), dish=self.object).count()
+            date__lt=datetime.now(), dish=self.object).count()
         return context
 
 
