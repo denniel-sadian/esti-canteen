@@ -12,6 +12,10 @@
         #orders {
             overflow-y: auto;
         }
+
+        #buttons {
+            text-align: right;
+        }
     </style>
 </head>
 
@@ -30,8 +34,13 @@
     <div id="confirm" class="w3-modal">
         <div class="w3-cotainer w3-animate-top w3-padding w3-modal-content w3-round-large">
             <h2>Confirmation</h2>
-            <p>Are you sure that you want to delete this order? Doing so, will of course, delete it permanently.</p>
-            <p>
+            <p>If the customer of this order did not take it on time, and this has been given to others already,
+                then you're fine to delete it.</p>
+            <p>Also, you should not delete orders that have been served because they are vital in making the report
+                below.</p>
+            <p>Are you sure that you want to delete this order? Doing so, will of course, delete it
+                permanently.</p>
+            <p id="buttons">
                 <button class="w3-blue w3-button w3-round-large" onclick="$('#confirm').slideUp()">No</button>
                 <button class="w3-red w3-button w3-round-large" onclick="deleteCompletely()">Yes</button>
             </p>
