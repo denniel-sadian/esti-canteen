@@ -73,8 +73,8 @@
 
 <body>
     <div class="w3-container w3-center w3-animate-zoom">
-        <div class="w3-container w3-white w3-card-4 w3-round-xlarge w3-padding-16">
-            <h1>{{ dish.name|title }}</h1>
+        <div class="w3-container w3-card-4 w3-round-xlarge w3-padding-16">
+            <h1 class="w3-text-white">{{ dish.name|title }}</h1>
             {% if dish.sold_out %}
             <p class="w3-large w3-tag w3-round-xxlarge w3-red">Sold out!</p>
             <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round w3-purple">Other dishes</a>
