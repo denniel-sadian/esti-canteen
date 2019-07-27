@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ESTI Canteen - Real-time Orders</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <header class="w3-container w3-center w3-padding-32 w3-black">
+        <h1>Real-time <span class="w3-tag w3-orange w3-round-large">Orders</span></h1>
+        <p class="w3-opacity">This page changes every second.</p>
+        <a href="{% url 'canteen:home' %}" class="w3-padding">Home</a>
+        <a href="/admin/" class="w3-padding">Manage</a>
+    </header>
+    <article class="w3-container w3-padding-32">
+        <div class="w3-content">
+            <h3>These are the current orders.</h3>
+        </div>
+    </article>
+    <script>
+    </script>
+</body>
+
+</html>
