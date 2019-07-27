@@ -49,6 +49,8 @@ class ThanksView(TemplateView):
 
 
 def json_orders(request):
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden()
     orders = [
         {
             'name': order.name,
