@@ -50,7 +50,7 @@ class ThanksView(TemplateView):
 
 def json_orders(request):
     if not request.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseForbidden("You're not authenticated.")
     orders = [
         {
             'name': order.name,
