@@ -39,6 +39,14 @@
             font-size: 55px;
         }
 
+        body>div>div {
+            background: linear-gradient(to bottom right, violet, #87CEEB, blue);
+        }
+
+        body>div>div>h1 {
+            text-shadow: 3px 3px 5px gray;
+        }
+
         @media only screen and (min-width: 600px) {
             h1 {
                 font-size: 60px;
@@ -77,14 +85,17 @@
                 {% if orders == 0 %}
                 No one is ordering it yet. Be the first to order!
                 {% elif orders == 1 %}
-                It has already <span class="w3-blue w3-tag w3-round-xxlarge">{{ orders }}
+                It has already <span class="w3-light-blue w3-tag w3-round-xxlarge">{{ orders }}
                     order</span>, as of now.
                 {% else %}
-                It has already <span class="w3-blue w3-tag w3-round-xxlarge">{{ orders }}
+                It has already <span class="w3-light-blue w3-tag w3-round-xxlarge">{{ orders }}
                     orders</span>, as of now.
                 {% endif %}</p>
             <div class="w3-margin-top">
                 <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round w3-purple">Other dishes</a>
+                {% if user.is_authenticated %}
+                <a href="/admin/canteen/dish/{{ dish.id }}/change/" class="w3-button w3-round w3-purple">Edit</a>
+                {% endif %}
                 <a href="{% url 'canteen:order' dish.id %}" class="w3-button w3-round w3-purple">Order</a>
             </div>
             {% endif %}
