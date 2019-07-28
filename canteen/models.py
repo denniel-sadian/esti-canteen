@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Dish(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=100)
     price = models.FloatField()
     date = models.DateField(auto_now=True)
     description = models.CharField(max_length=101)
