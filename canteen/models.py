@@ -26,7 +26,7 @@ class Feedback(models.Model):
     """
     The Feedback model.
     """
-    date = DateTimeField(auto_now=True)
+    date = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100)
     content = models.TextField()
 
