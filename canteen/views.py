@@ -1,5 +1,5 @@
 """
-views for the `canteen`
+Views for the `canteen`
 """
 
 from django.views.generic import TemplateView
