@@ -14,5 +14,5 @@ urlpatterns = [
          name='api-served'),
     path('api-delete-order/<int:id>/', views.api_delete_order,
          name='api-delete-order'),
-    path('api-report', view.api_report, name='api-report')
+    path('api-report', views.api_report, name='api-report')
 ]
