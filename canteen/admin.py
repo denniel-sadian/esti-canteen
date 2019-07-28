@@ -5,7 +5,7 @@ from .models import Order
 
 
 class DishAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'date', 'sold_out')
+    list_display = ('name', 'price', 'date', 'description', 'sold_out')
 
 
 class OrderAdmin(admin.ModelAdmin):
