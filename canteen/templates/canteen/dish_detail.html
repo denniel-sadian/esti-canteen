@@ -86,6 +86,7 @@
             <h1 class="w3-text-white">{{ dish.name|title }}</h1>
             {% if dish.sold_out %}
             <p class="w3-large w3-tag w3-round w3-red">Sold out!</p>
+            <p class="w3-large">Sad, you did not come early.</p>
             <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">Other dishes</a>
             {% else %}
             <p class="w3-margin-bottom w3-large">It costs <span class="w3-red w3-tag w3-round">{{ dish.price }}
