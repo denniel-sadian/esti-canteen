@@ -82,19 +82,19 @@
             {% endif %}
             <h1 class="w3-text-white">{{ dish.name|title }}</h1>
             {% if dish.sold_out %}
-            <p class="w3-large w3-tag w3-round-xxlarge w3-red">Sold out!</p>
+            <p class="w3-large w3-tag w3-round w3-red">Sold out!</p>
             <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">Other dishes</a>
             {% else %}
-            <p class="w3-margin-bottom">It costs <span class="w3-red w3-tag w3-round-xxlarge">{{ dish.price }}
+            <p class="w3-margin-bottom">It costs <span class="w3-red w3-tag w3-round">{{ dish.price }}
                     pessos</span>.
                 {{ dish.description }}
                 {% if orders == 0 %}
                 No one is ordering it yet. Be the first to order!
                 {% elif orders == 1 %}
-                It has already <span class="w3-light-blue w3-tag w3-round-xxlarge">{{ orders }}
+                It has already <span class="w3-light-blue w3-tag w3-round">{{ orders }}
                     order</span>, as of now.
                 {% else %}
-                It has already <span class="w3-light-blue w3-tag w3-round-xxlarge">{{ orders }}
+                It has already <span class="w3-light-blue w3-tag w3-round">{{ orders }}
                     orders</span>, as of now.
                 {% endif %}</p>
             <div class="w3-margin-top">
