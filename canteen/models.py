@@ -22,6 +22,18 @@ class Dish(models.Model):
         return self.name
 
 
+class Feedback(models.Model):
+    """
+    The Feedback model.
+    """
+    date = DateTimeField(auto_now=True)
+    name = models.CharField(max_length=100)
+    content = models.TextField()
+
+    def __str__(self):
+        return f'by {self.name}'
+
+
 class Order(models.Model):
     """
     The order model.
