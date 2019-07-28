@@ -67,6 +67,10 @@
                 <input type="text" class="w3-input" name="id_no"
                     value="{% if form.id_no.value %}{{ form.id_no.value }}{% endif %}" />
                 {{ form.id_no.errors }}
+                <label for="name" class="w3-opacity">Contact No:</label>
+                <input type="text" class="w3-input" name="contact_no"
+                    value="{% if form.contact_no.value %}{{ form.contact_no.value }}{% endif %}" />
+                {{ form.contact_no.errors }}
                 <label for="name" class="w3-opacity">How many orders:</label>
                 <input type="number" class="w3-input" name="count" min="1"
                     value="{% if form.count.value %}{{ form.count.value }}{% endif %}" />

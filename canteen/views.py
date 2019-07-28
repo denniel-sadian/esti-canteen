@@ -33,7 +33,7 @@ class DishView(DetailView):
 
 class OrderView(CreateView):
     model = Order
-    fields = ['name', 'id_no', 'count']
+    fields = ['name', 'id_no', 'contact_no', 'count']
     success_url = reverse_lazy('canteen:thanks')
 
     def form_valid(self, form):
