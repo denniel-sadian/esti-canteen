@@ -1,3 +1,7 @@
+"""
+views for the `canteen`
+"""
+
 from django.views.generic import TemplateView
 from django.views.generic import ListView
 from django.views.generic import DetailView
@@ -15,6 +19,9 @@ from .models import Order
 
 
 class HomeView(ListView):
+    """
+    View for listing the dishes at home page.
+    """
     context_object_name = 'dishes'
 
     def get_queryset(self):
@@ -22,6 +29,9 @@ class HomeView(ListView):
 
 
 class DishView(DetailView):
+    """
+    View for displaying the dish's detail.
+    """
     model = Dish
 
     def get_context_data(self, **kwargs):
@@ -32,6 +42,9 @@ class DishView(DetailView):
 
 
 class OrderView(CreateView):
+    """
+    View for creating orders.
+    """
     model = Order
     fields = ['name', 'id_no', 'contact_no', 'count']
     success_url = reverse_lazy('canteen:thanks')
@@ -47,16 +60,25 @@ class OrderView(CreateView):
 
 
 class ThanksView(TemplateView):
+    """
+    View for simply thanking the customer.
+    """
     template_name = 'canteen/thanks.html'
 
 
 class RealTimeOrdersView(LoginRequiredMixin, TemplateView):
+    """
+    View for displaying the template for orders and report.
+    """
     login_url = '/admin/login/'
     redirect_field_name = 'next'
     template_name = 'canteen/real_time_orders.html'
 
 
 def json_orders(request):
+    """
+    View for displaying all the current orders.
+    """
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
     orders = [
@@ -82,6 +104,9 @@ def json_orders(request):
 
 
 def json_audit(request):
+    """
+    View for displaying the audit.
+    """
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
     orders = Order.objects.filter(date__date=datetime.now().date())
@@ -101,6 +126,9 @@ def json_audit(request):
 
 
 def api_mark_order_served(request, id):
+    """
+    View for marking and unmarking the order as served.
+    """
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
     order = Order.objects.get(id=id)
@@ -110,6 +138,9 @@ def api_mark_order_served(request, id):
 
 
 def api_delete_order(request, id):
+    """
+    View for deleting an order.
+    """
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
     Order.objects.get(id=id).delete()
