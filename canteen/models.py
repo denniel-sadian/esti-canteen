@@ -1,7 +1,14 @@
+"""
+Models for the `canteen`
+"""
+
 from django.db import models
 
 
 class Dish(models.Model):
+    """
+    The Dish model.
+    """
     name = models.CharField(max_length=100)
     price = models.FloatField()
     date = models.DateField(auto_now=True)
@@ -16,6 +23,9 @@ class Dish(models.Model):
 
 
 class Order(models.Model):
+    """
+    The order model.
+    """
     date = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100)
     id_no = models.CharField('id no.', max_length=100)
