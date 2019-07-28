@@ -114,11 +114,20 @@
                 text-align: center;
             }
 
+            #logo {
+                width: 250px;
+                height: 250px;
+                margin-right: 20px;
+            }
         }
 
         @media (min-width:993px) {
             header h1 {
                 font-size: 90px;
+            }
+
+            #logo {
+                margin-right: 50px;
             }
         }
     </style>
@@ -128,7 +137,7 @@
     <header class="w3-animate-top">
         <div class="w3-container">
             <div>
-                <img id="logo" src="{% static 'canteen/vue_nuxt.png' %}" width="300" height="300" />
+                <img id="logo" src="{% static 'canteen/logo.png' %}" width="300" height="300" />
             </div>
             <div>
                 <h1 class="w3-text-white">Welcome to ESTI's Canteen!</h1>
