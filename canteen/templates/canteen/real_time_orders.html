@@ -60,6 +60,8 @@
     <script>
         var orderId;
         function markServed(id) {
+            orderId = id;
+            $('#' + id).slideUp();
             $.get('/api-mark-as-served/' + id + '/');
             structureReport();
         }
@@ -132,7 +134,7 @@
                                 '<span class="w3-tag w3-red w3-round">No</span>') +
                             '</td>'));
                         tr.append($('<td class="w3-center w3-border">' +
-                            '<button class="w3-button w3-round-xxlarge w3-orange" onclick="markServed(' +
+                            '<button id="' + data[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markServed(' +
                             data[o].id +
                             ')">Toggle Served</button>' +
                             '</td>'));
@@ -145,6 +147,7 @@
                     }
                     $('#orders').html(table);
                 }
+                $('#' + orderId).slideDown();
             })
         }
         $(document).ready(function () {
