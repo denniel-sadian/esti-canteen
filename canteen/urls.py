@@ -13,5 +13,6 @@ urlpatterns = [
     path('api-mark-as-served/<int:id>/',views.api_mark_order_served,
          name='api-served'),
     path('api-delete-order/<int:id>/', views.api_delete_order,
-         name='api-delete-order')
+         name='api-delete-order'),
+    path('api-report', view.api_report, name='api-report')
 ]

@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseForbidden
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum
 
 from .models import Dish
 from .models import Order
@@ -94,3 +95,10 @@ def api_delete_order(request, id):
         return HttpResponseForbidden("You're not authenticated.")
     Order.objects.get(id=id).delete()
     return HttpResponse('Deleted.')
+
+
+def api_report(request):
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden("You're not authenticated.")
+    return HttpResponse(Order.objects.filter(
+            date__lt=datetime.now()).aggregate(Sum('amount')))
