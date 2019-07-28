@@ -81,6 +81,21 @@ def json_orders(request):
     return JsonResponse(orders, safe=False)
 
 
+def json_report(request):
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden("You're not authenticated.")
+    orders = Order.objects.filter(date__lt=datetime.now())
+    data = {
+        'total_orders_amount':
+            orders.aggregate(Sum('amount'))['amount__sum'],
+        'total_orders_served_amount':
+            orders.filter(served=True).aggregate(Sum('amount'))['amount__sum']
+    }
+    data['total_amount_still_out'] = (
+        data['total_orders_amount'] - data['total_orders_served_amount'])
+    return JsonResponse(data)
+
+
 def api_mark_order_served(request, id):
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
@@ -95,10 +110,3 @@ def api_delete_order(request, id):
         return HttpResponseForbidden("You're not authenticated.")
     Order.objects.get(id=id).delete()
     return HttpResponse('Deleted.')
-
-
-def api_report(request):
-    if not request.user.is_authenticated:
-        return HttpResponseForbidden("You're not authenticated.")
-    return HttpResponse(Order.objects.filter(
-            date__lt=datetime.now()).aggregate(Sum('amount')))
