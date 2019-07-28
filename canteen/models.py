@@ -3,7 +3,7 @@ from django.db import models
 
 class Dish(models.Model):
     name = models.CharField(max_length=20)
-    price = models.FloatField()
+    price = models.DecimalField()
     date = models.DateField(auto_now=True)
     description = models.CharField(max_length=101)
     sold_out = models.BooleanField(default=False)
@@ -21,7 +21,7 @@ class Order(models.Model):
     id_no = models.CharField(max_length=100)
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
     count = models.IntegerField()
-    amount = models.FloatField(editable=False)
+    amount = models.DecimalField(editable=False)
     served = models.BooleanField(default=False)
 
     def __str__(self):
