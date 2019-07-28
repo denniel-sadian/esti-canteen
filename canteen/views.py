@@ -27,7 +27,7 @@ class DishView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['orders'] = Order.objects.filter(
-            date__lt=datetime.now(), dish=self.object).count()
+            date__date=datetime.now().date(), dish=self.object).count()
         return context
 
 
@@ -76,7 +76,7 @@ def json_orders(request):
             'served': order.served
         }
         for order in Order.objects.filter(
-            date__lt=datetime.now()).order_by('-date')
+            date__date=datetime.now().date()).order_by('-date')
     ]
     return JsonResponse(orders, safe=False)
 
@@ -84,7 +84,7 @@ def json_orders(request):
 def json_audit(request):
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
-    orders = Order.objects.filter(date__lt=datetime.now())
+    orders = Order.objects.filter(date__date=datetime.now().date())
     data = {
         'total_orders_amount':
             orders.aggregate(Sum('amount'))['amount__sum'],
