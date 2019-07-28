@@ -42,6 +42,7 @@
         }
 
         body>div>div {
+            overflow-y: auto;
             background: linear-gradient(to bottom right, violet, #87CEEB, blue);
         }
 
@@ -86,7 +87,7 @@
             <p class="w3-large w3-tag w3-round w3-red">Sold out!</p>
             <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">Other dishes</a>
             {% else %}
-            <p class="w3-margin-bottom">It costs <span class="w3-red w3-tag w3-round">{{ dish.price }}
+            <p class="w3-margin-bottom w3-large">It costs <span class="w3-red w3-tag w3-round">{{ dish.price }}
                     pessos</span>.
                 {{ dish.description }}
                 {% if orders == 0 %}
