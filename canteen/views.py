@@ -63,6 +63,7 @@ def json_orders(request):
             'id': order.id,
             'name': order.name,
             'id_no': order.id_no,
+            'contact_no': order.contact_no,
             'date': order.date,
             'dish': order.dish.name,
             'count': order.count,
