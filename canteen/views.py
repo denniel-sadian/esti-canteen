@@ -91,13 +91,12 @@ def json_audit(request):
         'total_orders_served_amount':
             orders.filter(served=True).aggregate(Sum('amount'))['amount__sum']
     }
-    if data['total_orders_amount'] and data['total_orders_served_amount']: 
-        data['total_amount_still_out'] = (
-            data['total_orders_amount'] - data['total_orders_served_amount'])
-    else:
-        data['total_amount_still_out'] = 0
+    if not data['total_orders_amount']:
         data['total_orders_amount'] = 0
+    if not data['total_orders_served_amount']:
         data['total_orders_served_amount'] = 0
+    data['total_amount_still_out'] = (
+            data['total_orders_amount'] - data['total_orders_served_amount'])
     return JsonResponse(data)
 
 
