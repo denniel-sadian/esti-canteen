@@ -81,7 +81,7 @@ def json_orders(request):
     return JsonResponse(orders, safe=False)
 
 
-def json_report(request):
+def json_audit(request):
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
     orders = Order.objects.filter(date__lt=datetime.now())
@@ -91,8 +91,13 @@ def json_report(request):
         'total_orders_served_amount':
             orders.filter(served=True).aggregate(Sum('amount'))['amount__sum']
     }
-    data['total_amount_still_out'] = (
-        data['total_orders_amount'] - data['total_orders_served_amount'])
+    if data['total_orders_amount'] and data['total_orders_served_amount']: 
+        data['total_amount_still_out'] = (
+            data['total_orders_amount'] - data['total_orders_served_amount'])
+    else:
+        data['total_amount_still_out'] = 0
+        data['total_orders_amount'] = 0
+        data['total_orders_served_amount'] = 0
     return JsonResponse(data)
 
 

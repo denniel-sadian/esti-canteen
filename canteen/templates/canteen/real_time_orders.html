@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
     <script rel="script" src="{% static 'canteen/jquery.min.js' %}"></script>
     <style>
-        #orders {
+        .tables {
             overflow-y: auto;
         }
 
@@ -27,8 +27,23 @@
     </header>
     <article class="w3-container w3-padding-32">
         <div class="w3-content">
-            <h3>These are the current orders.</h3>
-            <div id="orders"></div>
+            <h3>Audit</h3>
+            <div class="tables" id="audit">
+                <table class="w3-table-all w3-bottombar">
+                    <tr>
+                        <th class="w3-center w3-border w3-black">Total orders amount</th>
+                        <th class="w3-center w3-border w3-black">Total amount received</th>
+                        <th class="w3-center w3-border w3-black">Total amount not yet received</th>
+                    </tr>
+                    <tr>
+                        <td class="w3-center w3-border">0</td>
+                        <td class="w3-center w3-border">0</td>
+                        <td class="w3-center w3-border">0</td>
+                    </tr>
+                </table>
+            </div>
+            <h3 class="w3-margin-top">These are the current orders.</h3>
+            <div class="tables" id="orders"></div>
         </div>
     </article>
     <div id="confirm" class="w3-modal">
@@ -50,7 +65,7 @@
         var orderId;
         function markServed(id) {
             $.get('/api-mark-as-served/' + id + '/');
-            structureOrders();
+            structureReport();
         }
         function prepareForDeleting(id) {
             orderId = id;
@@ -59,61 +74,82 @@
         function deleteCompletely() {
             $.get('/api-delete-order/' + orderId + '/');
             orderId = ''
-            structureOrders();
+            structureReport();
             $('#confirm').slideUp();
         }
-        function structureOrders() {
-            $.get("{% url 'canteen:json-orders' %}", function (data, status) {
-                var table = $(
-                    '<table class="w3-table-all w3-bottombar">' +
-                    '<tr class="w3-black">' +
-                    '<th class="w3-center w3-border">Name</th>' +
-                    '<th class="w3-center w3-border">ID No.</th>' +
-                    '<th class="w3-center w3-border">Contact No.</th>' +
-                    '<th class="w3-center w3-border">Dish</th>' +
-                    '<th class="w3-center w3-border">Quantity</th>' +
-                    '<th class="w3-center w3-border">Amount to Pay</th>' +
-                    '<th class="w3-center w3-border">Date & Time</th>' +
-                    '<th class="w3-center w3-border">Served</th>' +
-                    '<th class="w3-center w3-border">Action 1</th>' +
-                    '<th class="w3-center w3-border">Action 2</th>' +
-                    '</tr>' +
-                    '</table>');
-                for (var o in data) {
-                    var tr = $('<tr></tr>');
-                    tr.append($('<td class="w3-center w3-border">' + data[o].name + '</td>'));
-                    tr.append($('<td class="w3-center w3-border">' + data[o].id_no + '</td>'));
-                    tr.append($('<td class="w3-center w3-border">' + data[o].contact_no + '</td>'));
-                    tr.append($('<td class="w3-center w3-border"><a href="/'
-                        + data[o].dish.id + '/">' +
-                        data[o].dish.name + ' (' + data[o].dish.price + 'pesos)' +
-                        '</a></td>'));
-                    tr.append($('<td class="w3-center w3-border">' + data[o].count + '</td>'));
-                    tr.append($('<td class="w3-center w3-border">' + data[o].amount + ' pesos</td>'));
-                    tr.append($('<td class="w3-center w3-border">' +
-                        new Date(data[o].date).toLocaleString() + '</td>'));
-                    tr.append($('<td class="w3-center w3-border">'
-                        + String(data[o].served ?
-                            '<span class="w3-tag w3-blue w3-round">Yes</span>' :
-                            '<span class="w3-tag w3-red w3-round">No</span>') +
-                        '</td>'));
-                    tr.append($('<td class="w3-center w3-border">' +
-                        '<button class="w3-button w3-round-xxlarge w3-orange" onclick="markServed(' +
-                        data[o].id +
-                        ')">Toggle Served</button>' +
-                        '</td>'));
-                    tr.append($('<td class="w3-center w3-border">' +
-                        '<button class="w3-button w3-round-xxlarge w3-red" onclick="prepareForDeleting(' +
-                        data[o].id +
-                        ')">Delete</button>' +
-                        '</td>'));
-                    table.append(tr);
+        function structureReport() {
+            $.get("{% url 'canteen:json-audit' %}", function (data, status) {
+                if (status == 'success') {
+                    var table = $(
+                        '<table class="w3-table-all w3-bottombar">' +
+                        '<tr>' +
+                        '<th class="w3-center w3-border w3-black">Total orders amount</th>' +
+                        '<th class="w3-center w3-border w3-black">Total amount received</th>' +
+                        '<th class="w3-center w3-border w3-black">Total amount not yet received</th>' +
+                        '</tr >' +
+                        '<tr>' +
+                        '<td class="w3-center w3-border">' + data.total_orders_amount + '</td>' +
+                        '<td class="w3-center w3-border">' + data.total_orders_served_amount + '</td>' +
+                        '<td class="w3-center w3-border">' + data.total_amount_still_out + '</td>' +
+                        '</tr>' +
+                        '</table>'
+                    );
+                    $('#audit').html(table);
                 }
-                $('#orders').html(table);
+            });
+            $.get("{% url 'canteen:json-orders' %}", function (data, status) {
+                if (status == 'success') {
+                    var table = $(
+                        '<table class="w3-table-all w3-bottombar">' +
+                        '<tr class="w3-black">' +
+                        '<th class="w3-center w3-border">Name</th>' +
+                        '<th class="w3-center w3-border">ID No.</th>' +
+                        '<th class="w3-center w3-border">Contact No.</th>' +
+                        '<th class="w3-center w3-border">Dish</th>' +
+                        '<th class="w3-center w3-border">Quantity</th>' +
+                        '<th class="w3-center w3-border">Amount to Pay</th>' +
+                        '<th class="w3-center w3-border">Date & Time</th>' +
+                        '<th class="w3-center w3-border">Served</th>' +
+                        '<th class="w3-center w3-border">Action 1</th>' +
+                        '<th class="w3-center w3-border">Action 2</th>' +
+                        '</tr>' +
+                        '</table>');
+                    for (var o in data) {
+                        var tr = $('<tr></tr>');
+                        tr.append($('<td class="w3-center w3-border">' + data[o].name + '</td>'));
+                        tr.append($('<td class="w3-center w3-border">' + data[o].id_no + '</td>'));
+                        tr.append($('<td class="w3-center w3-border">' + data[o].contact_no + '</td>'));
+                        tr.append($('<td class="w3-center w3-border"><a href="/'
+                            + data[o].dish.id + '/">' +
+                            data[o].dish.name + ' (' + data[o].dish.price + 'pesos)' +
+                            '</a></td>'));
+                        tr.append($('<td class="w3-center w3-border">' + data[o].count + '</td>'));
+                        tr.append($('<td class="w3-center w3-border">' + data[o].amount + ' pesos</td>'));
+                        tr.append($('<td class="w3-center w3-border">' +
+                            new Date(data[o].date).toLocaleString() + '</td>'));
+                        tr.append($('<td class="w3-center w3-border">'
+                            + String(data[o].served ?
+                                '<span class="w3-tag w3-blue w3-round">Yes</span>' :
+                                '<span class="w3-tag w3-red w3-round">No</span>') +
+                            '</td>'));
+                        tr.append($('<td class="w3-center w3-border">' +
+                            '<button class="w3-button w3-round-xxlarge w3-orange" onclick="markServed(' +
+                            data[o].id +
+                            ')">Toggle Served</button>' +
+                            '</td>'));
+                        tr.append($('<td class="w3-center w3-border">' +
+                            '<button class="w3-button w3-round-xxlarge w3-red" onclick="prepareForDeleting(' +
+                            data[o].id +
+                            ')">Delete</button>' +
+                            '</td>'));
+                        table.append(tr);
+                    }
+                    $('#orders').html(table);
+                }
             })
         }
         $(document).ready(function () {
-            setInterval(structureOrders, 1000)
+            setInterval(structureReport, 1000)
         })
     </script>
 </body>
