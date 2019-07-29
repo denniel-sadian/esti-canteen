@@ -34,6 +34,13 @@
             padding-bottom: 30px;
         }
 
+        .dish>div {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+        }
+
         .dish-image-cont {
             position: relative;
         }
@@ -47,8 +54,8 @@
         .dish-image {
             width: 100%;
             height: 200px;
-            border-top-right-radius: 4px;
-            border-top-left-radius: 4px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
         }
 
         .sold-out {
@@ -158,7 +165,7 @@
                 {% for dish in dishes %}
                 <a href="{% url 'canteen:dish-detail' dish.id %}">
                     <div class="w3-col m6 l4 dish w3-animate-zoom {% if dish.sold_out %}sold-out{% endif %}">
-                        <div class="w3-center w3-card-4 w3-border w3-border-purple w3-bottombar w3-round">
+                        <div class="w3-center w3-card-4 w3-border w3-border-purple">
                             <div class="dish-image-cont">
                                 <img src="{% static 'canteen/hands.png' %}" class="dish-image" />
                                 <span class="w3-card-4 w3-tag w3-large w3-round w3-red">{{ dish.price }}
