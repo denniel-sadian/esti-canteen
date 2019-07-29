@@ -72,7 +72,7 @@ class FeedbackView(CreateView):
     View for creating a feedback.
     """
     model = Feedback
-    fields = ['name', 'contact_no' 'content']
+    fields = ['name', 'contact_no', 'content']
 
 
 class ThanksView(TemplateView):
