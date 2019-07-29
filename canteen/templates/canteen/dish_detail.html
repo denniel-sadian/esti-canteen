@@ -103,6 +103,7 @@
                 {% endif %}</p>
             <div class="w3-margin-top">
                 <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">Other dishes</a>
+                <a href="{% url 'canteen:feedback' %}" class="w3-button w3-round-xxlarge w3-purple">Feedback</a>
                 <a href="{% url 'canteen:order' dish.id %}" class="w3-button w3-round-xxlarge w3-purple">Order</a>
             </div>
             {% endif %}
