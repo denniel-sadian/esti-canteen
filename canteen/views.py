@@ -73,6 +73,7 @@ class FeedbackView(CreateView):
     """
     model = Feedback
     fields = ['name', 'contact_no', 'content']
+    success_url = reverse_lazy('canteen:home')
 
 
 class ThanksView(TemplateView):
