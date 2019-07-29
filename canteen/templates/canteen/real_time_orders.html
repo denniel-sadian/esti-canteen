@@ -50,11 +50,9 @@
             <div class="tables" id="orders">
                 <p class="w3-large w3-opacity">Loading, please wait...</p>
             </div>
-            <div class="w3-margin-top">
-                <h2>Feedbacks</h2>
-                <ul>
-                    <li>Denniel luis said: Hello!</li>
-                </ul>
+            <h2 class="w3-margin-top">Feedbacks</h2>
+            <div id="feedbacks">
+                <p class="w3-large w3-opacity">Loading, please wait...</p>
             </div>
         </div>
     </article>
@@ -92,6 +90,26 @@
             $('#confirm').slideUp();
         }
         function structureReport() {
+            $.get("{% url 'canteen:json-feedbacks' %}", function (data, status) {
+                if (status == 'success') {
+                    var ul = $('<ul class="w3-ul"></ul>');
+                    for (f in data)
+                        ul.append(
+                            $(
+                                '<li><p><a class="w3-text-blue" href="/admin/canteen/feedback/' +
+                                data[f].id +
+                                '/change/">' +
+                                data[f].name +
+                                '</a>: ' +
+                                data[f].content +
+                                '<br/>(' +
+                                new Date(data[f].date).toLocaleString() +
+                                ')</p></li>'
+                            )
+                        );
+                    $('#feedbacks').html(ul);
+                }
+            });
             $.get("{% url 'canteen:json-audit' %}", function (data, status) {
                 if (status == 'success') {
                     var table = $(

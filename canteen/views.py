@@ -117,7 +117,7 @@ def json_orders(request):
         for order in Order.objects.filter(
             date__date=datetime.now().date()).order_by('-date')
     ]
-    return JsonResponse(orders)
+    return JsonResponse(orders, safe=False)
 
 
 def json_feedbacks(request):
@@ -129,12 +129,13 @@ def json_feedbacks(request):
     feedbacks = [
         {
             'id': f.id,
-            'name': f.id,
-            'content': f.content
+            'name': f.name,
+            'content': f.content,
+            'date': f.date
         }
         for f in Feedback.objects.all().order_by('-date')
     ]
-    return JsonResponse(feedbacks)
+    return JsonResponse(feedbacks, safe=False)
 
 
 def json_audit(request):
