@@ -120,6 +120,23 @@ def json_orders(request):
     return JsonResponse(orders, safe=False)
 
 
+def json_feedbacks(request):
+    """
+    View for giving the feedbacks.
+    """
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden("You're not authenticated.")
+    feedbacks = [
+        {
+            'id': f.id,
+            'name': f.id,
+            'content': f.content
+        }
+        for f in Feedback.objects.all().order_by('-date')
+    ]
+    return JsonResponse(feedbacks)
+
+
 def json_audit(request):
     """
     View for displaying the audit.
