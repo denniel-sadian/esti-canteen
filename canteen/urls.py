@@ -9,6 +9,7 @@ urlpatterns = [
     path('order/<int:dish>/', views.OrderView.as_view(), name='order'),
     path('thanks/', views.ThanksView.as_view(), name='thanks'),
     path('orders/', views.RealTimeOrdersView.as_view(), name='orders'),
+    path('feedback/', views.FeedbackView.as_view(), name='feedback'),
     path('json-orders/', views.json_orders, name='json-orders'),
     path('json-audit/', views.json_audit, name='json-audit'),
     path('api-mark-as-served/<int:id>/',views.api_mark_order_served,
