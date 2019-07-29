@@ -117,7 +117,7 @@ def json_orders(request):
         for order in Order.objects.filter(
             date__date=datetime.now().date()).order_by('-date')
     ]
-    return JsonResponse(orders, safe=False)
+    return JsonResponse(orders)
 
 
 def json_feedbacks(request):
