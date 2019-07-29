@@ -45,9 +45,15 @@
             position: relative;
         }
 
-        .dish-image-cont>span {
+        .price {
             position: absolute;
             top: 10px;
+            right: 10px;
+        }
+
+        .orders {
+            position: absolute;
+            top: 35px;
             right: 10px;
         }
 
@@ -168,8 +174,10 @@
                         <div class="w3-center w3-card-4 w3-border w3-border-purple">
                             <div class="dish-image-cont">
                                 <img src="{% static 'canteen/hands.png' %}" class="dish-image" />
-                                <span class="w3-card-4 w3-tag w3-large w3-round w3-red">{{ dish.price }}
+                                <span class="w3-card-4 w3-tag w3-small w3-round w3-red price">{{ dish.price }}
                                     pesos</span>
+                                <span class="w3-card-4 orders w3-tag w3-small w3-round w3-blue">Orders:
+                                    {{ dish.order__count }}</span>
                             </div>
                             <div class="w3-padding">
                                 <h4 class="{% if dish.sold_out %}w3-text-red{% endif %}">
