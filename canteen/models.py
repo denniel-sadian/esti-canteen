@@ -27,6 +27,7 @@ class Feedback(models.Model):
     The Feedback model.
     """
     date = models.DateTimeField(auto_now=True)
+    contact_no = models.IntegerField('contact no.')
     name = models.CharField(max_length=100)
     content = models.TextField()
 
