@@ -53,6 +53,11 @@
             right: 10px;
         }
 
+        .w3-button {
+            margin-top: 3px;
+            margin-bottom: 3px;
+        }
+
         @media only screen and (min-width: 600px) {
             h1 {
                 font-size: 60px;
@@ -89,7 +94,8 @@
             <p class="w3-large">Sad, you did not come early.</p>
             <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">Other dishes</a>
             {% else %}
-            <p class="w3-margin-bottom w3-large">It costs <span class="w3-red w3-tag w3-round">{{ dish.price }}
+            <p class="w3-margin-bottom w3-large w3-text-white">It costs <span
+                    class="w3-red w3-tag w3-round">{{ dish.price }}
                     pessos</span>.
                 {{ dish.description }}
                 {% if orders == 0 %}
