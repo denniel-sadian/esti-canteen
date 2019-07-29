@@ -76,7 +76,11 @@
                 <input type="text" class="w3-input w3-margin-bottom" name="name"
                     value="{% if form.name.value %}{{ form.name.value }}{% endif %}" />
                 {{ form.name.errors }}
-                <label for="name" class="w3-opacity">Content:</label>
+                <label for="contact_no" class="w3-opacity">Contact Number:</label>
+                <input type="text" class="w3-input w3-margin-bottom" name="contact_no"
+                    value="{% if form.contact_no.value %}{{ form.contact_no.value }}{% endif %}" />
+                {{ form.name.errors }}
+                <label for="content" class="w3-opacity">Content:</label>
                 <textarea name="content">{% if form.content.value %}{{ form.content.value }}{% endif %}</textarea>
                 {{ form.content.errors }}
             </div>
