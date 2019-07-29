@@ -15,7 +15,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 class FeedbackAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date')
+    list_display = ('name', 'contact_no', 'date')
 
 
 admin.site.register(Dish, DishAdmin)
