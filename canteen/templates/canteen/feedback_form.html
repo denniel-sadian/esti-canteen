@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ESTI Canteen - Feedback</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Submitting a feedback." />
+    <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            padding: 0px;
+            margin: 0px;
+            background: url({% static 'canteen/hands.png' %}) no-repeat center fixed;
+            background-size: cover;
+        }
+
+        .modal {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .errorlist {
+            color: red;
+        }
+
+        .modal>form {
+            width: 50px;
+            display: block;
+            width: 90%;
+            overflow-y: auto;
+            background: linear-gradient(to bottom right, violet, #87CEEB, blue);
+        }
+
+        @media only screen and (min-width: 600px) {
+            .modal>form {
+                width: 80%;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            .modal>form {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="modal">
+        <form method="POST" action="" class="w3-animate-zoom w3-container w3-card-4 w3-purple w3-round-large">
+            {% csrf_token %}
+            <h2>Feedback</h2>
+            <p>Give this site a feedback. Give the service a feedback. We're glad that you're concerned.</p>
+            <div class="w3-container w3-white w3-padding-16 w3-round-large">
+                <label for="name" class="w3-opacity">Name:</label>
+                <input type="text" class="w3-input" name="name"
+                    value="{% if form.name.value %}{{ form.name.value }}{% endif %}" />
+                {{ form.name.errors }}
+                <textarea name="content" placeholder="Content...">
+                    {% if form.content.value %}
+                    {{ form.content.value }}
+                    {% endif %}
+                </textarea>
+            </div>
+            <div class="w3-right w3-margin-top w3-margin-bottom">
+                <a href="{% url 'canteen:dish-detail' dish.id %}" class="w3-button w3-blue w3-round-xxlarge">Go back</a>
+                <input type="submit" class="w3-button w3-blue w3-round-xxlarge" value="Order" />
+            </div>
+        </form>
+    </div>
+    </div>
+
+</body>
+
+</html>
