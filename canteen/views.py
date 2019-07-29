@@ -16,6 +16,7 @@ from django.db.models import Sum
 
 from .models import Dish
 from .models import Order
+from .models import Feedback
 
 
 class HomeView(ListView):
@@ -64,6 +65,14 @@ class OrderView(CreateView):
         context = super().get_context_data(**kwargs)
         context['dish'] = Dish.objects.get(id=self.kwargs['dish'])
         return context
+
+
+class FeedbackView(CreateView):
+    """
+    View for creating a feedback.
+    """
+    model = Feedback
+    fields = ['name', 'content']
 
 
 class ThanksView(TemplateView):
