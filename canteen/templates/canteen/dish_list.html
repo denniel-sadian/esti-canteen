@@ -34,7 +34,7 @@
             padding-bottom: 30px;
         }
 
-        .dish>div {
+        .dish>a>div {
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
             border-bottom-left-radius: 25px;
@@ -169,8 +169,8 @@
             <h2>Our menu for today!</h2>
             <div class="w3-row">
                 {% for dish in dishes %}
-                <a href="{% url 'canteen:dish-detail' dish.id %}">
-                    <div class="w3-col m6 l4 dish w3-animate-zoom {% if dish.sold_out %}sold-out{% endif %}">
+                <div class="w3-col m6 l4 dish w3-animate-zoom {% if dish.sold_out %}sold-out{% endif %}">
+                    <a href="{% url 'canteen:dish-detail' dish.id %}">
                         <div class="w3-center w3-card-4 w3-border w3-border-purple">
                             <div class="dish-image-cont">
                                 <img src="{% static 'canteen/hands.png' %}" class="dish-image" />
@@ -185,8 +185,8 @@
                                 </h4>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
                 {% endfor %}
             </div>
             {% else %}
