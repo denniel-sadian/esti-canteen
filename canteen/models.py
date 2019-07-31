@@ -14,6 +14,7 @@ class Dish(models.Model):
     date = models.DateField(auto_now=True)
     description = models.CharField(max_length=101)
     sold_out = models.BooleanField(default=False)
+    photo = models.ImageField(upload_to='dishes')
 
     class Meta:
         verbose_name_plural = 'dishes'
