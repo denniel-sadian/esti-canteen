@@ -50,7 +50,7 @@ class Order(models.Model):
     id_no = models.CharField('id no.', max_length=100)
     contact_no = models.CharField(max_length=15)
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
-    count = models.PositiveSmallIntegerField(default=1)
+    count = models.BigIntegerField()
     amount = models.FloatField(editable=False)
     served = models.BooleanField(default=False)
 
