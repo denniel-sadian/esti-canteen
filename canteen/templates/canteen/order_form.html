@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="{{ dish.description }}" />
     <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <style>
         html,
         body {
@@ -59,7 +61,7 @@
     <div class="modal">
         <form method="POST" action="" class="w3-animate-zoom w3-container w3-card-4 w3-purple w3-round-large">
             {% csrf_token %}
-            <h2>Ordering {{ dish.name|title }}</h2>
+            <h2><i class="fas fa-hamburger"></i> Ordering {{ dish.name|title }}</h2>
             <p>What a nice taste you have! Order quickly, we might run out of {{ dish.name|title }}.</p>
             <div class="w3-container w3-white w3-padding-16 w3-round-large">
                 <label for="name" class="w3-opacity">Name:</label>
@@ -80,8 +82,11 @@
                 {{ form.count.errors }}
             </div>
             <div class="w3-right w3-margin-top w3-margin-bottom">
-                <a href="{% url 'canteen:dish-detail' dish.id %}" class="w3-button w3-blue w3-round-xxlarge">Go back</a>
-                <input type="submit" class="w3-button w3-blue w3-round-xxlarge" value="Order" />
+                <a href="{% url 'canteen:dish-detail' dish.id %}" class="w3-button w3-blue w3-round-xxlarge">
+                    <i class="fas fa-arrow-alt-circle-left"></i> Go back</a>
+                <button type="submit" class="w3-button w3-blue w3-round-xxlarge">
+                    <i class="fas fa-check-circle"></i> Order
+                </button>
             </div>
         </form>
     </div>

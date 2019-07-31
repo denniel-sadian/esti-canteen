@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Submitting a feedback." />
     <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <style>
         html,
         body {
@@ -68,7 +70,7 @@
     <div class="modal">
         <form method="POST" action="" class="w3-animate-zoom w3-container w3-card-4 w3-purple w3-round-large">
             {% csrf_token %}
-            <h2>Feedback</h2>
+            <h2><i class="fas fa-feather-alt"></i> Feedback</h2>
             <p>Give this site a feedback. Give the service a feedback. We're glad that you're
                 concerned.</p>
             <div class="w3-container w3-white w3-padding-16 w3-round-large">
@@ -85,8 +87,11 @@
                 {{ form.content.errors }}
             </div>
             <div class="w3-right w3-margin-top w3-margin-bottom">
-                <a href="{% url 'canteen:home' %}" class="w3-button w3-blue w3-round-xxlarge">Home</a>
-                <input type="submit" class="w3-button w3-blue w3-round-xxlarge" value="Submit" />
+                <a href="{% url 'canteen:home' %}" class="w3-button w3-blue w3-round-xxlarge">
+                    <i class="fas fa-home"></i> Home</a>
+                <button type="submit" class="w3-button w3-blue w3-round-xxlarge">
+                    <i class="fas fa-paper-plane"></i> Submit
+                </button>
             </div>
         </form>
     </div>

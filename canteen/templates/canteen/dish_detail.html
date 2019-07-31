@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="{{ dish.description }}" />
     <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <style>
         html,
         body {
@@ -49,8 +51,14 @@
 
         #edit-link {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
+            top: 8px;
+            right: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .w3-button {
@@ -86,9 +94,12 @@
     <div class="w3-container w3-center w3-animate-zoom">
         <div class="w3-container w3-card-4 w3-round-xlarge w3-padding-16">
             {% if user.is_authenticated %}
-            <a id="edit-link" href="/admin/canteen/dish/{{ dish.id }}/change/" class="w3-text-white">Edit it here.</a>
+            <a id="edit-link" href="/admin/canteen/dish/{{ dish.id }}/change/" class="w3-text-white w3-button"><i
+                    class="fas fa-pencil-alt"></i></a>
             {% endif %}
-            <h1 class="w3-text-white">{{ dish.name|title }}</h1>
+            <h1 class="w3-text-white">
+                <i class="fas fa-drumstick-bite"></i><br />
+                {{ dish.name|title }}</h1>
             {% if dish.sold_out %}
             <p class="w3-large w3-tag w3-round w3-red">Sold out!</p>
             <p class="w3-large">Sad, you did not come early.</p>
@@ -108,9 +119,12 @@
                     orders</span>, as of now.
                 {% endif %}</p>
             <div class="w3-margin-top">
-                <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">Other dishes</a>
-                <a href="{% url 'canteen:feedback' %}" class="w3-button w3-round-xxlarge w3-purple">Feedback</a>
-                <a href="{% url 'canteen:order' dish.id %}" class="w3-button w3-round-xxlarge w3-purple">Order</a>
+                <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">
+                    <i class="fas fa-list"></i> Other dishes</a>
+                <a href="{% url 'canteen:feedback' %}" class="w3-button w3-round-xxlarge w3-purple">
+                    <i class="fas fa-feather-alt"></i> Feedback</a>
+                <a href="{% url 'canteen:order' dish.id %}" class="w3-button w3-round-xxlarge w3-purple">
+                    <i class="fas fa-check-circle"></i> Order</a>
             </div>
             {% endif %}
         </div>

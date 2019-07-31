@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="It's so good to eat, especially if you've paid well." />
     <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <style>
         html,
         body {
@@ -156,8 +158,8 @@
                 <h1 class="w3-text-white">Welcome to ESTI's Canteen!</h1>
                 <p class="w3-text-white w3-large">It's so good to eat, especially if you've paid well.</p>
                 <p>
-                    <a href="#article" class="w3-button w3-padding w3-round-xxlarge w3-purple">Check
-                        the menu</a>
+                    <a href="#article" class="w3-button w3-padding w3-round-xxlarge w3-purple">
+                        <i class="fas fa-clipboard-list"></i> Check the menu</a>
                 </p>
             </div>
         </div>
@@ -166,7 +168,7 @@
     <article id="article" class="w3-container w3-padding-32 w3-margin w3-animate-opacity">
         <div class="w3-content">
             {% if dishes %}
-            <h2>Our menu for today!</h2>
+            <h2><i class="fas fa-clipboard-list"></i> Our menu for today!</h2>
             <div class="w3-row">
                 {% for dish in dishes %}
                 <div class="w3-col m6 l4 dish w3-animate-zoom {% if dish.sold_out %}sold-out{% endif %}">
@@ -207,10 +209,16 @@
 
     <footer class="w3-container w3-center w3-padding-64">
         <div class="w3-content">
-            <h1 class="w3-text-white">Eat well, live well. But don't forget to pay well.</h1>
+            <h1 class="w3-text-white">
+                <i class="fas fa-quote-left"></i>
+                Eat well, live well. But don't forget to pay well
+                <i class="fas fa-quote-right"></i>
+            </h1>
         </div>
-        <a href="/admin/" class="w3-button w3-margin-top w3-round-xxlarge w3-purple">Manage</a>
-        <a href="{% url 'canteen:feedback' %}" class="w3-button w3-margin-top w3-round-xxlarge w3-purple">Feedback</a>
+        <a href="/admin/" class="w3-button w3-margin-top w3-round-xxlarge w3-purple">
+            <i class="fas fa-tools"></i> Manage</a>
+        <a href="{% url 'canteen:feedback' %}" class="w3-button w3-margin-top w3-round-xxlarge w3-purple">
+            <i class="fas fa-feather-alt"></i> Feedback</a>
     </footer>
 
 </body>
