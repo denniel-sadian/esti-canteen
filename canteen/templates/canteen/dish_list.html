@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="It's so good to eat, especially if you've paid well." />
     <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
+    <link rel="icon" href="{% static 'canteen/esti_icon.png' %}" type="image/x-icon" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <style>
@@ -133,17 +134,12 @@
             #logo {
                 width: 250px;
                 height: 250px;
-                margin-right: 20px;
             }
         }
 
         @media (min-width:993px) {
             header h1 {
                 font-size: 90px;
-            }
-
-            #logo {
-                margin-right: 50px;
             }
         }
     </style>
@@ -153,7 +149,7 @@
     <header class="w3-animate-top">
         <div class="w3-container">
             <div>
-                <img id="logo" src="{% static 'canteen/logo.png' %}" width="300" height="300" />
+                <img id="logo" src="{% static 'canteen/esti_square.png' %}" width="350" height="350" />
             </div>
             <div>
                 <h1 class="w3-text-white">Welcome to ESTI's Canteen!</h1>
