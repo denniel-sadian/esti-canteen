@@ -64,6 +64,7 @@
             height: 200px;
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
+            object-fit: cover;
         }
 
         .sold-out {
@@ -175,7 +176,7 @@
                     <a href="{% url 'canteen:dish-detail' dish.id %}">
                         <div class="w3-center w3-card-4 w3-border w3-border-purple">
                             <div class="dish-image-cont">
-                                <img src="{% static 'canteen/hands.png' %}" class="dish-image" />
+                                <img src="{{ dish.photo.url }}" class="dish-image" />
                                 <span class="w3-card-4 w3-tag w3-small w3-round w3-red price">{{ dish.price }}
                                     pesos</span>
                                 <span class="w3-card-4 orders w3-tag w3-small w3-round w3-blue">Orders:
