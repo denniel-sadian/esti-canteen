@@ -17,6 +17,7 @@ class Dish(models.Model):
 
     class Meta:
         verbose_name_plural = 'dishes'
+        unique_together = ('name', 'date')
 
     def __str__(self):
         return self.name
