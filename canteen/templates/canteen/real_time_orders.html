@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Loot at the audit and the real-time orders." />
     <link rel="icon" href="{% static 'canteen/esti_icon.png' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'canteen/esti_icon.png' %}" type="image/x-icon" />
     <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -40,28 +41,34 @@
 <body>
     <header class="w3-container w3-center w3-padding-32 w3-black">
         <h1>Real-time <span class="w3-tag w3-orange w3-round">Orders</span></h1>
-        <a href="{% url 'canteen:home' %}" class="w3-button w3-round-xxlarge">Home</a>
-        <a href="/admin/" class="w3-button w3-round-xxlarge">Manage</a>
+        <a href="{% url 'canteen:home' %}" class="w3-button w3-round-xxlarge">
+            <i class="fas fa-home"></i> Home</a>
+        <a href="/admin/" class="w3-button w3-round-xxlarge">
+            <i class="fas fa-tools"></i> Manage</a>
     </header>
     <article class="w3-container w3-padding-32">
         <div class="w3-content">
-            <h2>Audit</h2>
+            <h2><i class="fas fa-calculator"></i> Audit</h2>
             <div class="tables" id="audit">
-                <p class="w3-large w3-opacity">Loading, please wait...</p>
+                <p class="w3-large w3-opacity">
+                    <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
             </div>
-            <h2 class="w3-margin-top">These are the current orders.</h2>
+            <h2 class="w3-margin-top"><i class="fas fa-clipboard-list"></i> These are the current orders.</h2>
             <div class="tables" id="orders">
-                <p class="w3-large w3-opacity">Loading, please wait...</p>
+                <p class="w3-large w3-opacity">
+                    <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
             </div>
-            <h2 class="w3-margin-top">Feedbacks</h2>
+            <h2 class="w3-margin-top"><i class="fas fa-feather-alt"></i> Feedbacks</h2>
             <div id="feedbacks">
-                <p class="w3-large w3-opacity">Loading, please wait...</p>
+                <p class="w3-large w3-opacity">
+                    <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
             </div>
         </div>
     </article>
     <div id="confirm" class="w3-modal">
-        <div class="w3-cotainer w3-animate-top w3-padding w3-modal-content w3-round-large">
-            <h2>Confirmation</h2>
+        <div
+            class="w3-cotainer w3-animate-top w3-padding w3-border w3-border-red w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-modal-content w3-round-xlarge">
+            <h2 class="w3-text-red"><i class="fas fa-exclamation-triangle"></i> Confirmation</h2>
             <p>If the customer of this order did not take it on time, and this has been given to others already,
                 then you're fine to delete it.</p>
             <p>Also, you should not delete orders that have been served because they are vital in making the report
@@ -69,8 +76,10 @@
             <p>Are you sure that you want to delete this order? Doing so, will of course, delete it
                 permanently.</p>
             <p id="buttons">
-                <button class="w3-blue w3-button w3-round-xxlarge" onclick="$('#confirm').slideUp()">No</button>
-                <button class="w3-red w3-button w3-round-xxlarge" onclick="deleteCompletely()">Yes</button>
+                <button class="w3-green w3-button w3-round-xxlarge" onclick="$('#confirm').slideUp()">
+                    <i class="fas fa-times-circle"></i> No</button>
+                <button class="w3-red w3-button w3-round-xxlarge" onclick="deleteCompletely()">
+                    <i class="fas fa-check-circle"></i> Yes</button>
             </p>
         </div>
     </div>
@@ -99,7 +108,7 @@
                     for (f in data)
                         ul.append(
                             $(
-                                '<li><p><a class="w3-text-blue" href="/admin/canteen/feedback/' +
+                                '<li><p><i class="fas fa-user-circle"></i> <a class="w3-text-blue" href="/admin/canteen/feedback/' +
                                 data[f].id +
                                 '/change/">' +
                                 data[f].name +
@@ -167,18 +176,18 @@
                             new Date(data[o].date).toLocaleString() + '</td>'));
                         tr.append($('<td class="w3-center w3-border">'
                             + String(data[o].served ?
-                                '<span class="w3-tag w3-blue w3-round">Yes</span>' :
-                                '<span class="w3-tag w3-red w3-round">No</span>') +
+                                '<i class="fas fa-check-circle w3-text-green"></li>' :
+                                '<i class="fas fa-times-circle w3-text-red"></li>') +
                             '</td>'));
                         tr.append($('<td class="w3-center w3-border">' +
                             '<button id="' + data[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markServed(' +
                             data[o].id +
-                            ')">Toggle Served</button>' +
+                            ')"><i class="fas fa-check-circle"></i> Served?</button>' +
                             '</td>'));
                         tr.append($('<td class="w3-center w3-border">' +
                             '<button class="w3-button w3-round-xxlarge w3-red" onclick="prepareForDeleting(' +
                             data[o].id +
-                            ')">Delete</button>' +
+                            ')"><i class="fas fa-times-circle"></i> Delete</button>' +
                             '</td>'));
                         table.append(tr);
                     }
