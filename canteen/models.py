@@ -33,7 +33,7 @@ class Feedback(models.Model):
     The Feedback model.
     """
     date = models.DateTimeField(auto_now=True)
-    contact_no = models.IntegerField('contact no.')
+    contact_no = models.CharField(max_length=15)
     name = models.CharField(max_length=100)
     content = models.TextField()
 
@@ -48,7 +48,7 @@ class Order(models.Model):
     date = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100)
     id_no = models.CharField('id no.', max_length=100)
-    contact_no = models.IntegerField('contact no.')
+    contact_no = models.CharField(max_length=15)
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
     count = models.IntegerField()
     amount = models.FloatField(editable=False)
