@@ -99,6 +99,12 @@
             background: linear-gradient(to bottom right, #2196F3, violet);
         }
 
+        #dishes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         @media (max-width:768px) {
             header h1 {
                 font-size: 50px;
@@ -166,7 +172,7 @@
         <div class="w3-content">
             {% if dishes %}
             <h2><i class="fas fa-clipboard-list"></i> Our menu for today!</h2>
-            <div class="w3-row">
+            <div id="dishes" class="w3-row">
                 {% for dish in dishes %}
                 <div class="w3-col m6 l4 dish w3-animate-zoom {% if dish.sold_out %}sold-out{% endif %}">
                     <a href="{% url 'canteen:dish-detail' dish.id %}">
