@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 
 <!DOCTYPE html>
 <html>
@@ -107,16 +108,16 @@
             <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">Other dishes</a>
             {% else %}
             <p class="w3-margin-bottom w3-large w3-text-white">It costs <span
-                    class="w3-red w3-tag w3-round">{{ dish.price }}
+                    class="w3-red w3-tag w3-round">{{ dish.price|intcomma }}
                     pessos</span>.
                 {{ dish.description }}
                 {% if orders == 0 %}
                 No one is ordering it yet. Be the first to order!
                 {% elif orders == 1 %}
-                It has already <span class="w3-teal w3-tag w3-round">{{ orders }}
+                It has already <span class="w3-teal w3-tag w3-round">{{ orders|intcomma }}
                     order</span>, as of now.
                 {% else %}
-                It has already <span class="w3-teal w3-tag w3-round">{{ orders }}
+                It has already <span class="w3-teal w3-tag w3-round">{{ orders|intcomma }}
                     orders</span>, as of now.
                 {% endif %}</p>
             <div class="w3-margin-top">
