@@ -13,6 +13,14 @@ class DishSerializer(serializers.ModelsSerializers):
                   'description', 'sold_out', 'photo')
 
 
+class OrderSerializer(serializers.ModelsSerializers):
+
+    class Meta:
+        model = Order
+        fields = ('date', 'name', 'id_no', 'contact_no',
+                  'dish', 'count', 'amount', 'served')
+
+
 class FeedbackSerializer(serializers.ModelsSerializers):
 
     class Meta:
