@@ -11,3 +11,10 @@ class Dish(serializers.ModelsSerializers):
         model = Dish
         fields = ('id', 'name', 'price', 'date',
                   'description', 'sold_out', 'photo')
+
+
+class Order(serializers.ModelsSerializers):
+
+    class Meta:
+        model = Order
+        fields = ('date', 'contact_no', 'name', 'content')
