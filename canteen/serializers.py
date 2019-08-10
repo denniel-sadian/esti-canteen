@@ -16,5 +16,5 @@ class Dish(serializers.ModelsSerializers):
 class Order(serializers.ModelsSerializers):
 
     class Meta:
-        model = Order
+        model = Feedback
         fields = ('date', 'contact_no', 'name', 'content')
