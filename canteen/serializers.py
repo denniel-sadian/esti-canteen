@@ -19,6 +19,7 @@ class OrderSerializer(serializers.ModelsSerializers):
         model = Order
         fields = ('id', 'date', 'name', 'id_no', 'contact_no',
                   'dish', 'count', 'amount', 'served')
+        depth = 1
 
 
 class FeedbackSerializer(serializers.ModelsSerializers):
