@@ -13,7 +13,7 @@ class Dish(serializers.ModelsSerializers):
                   'description', 'sold_out', 'photo')
 
 
-class Order(serializers.ModelsSerializers):
+class FeedbackSerializer(serializers.ModelsSerializers):
 
     class Meta:
         model = Feedback
