@@ -5,7 +5,7 @@ from .models import Order
 from .models import Feedback
 
 
-class Dish(serializers.ModelsSerializers):
+class DishSerializer(serializers.ModelsSerializers):
 
     class Meta:
         model = Dish
