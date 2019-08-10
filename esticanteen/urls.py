@@ -23,5 +23,6 @@ from django.views.static import serve
 urlpatterns = [
     path('', include('canteen.urls')),
     path('admin/', admin.site.urls),
+    url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
