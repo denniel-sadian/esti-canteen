@@ -1,5 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 
 from .serializers import DishSerializer
 from .serializers import OrderSerializer
@@ -19,3 +21,9 @@ class OrderViewSet(ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+
+class FeedbackListView(ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
