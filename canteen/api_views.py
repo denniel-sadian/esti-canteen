@@ -13,3 +13,9 @@ class DishViewSet(ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Dish.objects.all()
     serializer_class = DishSerializer
+
+
+class OrderViewSet(ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
