@@ -9,7 +9,7 @@ from .models import Order
 from .models import Feedback
 
 
-class DishViews(ModelViewSet):
+class DishViewSet(ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Dish.objects.all()
     serializer_class = DishSerializer
