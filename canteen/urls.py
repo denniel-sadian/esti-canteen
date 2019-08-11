@@ -1,6 +1,7 @@
-from django.urls import path
+from django.urls import path, include
 
 from . import views
+from . import api_urls
 
 app_name = 'canteen'
 urlpatterns = [
@@ -17,4 +18,6 @@ urlpatterns = [
          name='api-served'),
     path('api-delete-order/<int:id>/', views.api_delete_order,
          name='api-delete-order'),
+
+    path('api/', include(api_urls.urlpatterns))
 ]

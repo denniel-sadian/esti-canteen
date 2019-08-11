@@ -10,4 +10,4 @@ from .models import Feedback
 
 class DishViews(ModelViewSet):
     queryset = Dish.objects.all()
-    serializer_class = AccountSerializer
+    serializer_class = DishSerializer

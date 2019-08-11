@@ -5,7 +5,7 @@ from .models import Order
 from .models import Feedback
 
 
-class DishSerializer(serializers.ModelsSerializers):
+class DishSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Dish
@@ -13,7 +13,7 @@ class DishSerializer(serializers.ModelsSerializers):
                   'description', 'sold_out', 'photo')
 
 
-class OrderSerializer(serializers.ModelsSerializers):
+class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
@@ -22,7 +22,7 @@ class OrderSerializer(serializers.ModelsSerializers):
         depth = 1
 
 
-class FeedbackSerializer(serializers.ModelsSerializers):
+class FeedbackSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Feedback
