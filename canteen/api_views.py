@@ -1,3 +1,4 @@
+from django.utils.timezone import datetime
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -15,6 +16,10 @@ class DishViewSet(ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Dish.objects.all()
     serializer_class = DishSerializer
+
+    def get_queryset(self):
+        return Dish.objects.filter(
+            date=datetime.now()).annotate(Count('order'))
 
 
 class OrderViewSet(ModelViewSet):
