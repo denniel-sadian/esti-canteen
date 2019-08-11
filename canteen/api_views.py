@@ -18,8 +18,7 @@ class DishViewSet(ModelViewSet):
     serializer_class = DishSerializer
 
     def get_queryset(self):
-        return Dish.objects.filter(
-            date=datetime.now()).annotate(Count('order'))
+        return Dish.objects.filter(date=datetime.now())
 
 
 class OrderViewSet(ModelViewSet):
