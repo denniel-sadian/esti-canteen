@@ -33,7 +33,7 @@ class HomeView(ListView):
         return context
 
     def get_queryset(self):
-        return Dish.objects.filter(date=datetime.now()).annotate(Count('order'))
+        return Dish.objects.filter(date=datetime.now()).annotate(Count('orders'))
 
 
 class DishView(DetailView):
