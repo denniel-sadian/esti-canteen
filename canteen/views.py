@@ -13,7 +13,6 @@ from django.http import HttpResponseForbidden
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
-from django.db.models import Count
 
 from .models import Dish
 from .models import Order
@@ -33,7 +32,7 @@ class HomeView(ListView):
         return context
 
     def get_queryset(self):
-        return Dish.objects.filter(date=datetime.now()).annotate(Count('orders'))
+        return Dish.objects.filter(date=datetime.now())
 
 
 class DishView(DetailView):
