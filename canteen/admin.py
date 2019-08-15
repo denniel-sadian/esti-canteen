@@ -6,6 +6,7 @@ from .models import Feedback
 
 
 class DishAdmin(admin.ModelAdmin):
+    date_hierarchy = 'date'
     list_display = ('name', 'price', 'description', 'date', 'sold_out')
 
 
