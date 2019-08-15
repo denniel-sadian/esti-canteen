@@ -83,7 +83,7 @@
                 {{ form.count.errors }}
             </div>
             <div class="w3-right w3-margin-top w3-margin-bottom">
-                <a href="{% url 'canteen:dish-detail' dish.id %}" class="w3-button w3-blue w3-round-xxlarge">
+                <a href="{% url 'canteen:not-api-dish-detail' dish.id %}" class="w3-button w3-blue w3-round-xxlarge">
                     <i class="fas fa-arrow-alt-circle-left"></i> Go back</a>
                 <button type="submit" class="w3-button w3-blue w3-round-xxlarge">
                     <i class="fas fa-check-circle"></i> Order
