@@ -28,7 +28,8 @@ class HomeView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['orders_count'] = Order.objects.filter(
-            date__date=datetime.now().date()).count()
+            date__date=datetime.now().date()
+            ).aggregate(Sum('count'))['count__sum']
         return context
 
     def get_queryset(self):
