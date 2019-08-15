@@ -55,12 +55,6 @@
             right: 10px;
         }
 
-        .orders {
-            position: absolute;
-            top: 35px;
-            right: 10px;
-        }
-
         .dish-image {
             width: 100%;
             height: 200px;
@@ -182,8 +176,6 @@
                                 <img src="{{ dish.photo.url }}" class="dish-image" />
                                 <span class="w3-card-4 w3-tag w3-small w3-round w3-red price">{{ dish.price|intcomma }}
                                     pesos</span>
-                                <span class="w3-card-4 orders w3-tag w3-small w3-round w3-blue">Orders:
-                                    {{ dish.order__count|intcomma }}</span>
                             </div>
                             <div class="w3-padding">
                                 <h4 class="{% if dish.sold_out %}w3-text-red{% endif %}">
