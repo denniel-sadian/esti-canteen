@@ -6,7 +6,7 @@ from . import api_urls
 app_name = 'canteen'
 urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
-    path('<int:pk>/', views.DishView.as_view(), name='dish-detail'),
+    path('<int:pk>/', views.DishView.as_view(), name='not-api-dish-detail'),
     path('order/<int:dish>/', views.OrderView.as_view(), name='order'),
     path('thanks/', views.ThanksView.as_view(), name='thanks'),
     path('orders/', views.RealTimeOrdersView.as_view(), name='orders'),
