@@ -111,7 +111,7 @@
                     class="w3-red w3-tag w3-round">{{ dish.price|intcomma }}
                     pessos</span>.
                 {{ dish.description }}
-                {% if orders == 0 %}
+                {% if not orders %}
                 No one is ordering it yet. Be the first to order!
                 {% elif orders == 1 %}
                 It has already <span class="w3-teal w3-tag w3-round">{{ orders|intcomma }}
