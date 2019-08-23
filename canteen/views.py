@@ -92,12 +92,25 @@ class RealTimeOrdersView(LoginRequiredMixin, TemplateView):
     template_name = 'canteen/real_time_orders.html'
 
 
+def get_orders(request):
+    if request.GET['date']:
+        return Order.objects.filter(
+            date__date=request.GET['date']).order_by('-date')
+    else:
+        return Order.objects.filter(
+            date__date=datetime.now().date()).order_by('-date')
+
+
 def json_orders(request):
     """
     View for displaying all the current orders.
     """
+    
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
+    
+    orders = get_orders(request)
+    
     orders = [
         {
             'id': order.id,
@@ -114,8 +127,7 @@ def json_orders(request):
             'amount': order.amount,
             'served': order.served
         }
-        for order in Order.objects.filter(
-            date__date=datetime.now().date()).order_by('-date')
+        for order in orders
     ]
     return JsonResponse(orders, safe=False)
 
@@ -144,7 +156,9 @@ def json_audit(request):
     """
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
-    orders = Order.objects.filter(date__date=datetime.now().date())
+
+    orders = get_orders(request)
+
     data = {
         'total_orders_amount':
             orders.aggregate(Sum('amount'))['amount__sum'],

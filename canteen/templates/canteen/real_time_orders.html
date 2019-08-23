@@ -54,9 +54,10 @@
         <p>This is the report for today.</p>
     </div>
     <div class="w3-container w3-padding-32">
-        <div class="w3-content w3-card w3-padding w3-teal w3-round-large">
+        <div class="w3-content w3-padding">
             <h2>View Date</h2>
-            <input type="date" id="date" class="w3-input w3-round-xxlarge w3-margin-bottom" />
+            <input type="date" id="date" class="w3-input w3-margin-bottom" />
+            <button class="w3-button w3-green w3-round-xxlarge w3-block" onclick="setDateToNow()">Now</button>
         </div>
     </div>
     <article class="w3-container w3-padding-32">
@@ -97,6 +98,7 @@
         </div>
     </div>
     <script>
+        var dateInput = $('#date');
         var orderId;
         function markServed(id) {
             orderId = id;
@@ -135,7 +137,7 @@
                     $('#feedbacks').html(ul);
                 }
             });
-            $.get("{% url 'canteen:json-audit' %}", function (data, status) {
+            $.get("{% url 'canteen:json-audit' %}?date=" + dateInput.val(), function (data, status) {
                 if (status == 'success') {
                     var table = $(
                         '<table class="w3-table-all w3-bottombar">' +
@@ -157,7 +159,7 @@
                     $('#audit').html(table);
                 }
             });
-            $.get("{% url 'canteen:json-orders' %}", function (data, status) {
+            $.get("{% url 'canteen:json-orders' %}?date=" + dateInput.val(), function (data, status) {
                 if (status == 'success') {
                     var table = $(
                         '<table class="w3-table-all w3-bottombar">' +
@@ -209,11 +211,20 @@
                 $('#' + orderId).slideDown();
             })
         }
+        function setDateToNow() {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1;
+            var date = now.getDate();
+            dateInput.val(
+                year + '-' +
+                (month < 10 ? ('0' + month) : month) + '-' +
+                (date < 10 ? ('0' + date) : date)
+            );
+        }
         $(document).ready(function () {
             setInterval(structureReport, 1000);
-            var dateInput = $('#date');
-            var date = new Date();
-
+            setDateToNow();
         })
     </script>
 </body>
