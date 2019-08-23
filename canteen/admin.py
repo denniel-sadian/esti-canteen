@@ -8,6 +8,7 @@ from .models import Feedback
 
 class DishAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'description', 'date', 'sold_out')
+    search_fields = ['name', 'description', 'price']
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
