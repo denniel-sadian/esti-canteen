@@ -12,9 +12,89 @@
     <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <style>
+        header {
+            margin-bottom: 40px;
+        }
+
+        body {
+            margin-bottom: 100px;
+        }
+
+        article {
+            margin-bottom: 50px;
+        }
+
+        hr {
+            margin-top: 10px;
+        }
+
+        a {
+            color: #2196F3;
+        }
+    </style>
 </head>
 
 <body>
+    <header class="w3-container w3-green">
+        <div class="w3-content w3-center w3-padding-64">
+            <h1>Welcome to the Website's Documentation.</h1>
+            <p class="w3-large">This page is only accessible by site admins.</p>
+            <p>
+                <a href="{% url 'canteen:home' %}" class="w3-button w3-border w3-round-xxlarge">Home</a>
+                <a href="/admin" class="w3-button w3-border w3-round-xxlarge">Admin site</a>
+            </p>
+        </div>
+    </header>
+    <article class="w3-container">
+        <div class="w3-content">
+            <h2>How to add a dish?</h2>
+            <hr />
+            <p>So, we're cookin'! And you want to display the dishes. Well, here's how to do that.</p>
+            <ol>
+                <li>
+                    <p>Go to the admin site.</p>
+                </li>
+                <li>
+                    <p>Locate the "Dishes" link, and at its right, click the "Add" link that has the plus icon.</p>
+                </li>
+                <li>
+                    <p>Fill in the name, price, description, and select the photo of the dish from your device (make
+                        sure that you ready that photo). The sold
+                        out check box in not mandatory, you'll only check it if the canteen runs out of that dish.</p>
+                </li>
+                <li>
+                    <p>
+                        Finally, save the dish in the database. You have three options of saving it.
+                        <ul>
+                            <li>
+                                <p><b>Save</b> - Simply save it, and the site will redirect you to the list of all
+                                    dishes.</p>
+                            </li>
+                            <li>
+                                <p><b>Save and add another</b> - Just like the simple saving, but it will redirect you
+                                    to the same page with the form being cleaned.</p>
+                            </li>
+                            <li>
+                                <p><b>Save and continue editing</b> - It's simply saving the dish as well, but it
+                                    will redirect you to the same page containing the form that has the values you've
+                                    entered. Prefered if you want to further edit the dish.</p>
+                            </li>
+                        </ul>
+                    </p>
+                </li>
+            </ol>
+        </div>
+    </article>
+    <article class="w3-container">
+        <div class="w3-content">
+            <h2>How to edit a dish?</h2>
+            <hr />
+            <p>If there's something you like to change with the dishes, like spelling, pricing, photo or anything, you
+                can simple follow these steps.</p>
+            <h3>Direct edit at the admin site.</h3>
+        </div>
+    </article>
 </body>
 
 </html>
