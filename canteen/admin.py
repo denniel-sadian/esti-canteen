@@ -17,7 +17,7 @@ class DishAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     date_hierarchy = 'date'
     list_display = ('name', 'dish', 'count', 'amount', 'id_no',
-                    'contact_no', 'date')
+                    'contact_no', 'date', 'served')
 
 
 class FeedbackAdmin(admin.ModelAdmin):
