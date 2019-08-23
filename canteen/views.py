@@ -93,6 +93,9 @@ class RealTimeOrdersView(LoginRequiredMixin, TemplateView):
 
 
 def get_orders(request):
+    """
+    Utility function for getting orders.
+    """
     if request.GET['date']:
         return Order.objects.filter(
             date__date=request.GET['date']).order_by('-date')
