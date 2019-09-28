@@ -96,6 +96,9 @@ class ManageView(LoginRequiredMixin, ListView):
     login_url = '/login/'
     template_name = 'canteen/manage.html'
 
+    def get_queryset(self):
+        return Dish.objects.filter(date=datetime.now())
+
 
 class DocumentationView(LoginRequiredMixin, TemplateView):
     """
