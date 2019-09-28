@@ -95,6 +95,7 @@ class RealTimeOrdersView(LoginRequiredMixin, TemplateView):
 class ManageView(LoginRequiredMixin, ListView):
     login_url = '/login/'
     template_name = 'canteen/manage.html'
+    context_object_name = 'dishes'
 
     def get_queryset(self):
         return Dish.objects.filter(date=datetime.now())
