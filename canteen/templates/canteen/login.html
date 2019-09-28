@@ -106,6 +106,8 @@
                     {% csrf_token %}
                     <input type="text" name="username" placeholder="Username">
                     <input type="password" class="w3-margin-bottom" name="password" placeholder="Password">
+                    <a href="{% url 'canteen:home' %}"
+                        class="w3-button w3-round-xxlarge w3-gray w3-margin-bottom">Home</a>
                     <input type="submit" class="w3-button w3-round-xxlarge w3-purple w3-margin-bottom" value="Login">
                     <input type="hidden" name="next" value="/manage">
                 </form>
