@@ -20,6 +20,8 @@ urlpatterns = [
          name='api-served'),
     path('api-delete-order/<int:id>/', views.api_delete_order,
          name='api-delete-order'),
+    
+    path('manage/', views.ManageView.as_view(), name='manage'),
     path('login/', LoginView.as_view(
         template_name='canteen/login.html',
     )),
