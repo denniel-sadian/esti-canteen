@@ -1,4 +1,5 @@
 from django.urls import path, include
+from django.contrib.auth.views import LoginView
 
 from . import views
 from . import api_urls
@@ -19,6 +20,9 @@ urlpatterns = [
          name='api-served'),
     path('api-delete-order/<int:id>/', views.api_delete_order,
          name='api-delete-order'),
+    path('login/', LoginView.as_view(
+        template_name='canteen/login.html',
+    )),
 
     path('api/', include(api_urls.urlpatterns))
 ]
