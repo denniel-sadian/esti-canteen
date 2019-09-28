@@ -1,0 +1,59 @@
+{% load humanize %}
+
+<style>
+    .dish {
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-bottom: 30px;
+    }
+
+    .dish>a>div {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
+
+    .dish-image-cont {
+        position: relative;
+    }
+
+    .price {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .dish-image {
+        width: 100%;
+        height: 200px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        object-fit: cover;
+    }
+
+    .sold-out {
+        opacity: 0.5;
+    }
+</style>
+
+<div id="dishes" class="w3-row">
+    {% for dish in dishes %}
+    <div class="w3-col m6 l4 dish w3-animate-zoom {% if dish.sold_out %}sold-out{% endif %}">
+        <a href="{% url 'canteen:not-api-dish-detail' dish.id %}">
+            <div class="w3-center w3-card-4 w3-border w3-border-purple">
+                <div class="dish-image-cont">
+                    <img src="{{ dish.photo.url }}" class="dish-image" />
+                    <span class="w3-card-4 w3-tag w3-small w3-round w3-red price">{{ dish.price|intcomma }}
+                        pesos</span>
+                </div>
+                <div class="w3-padding">
+                    <h4 class="{% if dish.sold_out %}w3-text-red{% endif %}">
+                        {{ dish.name|title }}
+                    </h4>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
