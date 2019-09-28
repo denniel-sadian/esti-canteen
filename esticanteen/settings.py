@@ -152,6 +152,11 @@ REST_FRAMEWORK = {
 }
 
 
+# Logout
+
+LOGOUT_REDIRECT_URL = '/login/'
+
+
 # Activate Django-Heroku
 
 if there_is_django_heroku:
