@@ -92,6 +92,11 @@ class RealTimeOrdersView(LoginRequiredMixin, TemplateView):
     template_name = 'canteen/real_time_orders.html'
 
 
+class ManageView(LoginRequiredMixin, ListView):
+    login_url = '/login/'
+    template_name = 'canteen/manage.html'
+
+
 class DocumentationView(LoginRequiredMixin, TemplateView):
     """
     View for displaying the websites documentation.
