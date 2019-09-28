@@ -50,9 +50,7 @@
     <article class="w3-container">
         <div class="w3-content">
             <h2>These are the dishes today.</h2>
-            <div class="w3-container">
-                <img src="" />
-            </div>
+            {% include 'canteen/dishes.html' with dishes=dishes %}
         </div>
     </article>
 </body>
