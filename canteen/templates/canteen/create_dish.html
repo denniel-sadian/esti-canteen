@@ -3,3 +3,51 @@
 {% block title %}Create Dish{% endblock %}
 
 {% block header %}Creating a Dish{% endblock %}
+
+{% block style %}
+<style>
+    .errorlist {
+        color: red;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<article class="w3-container w3-margin-top w3-padding-top">
+    <form enctype="multipart/form-data" method="POST" action="" class="w3-content">
+        {% csrf_token %}
+        <h2>Please fill in the form</h2>
+        <p>Make sure that you input correct information about the dish.</p>
+        <div class="w3-white w3-padding-16 w3-round-large">
+
+            <label for="name" class="w3-opacity">Name:</label>
+            <input type="text" class="w3-input w3-margin-bottom" name="name"
+                value="{% if form.name.value %}{{ form.name.value }}{% endif %}" />
+            {{ form.name.errors }}
+
+            <label for="price" class="w3-opacity">Price:</label>
+            <input type="number" class="w3-input w3-margin-bottom" name="price"
+                value="{% if form.price.value %}{{ form.price.value }}{% endif %}" />
+            {{ form.price.errors }}
+
+            <label for="description" class="w3-opacity">Description:</label>
+            <input type="text" class="w3-input w3-margin-bottom" name="description"
+                value="{% if form.description.value %}{{ form.description.value }}{% endif %}" />
+            {{ form.description.errors }}
+
+            <label for="photo" class="w3-opacity">Photo:</label>
+            <input type="file" accept="image/*" class="w3-input w3-margin-bottom" name="photo"
+                value="{% if form.photo.value %}{{ form.photo.value }}{% endif %}" />
+            {{ form.photo.errors }}
+
+        </div>
+        <div class="w3-right w3-margin-top w3-margin-bottom">
+            <a href="{% url 'canteen:manage' %}" class="w3-button w3-gray w3-round-xxlarge">
+                <i class="fas fa-home"></i> Go back</a>
+            <button type="submit" class="w3-button w3-green w3-round-xxlarge">
+                <i class="fas fa-paper-plane"></i> Creat dish
+            </button>
+        </div>
+    </form>
+</article>
+{% endblock %}
