@@ -95,7 +95,7 @@
                 <div class="dish-controls">
                     <a href="{% url 'canteen:edit' d.id %}" class="w3-button w3-blue w3-round-xxlarge">Edit</a>
                     <button class="w3-button w3-red w3-round-xxlarge"
-                        onclick="prepareForDeleting({{ d.id }})">Delete</button>
+                        onclick="prepareForDeleting('{{ d.id }}')">Delete</button>
                 </div>
             </div>
         </div>
@@ -123,11 +123,18 @@
 </div>
 
 <script>
-    var orderId;
+    var dishId;
 
     function prepareForDeleting(id) {
-        orderId = id;
+        dishId = id;
         $('#confirm').show();
+    }
+
+    function deleteCompletely() {
+        $.get('/api-delete-dish/' + dishId + '/');
+        dishId = '';
+        $('#confirm').slideUp();
+        location.reload(true);
     }
 </script>
 {% endblock %}
