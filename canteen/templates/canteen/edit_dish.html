@@ -36,14 +36,12 @@
             {{ form.description.errors }}
 
             <label for="sold_out" class="w3-opacity">Sold out:</label>
-            <input type="checkbox" class="w3-margin-bottom" name="sold_out"
-                {% if form.sold_out.value %}checked{% endif %} />
+            {{ form.sold_out }}
             {{ form.sold_out.errors }}
 
             <br />
             <label for="photo" class="w3-opacity">Photo:</label>
-            <input type="file" accept="image/*" class="w3-input w3-margin-bottom" name="photo"
-                value="{% if form.photo.value %}{{ form.photo.value }}{% endif %}" />
+            {{ form.photo }}
             {{ form.photo.errors }}
 
         </div>
