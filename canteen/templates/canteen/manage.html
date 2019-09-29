@@ -11,7 +11,7 @@
         {% else %}
         <h2>The canteen has no dishes yet.</h2>
         {% endif %}
-        <a href="#" class="w3-button w3-round-xxlarge w3-green w3-right">Add dish</a>
+        <a href="{% url 'canteen:create' %}" class="w3-button w3-round-xxlarge w3-green w3-right">Add dish</a>
     </div>
 </article>
 {% endblock %}
