@@ -93,6 +93,9 @@ class RealTimeOrdersView(LoginRequiredMixin, TemplateView):
 
 
 class ManageView(LoginRequiredMixin, ListView):
+    """
+    Home view of the managing site.
+    """
     login_url = '/login/'
     template_name = 'canteen/manage.html'
     context_object_name = 'dishes'
