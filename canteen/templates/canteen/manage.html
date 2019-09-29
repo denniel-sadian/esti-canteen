@@ -49,8 +49,12 @@
     </header>
     <article class="w3-container">
         <div class="w3-content">
+            {% if dishes %}
             <h2>These are the dishes today.</h2>
             {% include 'canteen/dishes.html' with dishes=dishes %}
+            {% else %}
+            <h2 class="w3-center">The canteen has no dishes yet.</h2>
+            {% endif %}
         </div>
     </article>
 </body>
