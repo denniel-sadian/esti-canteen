@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView
+from django.views.generic.edit import UpdateView
 from django.http import JsonResponse
 from django.utils.timezone import datetime
 from django.urls import reverse_lazy
@@ -112,6 +113,16 @@ class CreateDishView(LoginRequiredMixin, CreateView):
     model = Dish
     fields = ['name', 'price', 'description', 'photo']
     success_url = reverse_lazy('canteen:manage')
+    template_name = 'canteen/create_dish.html'
+
+
+class UpdateDishView(LoginRequiredMixin, UpdateView):
+    """
+    View for updating a dish.
+    """
+    login_url = '/login/'
+    model = Dish
+    fields = ['name', 'price', 'description', 'photo']
     template_name = 'canteen/create_dish.html'
 
 
