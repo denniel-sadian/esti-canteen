@@ -122,7 +122,7 @@ class UpdateDishView(LoginRequiredMixin, UpdateView):
     """
     login_url = '/login/'
     model = Dish
-    fields = ['name', 'price', 'description', 'photo']
+    fields = ['name', 'price', 'description', 'sold_out', 'photo']
     template_name = 'canteen/create_dish.html'
 
 
