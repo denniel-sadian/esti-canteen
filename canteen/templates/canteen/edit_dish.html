@@ -37,8 +37,9 @@
 
             <label for="sold_out" class="w3-opacity">Sold out:</label>
             <input type="checkbox" class="w3-margin-bottom" name="sold_out"
-                value="{% if form.sold_out.value %}{{ form.sold_out.value }}{% endif %}" />
+                {% if form.sold_out.value %}checked{% endif %} />
             {{ form.sold_out.errors }}
+
             <br />
             <label for="photo" class="w3-opacity">Photo:</label>
             <input type="file" accept="image/*" class="w3-input w3-margin-bottom" name="photo"
