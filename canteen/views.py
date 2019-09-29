@@ -108,6 +108,7 @@ class CreateDishView(LoginRequiredMixin, CreateView):
     """
     View for creating a dish.
     """
+    login_url = '/login/'
     model = Dish
     fields = ['name', 'price', 'description', 'photo']
     success_url = reverse_lazy('canteen:manage')
