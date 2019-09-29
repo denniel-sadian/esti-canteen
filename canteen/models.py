@@ -29,7 +29,7 @@ class Dish(models.Model):
         super().save(*args, **kwargs)
     
     def get_absolute_url(self):
-        return reverse('canteen:manage', kwargs={'pk': self.pk})
+        return reverse('canteen:not-api-dish-detail', kwargs={'pk': self.pk})
 
 class Feedback(models.Model):
     """
