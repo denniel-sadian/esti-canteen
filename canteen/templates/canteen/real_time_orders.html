@@ -1,232 +1,210 @@
+{% extends 'canteen/manage_base.html' %}
+
 {% load static %}
 
-<!DOCTYPE html>
-<html>
+{% block title %}Real-time orders and feedbacks{% endblock %}
 
-<head>
-    <title>ESTI Canteen - Real-time Orders</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Loot at the audit and the real-time orders." />
-    <link rel="icon" href="{% static 'canteen/esti_icon.png' %}" type="image/x-icon" />
-    <link rel="icon" href="{% static 'canteen/esti_icon.png' %}" type="image/x-icon" />
-    <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <script rel="script" src="{% static 'canteen/jquery.min.js' %}"></script>
-    <style>
-        .tables {
-            overflow-y: auto;
-        }
+{% block header %}Real-time orders and Feedbacks{% endblock %}
 
-        #buttons {
-            text-align: right;
-        }
+{% block style %}
+<style>
+    .tables {
+        overflow-y: auto;
+    }
 
-        header .w3-button {
-            margin-top: 3px;
-            margin-bottom: 3px;
-        }
+    #buttons {
+        text-align: right;
+    }
 
-        header {
-            background: linear-gradient(black 67%, #ff9800);
-        }
+    header .w3-button {
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
 
-        article {
-            margin-bottom: 50px;
-        }
+    article {
+        margin-bottom: 50px;
+    }
 
-        th,
-        td {
-            vertical-align: middle !important;
-        }
-    </style>
-</head>
+    th,
+    td {
+        vertical-align: middle !important;
+    }
+</style>
+{% endblock %}
 
-<body>
-    <header class="w3-container w3-center w3-padding-32 w3-black">
-        <h1>Real-time <span class="w3-tag w3-orange w3-round">Orders</span></h1>
-        <a href="{% url 'canteen:home' %}" class="w3-button w3-round-xxlarge">
-            <i class="fas fa-home"></i> Home</a>
-        <a href="{% url 'canteen:manage' %}" class="w3-button w3-round-xxlarge">
-            <i class="fas fa-tools"></i> Manage</a>
-    </header>
-    <div class="w3-container w3-center w3-orange w3-large">
-        <p>This is the report for today.</p>
+{% block content %}
+<div class="w3-container w3-padding-32">
+    <div class="w3-content w3-padding">
+        <h2>View Date</h2>
+        <input type="date" id="date" class="w3-input w3-margin-bottom" />
+        <button class="w3-button w3-green w3-round-xxlarge w3-block" onclick="setDateToNow()">Now</button>
     </div>
-    <div class="w3-container w3-padding-32">
-        <div class="w3-content w3-padding">
-            <h2>View Date</h2>
-            <input type="date" id="date" class="w3-input w3-margin-bottom" />
-            <button class="w3-button w3-green w3-round-xxlarge w3-block" onclick="setDateToNow()">Now</button>
+</div>
+<article class="w3-container w3-padding-32">
+    <div class="w3-content">
+        <h2><i class="fas fa-calculator"></i> Audit</h2>
+        <div class="tables" id="audit">
+            <p class="w3-large w3-opacity">
+                <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
+        </div>
+        <h2 class="w3-margin-top"><i class="fas fa-clipboard-list"></i> Orders</h2>
+        <div class="tables" id="orders">
+            <p class="w3-large w3-opacity">
+                <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
+        </div>
+        <h2 class="w3-margin-top"><i class="fas fa-feather-alt"></i> Feedbacks</h2>
+        <div id="feedbacks">
+            <p class="w3-large w3-opacity">
+                <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
         </div>
     </div>
-    <article class="w3-container w3-padding-32">
-        <div class="w3-content">
-            <h2><i class="fas fa-calculator"></i> Audit</h2>
-            <div class="tables" id="audit">
-                <p class="w3-large w3-opacity">
-                    <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
-            </div>
-            <h2 class="w3-margin-top"><i class="fas fa-clipboard-list"></i> Orders</h2>
-            <div class="tables" id="orders">
-                <p class="w3-large w3-opacity">
-                    <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
-            </div>
-            <h2 class="w3-margin-top"><i class="fas fa-feather-alt"></i> Feedbacks</h2>
-            <div id="feedbacks">
-                <p class="w3-large w3-opacity">
-                    <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
-            </div>
-        </div>
-    </article>
-    <div id="confirm" class="w3-modal">
-        <div
-            class="w3-cotainer w3-animate-top w3-padding w3-border w3-border-red w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-modal-content w3-round-xlarge">
-            <h2 class="w3-text-red"><i class="fas fa-exclamation-triangle"></i> Confirmation</h2>
-            <p>If the customer of this order did not take it on time, and this has been given to others already,
-                then you're fine to delete it.</p>
-            <p>Also, you should not delete orders that have been served because they are vital in making the report
-                below.</p>
-            <p>Are you sure that you want to delete this order? Doing so, will of course, delete it
-                permanently.</p>
-            <p id="buttons">
-                <button class="w3-green w3-button w3-round-xxlarge" onclick="$('#confirm').slideUp()">
-                    <i class="fas fa-times-circle"></i> No</button>
-                <button class="w3-red w3-button w3-round-xxlarge" onclick="deleteCompletely()">
-                    <i class="fas fa-check-circle"></i> Yes</button>
-            </p>
-        </div>
+</article>
+<div id="confirm" class="w3-modal">
+    <div
+        class="w3-cotainer w3-animate-top w3-padding w3-border w3-border-red w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-modal-content w3-round-xlarge">
+        <h2 class="w3-text-red"><i class="fas fa-exclamation-triangle"></i> Confirmation</h2>
+        <p>If the customer of this order did not take it on time, and this has been given to others already,
+            then you're fine to delete it.</p>
+        <p>Also, you should not delete orders that have been served because they are vital in making the report
+            below.</p>
+        <p>Are you sure that you want to delete this order? Doing so, will of course, delete it
+            permanently.</p>
+        <p id="buttons">
+            <button class="w3-green w3-button w3-round-xxlarge" onclick="$('#confirm').slideUp()">
+                <i class="fas fa-times-circle"></i> No</button>
+            <button class="w3-red w3-button w3-round-xxlarge" onclick="deleteCompletely()">
+                <i class="fas fa-check-circle"></i> Yes</button>
+        </p>
     </div>
-    <script>
-        var dateInput = $('#date');
-        var orderId;
-        function markServed(id) {
-            orderId = id;
-            $('#' + id).slideUp();
-            $.get('/api-mark-as-served/' + id + '/');
-            structureReport();
-        }
-        function prepareForDeleting(id) {
-            orderId = id;
-            $('#confirm').show();
-        }
-        function deleteCompletely() {
-            $.get('/api-delete-order/' + orderId + '/');
-            orderId = ''
-            structureReport();
-            $('#confirm').slideUp();
-        }
-        function structureReport() {
-            $.get("{% url 'canteen:json-feedbacks' %}", function (data, status) {
-                if (status == 'success') {
-                    var ul = $('<ul class="w3-ul"></ul>');
-                    for (f in data)
-                        ul.append(
-                            $(
-                                '<li><p><i class="fas fa-user-circle"></i> <a class="w3-text-blue" href="/admin/canteen/feedback/' +
-                                data[f].id +
-                                '/change/">' +
-                                data[f].name +
-                                '</a>: ' +
-                                data[f].content +
-                                '<br/>(' +
-                                new Date(data[f].date).toLocaleString() +
-                                ')</p></li>'
-                            )
-                        );
-                    $('#feedbacks').html(ul);
-                }
-            });
-            $.get("{% url 'canteen:json-audit' %}?date=" + dateInput.val(), function (data, status) {
-                if (status == 'success') {
-                    var table = $(
-                        '<table class="w3-table-all w3-bottombar">' +
-                        '<tr>' +
-                        '<th class="w3-center w3-border w3-black"><h4>Orders\' total amount</h4></th>' +
-                        '<th class="w3-center w3-border w3-black"><h4>Total amount received</h4></th>' +
-                        '<th class="w3-center w3-border w3-black"><h4>Total amount that isn\'t yet received</h4></th>' +
-                        '</tr >' +
-                        '<tr>' +
-                        '<td class="w3-center w3-border">' + data.total_orders_amount +
-                        ' pesos</td>' +
-                        '<td class="w3-center w3-border">' + data.total_orders_served_amount +
-                        ' pesos</td>' +
-                        '<td class="w3-center w3-border">' + data.total_amount_still_out +
-                        ' pesos</td>' +
-                        '</tr>' +
-                        '</table>'
+</div>
+<script>
+    var dateInput = $('#date');
+    var orderId;
+    function markServed(id) {
+        orderId = id;
+        $('#' + id).slideUp();
+        $.get('/api-mark-as-served/' + id + '/');
+        structureReport();
+    }
+    function prepareForDeleting(id) {
+        orderId = id;
+        $('#confirm').show();
+    }
+    function deleteCompletely() {
+        $.get('/api-delete-order/' + orderId + '/');
+        orderId = ''
+        structureReport();
+        $('#confirm').slideUp();
+    }
+    function structureReport() {
+        $.get("{% url 'canteen:json-feedbacks' %}", function (data, status) {
+            if (status == 'success') {
+                var ul = $('<ul class="w3-ul"></ul>');
+                for (f in data)
+                    ul.append(
+                        $(
+                            '<li><p><i class="fas fa-user-circle"></i> <a class="w3-text-blue" href="/admin/canteen/feedback/' +
+                            data[f].id +
+                            '/change/">' +
+                            data[f].name +
+                            '</a>: ' +
+                            data[f].content +
+                            '<br/>(' +
+                            new Date(data[f].date).toLocaleString() +
+                            ')</p></li>'
+                        )
                     );
-                    $('#audit').html(table);
+                $('#feedbacks').html(ul);
+            }
+        });
+        $.get("{% url 'canteen:json-audit' %}?date=" + dateInput.val(), function (data, status) {
+            if (status == 'success') {
+                var table = $(
+                    '<table class="w3-table-all w3-bottombar">' +
+                    '<tr>' +
+                    '<th class="w3-center w3-border w3-black"><h4>Orders\' total amount</h4></th>' +
+                    '<th class="w3-center w3-border w3-black"><h4>Total amount received</h4></th>' +
+                    '<th class="w3-center w3-border w3-black"><h4>Total amount that isn\'t yet received</h4></th>' +
+                    '</tr >' +
+                    '<tr>' +
+                    '<td class="w3-center w3-border">' + data.total_orders_amount +
+                    ' pesos</td>' +
+                    '<td class="w3-center w3-border">' + data.total_orders_served_amount +
+                    ' pesos</td>' +
+                    '<td class="w3-center w3-border">' + data.total_amount_still_out +
+                    ' pesos</td>' +
+                    '</tr>' +
+                    '</table>'
+                );
+                $('#audit').html(table);
+            }
+        });
+        $.get("{% url 'canteen:json-orders' %}?date=" + dateInput.val(), function (data, status) {
+            if (status == 'success') {
+                var table = $(
+                    '<table class="w3-table-all w3-bottombar">' +
+                    '<tr class="w3-black">' +
+                    '<th class="w3-center w3-border"><h4>Name</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>ID No.</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Contact No.</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Dish</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Quantity</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Amount to Pay</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Date & Time</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Served</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Action 1</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Action 2</h4></th>' +
+                    '</tr>' +
+                    '</table>');
+                for (var o in data) {
+                    var tr = $('<tr></tr>');
+                    tr.append($('<td class="w3-center w3-border"><a href="/admin/canteen/order/' + data[o].id + '/change/">' + data[o].name + '</a></td>'));
+                    tr.append($('<td class="w3-center w3-border">' + data[o].id_no + '</td>'));
+                    tr.append($('<td class="w3-center w3-border">' + data[o].contact_no + '</td>'));
+                    tr.append($('<td class="w3-center w3-border"><a href="/'
+                        + data[o].dish.id + '/">' +
+                        data[o].dish.name + ' (' + data[o].dish.price + 'pesos)' +
+                        '</a></td>'));
+                    tr.append($('<td class="w3-center w3-border">' + data[o].count + '</td>'));
+                    tr.append($('<td class="w3-center w3-border">' + data[o].amount + ' pesos</td>'));
+                    tr.append($('<td class="w3-center w3-border">' +
+                        new Date(data[o].date).toLocaleString() + '</td>'));
+                    tr.append($('<td class="w3-center w3-border">'
+                        + String(data[o].served ?
+                            '<i class="fas fa-check-circle w3-text-green"></li>' :
+                            '<i class="fas fa-times-circle w3-text-red"></li>') +
+                        '</td>'));
+                    tr.append($('<td class="w3-center w3-border">' +
+                        '<button id="' + data[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markServed(' +
+                        data[o].id +
+                        ')"><i class="fas fa-check-circle"></i> Served?</button>' +
+                        '</td>'));
+                    tr.append($('<td class="w3-center w3-border">' +
+                        '<button class="w3-button w3-round-xxlarge w3-red" onclick="prepareForDeleting(' +
+                        data[o].id +
+                        ')"><i class="fas fa-times-circle"></i> Delete</button>' +
+                        '</td>'));
+                    table.append(tr);
                 }
-            });
-            $.get("{% url 'canteen:json-orders' %}?date=" + dateInput.val(), function (data, status) {
-                if (status == 'success') {
-                    var table = $(
-                        '<table class="w3-table-all w3-bottombar">' +
-                        '<tr class="w3-black">' +
-                        '<th class="w3-center w3-border"><h4>Name</h4></th>' +
-                        '<th class="w3-center w3-border"><h4>ID No.</h4></th>' +
-                        '<th class="w3-center w3-border"><h4>Contact No.</h4></th>' +
-                        '<th class="w3-center w3-border"><h4>Dish</h4></th>' +
-                        '<th class="w3-center w3-border"><h4>Quantity</h4></th>' +
-                        '<th class="w3-center w3-border"><h4>Amount to Pay</h4></th>' +
-                        '<th class="w3-center w3-border"><h4>Date & Time</h4></th>' +
-                        '<th class="w3-center w3-border"><h4>Served</h4></th>' +
-                        '<th class="w3-center w3-border"><h4>Action 1</h4></th>' +
-                        '<th class="w3-center w3-border"><h4>Action 2</h4></th>' +
-                        '</tr>' +
-                        '</table>');
-                    for (var o in data) {
-                        var tr = $('<tr></tr>');
-                        tr.append($('<td class="w3-center w3-border"><a href="/admin/canteen/order/' + data[o].id + '/change/">' + data[o].name + '</a></td>'));
-                        tr.append($('<td class="w3-center w3-border">' + data[o].id_no + '</td>'));
-                        tr.append($('<td class="w3-center w3-border">' + data[o].contact_no + '</td>'));
-                        tr.append($('<td class="w3-center w3-border"><a href="/'
-                            + data[o].dish.id + '/">' +
-                            data[o].dish.name + ' (' + data[o].dish.price + 'pesos)' +
-                            '</a></td>'));
-                        tr.append($('<td class="w3-center w3-border">' + data[o].count + '</td>'));
-                        tr.append($('<td class="w3-center w3-border">' + data[o].amount + ' pesos</td>'));
-                        tr.append($('<td class="w3-center w3-border">' +
-                            new Date(data[o].date).toLocaleString() + '</td>'));
-                        tr.append($('<td class="w3-center w3-border">'
-                            + String(data[o].served ?
-                                '<i class="fas fa-check-circle w3-text-green"></li>' :
-                                '<i class="fas fa-times-circle w3-text-red"></li>') +
-                            '</td>'));
-                        tr.append($('<td class="w3-center w3-border">' +
-                            '<button id="' + data[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markServed(' +
-                            data[o].id +
-                            ')"><i class="fas fa-check-circle"></i> Served?</button>' +
-                            '</td>'));
-                        tr.append($('<td class="w3-center w3-border">' +
-                            '<button class="w3-button w3-round-xxlarge w3-red" onclick="prepareForDeleting(' +
-                            data[o].id +
-                            ')"><i class="fas fa-times-circle"></i> Delete</button>' +
-                            '</td>'));
-                        table.append(tr);
-                    }
-                    $('#orders').html(table);
-                }
-                $('#' + orderId).slideDown();
-            })
-        }
-        function setDateToNow() {
-            var now = new Date();
-            var year = now.getFullYear();
-            var month = now.getMonth() + 1;
-            var date = now.getDate();
-            dateInput.val(
-                year + '-' +
-                (month < 10 ? ('0' + month) : month) + '-' +
-                (date < 10 ? ('0' + date) : date)
-            );
-        }
-        $(document).ready(function () {
-            setInterval(structureReport, 1000);
-            setDateToNow();
+                $('#orders').html(table);
+            }
+            $('#' + orderId).slideDown();
         })
-    </script>
-</body>
-
-</html>
+    }
+    function setDateToNow() {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var date = now.getDate();
+        dateInput.val(
+            year + '-' +
+            (month < 10 ? ('0' + month) : month) + '-' +
+            (date < 10 ? ('0' + date) : date)
+        );
+    }
+    $(document).ready(function () {
+        setInterval(structureReport, 1000);
+        setDateToNow();
+    })
+</script>
+{% endblock %}
