@@ -1,13 +1,100 @@
 {% extends 'canteen/manage_base.html' %}
 
 {% load static %}
+{% load humanize %}
+
+{% block style %}
+<style>
+    .dishes-flex {
+        display: flex;
+    }
+
+    .dish-controls {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        border-left: 1px solid #4CAF50;
+    }
+
+    .dish-info {
+        display: flex;
+    }
+
+    .dish-image-cont {
+        display: flex;
+        justify-content: right;
+        flex-direction: column;
+        border-right: 1px solid #4CAF50;
+    }
+
+    .dish-controls a {
+        margin: 5px;
+    }
+
+    img {
+        width: 200px;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px 0px 0px 16px;
+    }
+
+    @media (max-width: 600px) {
+
+        .dishes-flex,
+        .dish-info {
+            flex-direction: column;
+        }
+
+        .dish-controls {
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid #4CAF50;
+            border-left: none;
+        }
+
+        .dish-image-cont {
+            border-right: none;
+            border-bottom: 1px solid #4CAF50;
+        }
+
+        img {
+            width: 100%;
+            height: 150px;
+            border-radius: 16px 16px 0px 0px;
+        }
+    }
+</style>
+{% endblock %}
 
 {% block content %}
 <article class="w3-container w3-margin-top w3-padding-top">
     <div class="w3-content">
         {% if dishes %}
         <h2>These are the dishes today.</h2>
-        {% include 'canteen/dishes.html' with dishes=dishes %}
+        {% for d in dishes %}
+        <div class="dishes-flex w3-card-4 w3-border w3-border-green w3-margin-bottom w3-round-xlarge">
+            <div class="dish-image-cont">
+                <img src="{{ d.photo.url }}">
+            </div>
+            <div class="dish-info" style="flex-grow: 8">
+                <div class="w3-padding" style="flex-grow: 8">
+                    <h3>{{ d.name|title }}</h3>
+                    <p>It costs {{ d.price|intcomma }} pesos</p>
+                    <p>{{ d.description }}</p>
+                    {% if d.sold_out %}
+                    <p class="w3-text-red">It is sold out already.</p>
+                    {% else %}
+                    <p class="w3-text-green">It is not sold out yet.</p>
+                    {% endif %}
+                    <p></p>
+                </div>
+                <div class="dish-controls">
+                    <a href="#" class="w3-button w3-blue w3-round-xxlarge">Edit</a>
+                    <a href="#" class="w3-button w3-red w3-round-xxlarge">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
         {% else %}
         <h2>The canteen has no dishes yet.</h2>
         {% endif %}
