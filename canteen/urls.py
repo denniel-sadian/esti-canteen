@@ -22,6 +22,7 @@ urlpatterns = [
          name='api-delete-order'),
     
     path('manage/', views.ManageView.as_view(), name='manage'),
+    path('manage/create/', views.CreateDishView.as_view(), name='create'),
     path('login/', LoginView.as_view(
         template_name='canteen/login.html',
     )),
