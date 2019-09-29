@@ -240,3 +240,13 @@ def api_delete_order(request, id):
         return HttpResponseForbidden("You're not authenticated.")
     Order.objects.get(id=id).delete()
     return HttpResponse('Deleted.')
+
+
+def api_delete_dish(request, id):
+    """
+    View for deleting a dish.
+    """
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden("You're not authenticated.")
+    Dish.objects.get(id=id).delete()
+    return HttpResponse('Deleted.')
