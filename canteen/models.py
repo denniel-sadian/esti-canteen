@@ -3,6 +3,7 @@ Models for the `canteen`
 """
 
 from django.db import models
+from django.urls import reverse
 
 
 class Dish(models.Model):
@@ -26,7 +27,9 @@ class Dish(models.Model):
     def save(self, *args, **kwargs):
         self.name = self.name.lower()
         super().save(*args, **kwargs)
-
+    
+    def get_absolute_url(self):
+        return reverse('canteen:manage', kwargs={'pk': self.pk})
 
 class Feedback(models.Model):
     """
