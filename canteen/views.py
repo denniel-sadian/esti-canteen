@@ -101,6 +101,15 @@ class ManageView(LoginRequiredMixin, ListView):
         return Dish.objects.filter(date=datetime.now())
 
 
+class CreateDishView(LoginRequiredMixin, CreateView):
+    """
+    View for creating a dish.
+    """
+    model = Dish
+    fields = ['name', 'price', 'description', 'photo']
+    success_url = reverse_lazy('canteen:manage')
+
+
 class DocumentationView(LoginRequiredMixin, TemplateView):
     """
     View for displaying the websites documentation.
