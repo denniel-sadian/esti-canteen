@@ -20,6 +20,8 @@ urlpatterns = [
          name='api-served'),
     path('api-delete-order/<int:id>/', views.api_delete_order,
          name='api-delete-order'),
+    path('api-delete-dish/<int:id>/', views.api_delete_dish,
+         name='api-delete-dish'),
     
     path('manage/', views.ManageView.as_view(), name='manage'),
     path('manage/create/', views.CreateDishView.as_view(), name='create'),
