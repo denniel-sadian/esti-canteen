@@ -112,6 +112,7 @@ class CreateDishView(LoginRequiredMixin, CreateView):
     model = Dish
     fields = ['name', 'price', 'description', 'photo']
     success_url = reverse_lazy('canteen:manage')
+    template_name = 'canteen/create_dish.html'
 
 
 class DocumentationView(LoginRequiredMixin, TemplateView):
