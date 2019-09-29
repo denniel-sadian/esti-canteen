@@ -23,7 +23,7 @@ urlpatterns = [
     
     path('manage/', views.ManageView.as_view(), name='manage'),
     path('manage/create/', views.CreateDishView.as_view(), name='create'),
-    path('manage/edit/<int:id>/', views.UpdateDishView.as_view(), name='edit'),
+    path('manage/edit/<int:pk>/', views.UpdateDishView.as_view(), name='edit'),
     path('login/', LoginView.as_view(
         template_name='canteen/login.html',
     )),
