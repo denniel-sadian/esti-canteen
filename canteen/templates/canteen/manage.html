@@ -27,7 +27,7 @@
         border-right: 1px solid #4CAF50;
     }
 
-    .dish-controls a {
+    .dish-controls>* {
         margin: 5px;
     }
 
@@ -36,6 +36,10 @@
         height: 100%;
         object-fit: cover;
         border-radius: 16px 0px 0px 16px;
+    }
+
+    #buttons {
+        text-align: right;
     }
 
     @media (max-width: 600px) {
@@ -90,7 +94,8 @@
                 </div>
                 <div class="dish-controls">
                     <a href="{% url 'canteen:edit' d.id %}" class="w3-button w3-blue w3-round-xxlarge">Edit</a>
-                    <a href="#" class="w3-button w3-red w3-round-xxlarge">Delete</a>
+                    <button class="w3-button w3-red w3-round-xxlarge"
+                        onclick="prepareForDeleting({{ d.id }})">Delete</button>
                 </div>
             </div>
         </div>
@@ -101,4 +106,28 @@
         <a href="{% url 'canteen:create' %}" class="w3-button w3-round-xxlarge w3-green w3-right">Add dish</a>
     </div>
 </article>
+
+<div id="confirm" class="w3-modal">
+    <div
+        class="w3-cotainer w3-animate-top w3-padding w3-border w3-border-red w3-topbar w3-leftbar w3-rightbar w3-bottombar w3-modal-content w3-round-xlarge">
+        <h2 class="w3-text-red"><i class="fas fa-exclamation-triangle"></i> Confirmation</h2>
+        <p>Are you sure that you want to delete this dish? Doing so will, of couse, delete it completely. Orders of this
+            dish will be deleted as well, thus making the report unreliable.</p>
+        <p id="buttons">
+            <button class="w3-green w3-button w3-round-xxlarge" onclick="$('#confirm').slideUp()">
+                <i class="fas fa-times-circle"></i> No</button>
+            <button class="w3-red w3-button w3-round-xxlarge" onclick="deleteCompletely()">
+                <i class="fas fa-check-circle"></i> Yes</button>
+        </p>
+    </div>
+</div>
+
+<script>
+    var orderId;
+
+    function prepareForDeleting(id) {
+        orderId = id;
+        $('#confirm').show();
+    }
+</script>
 {% endblock %}
