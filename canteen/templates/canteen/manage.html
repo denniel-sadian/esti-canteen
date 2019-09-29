@@ -1,63 +1,17 @@
+{% extends 'canteen/manage_base.html' %}
+
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>ESTI Canteen - Manage</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Loot at the audit and the real-time orders." />
-    <link rel="icon" href="{% static 'canteen/esti_icon.png' %}" type="image/x-icon" />
-    <link rel="icon" href="{% static 'canteen/esti_icon.png' %}" type="image/x-icon" />
-    <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <style>
-        header {
-            margin-bottom: 40px;
-        }
-
-        body {
-            margin-bottom: 100px;
-        }
-
-        article {
-            margin-bottom: 50px;
-        }
-
-        hr {
-            margin-top: 10px;
-        }
-
-        a {
-            color: #2196F3;
-        }
-    </style>
-</head>
-
-<body>
-    <header class="w3-container w3-green">
-        <div class="w3-content w3-center w3-padding-64">
-            <h1>Welcome to the Managing Site</h1>
-            <p class="w3-large">This page is only accessible by site admins.</p>
-            <p>
-                <a href="{% url 'canteen:home' %}" class="w3-button w3-border w3-round-xxlarge">Home</a>
-                <a href="{% url 'canteen:orders' %}" class="w3-button w3-border w3-round-xxlarge">Orders</a>
-                <a href="{% url 'admin:logout' %}" class="w3-button w3-border w3-round-xxlarge">Logout</a>
-            </p>
-        </div>
-    </header>
-    <article class="w3-container">
-        <div class="w3-content">
-            {% if dishes %}
-            <h2>These are the dishes today.</h2>
-            {% include 'canteen/dishes.html' with dishes=dishes %}
-            {% else %}
-            <h2>The canteen has no dishes yet.</h2>
-            {% endif %}
-            <a href="#" class="w3-button w3-round-xxlarge w3-green w3-right">Add dish</a>
-        </div>
-    </article>
-</body>
-
-</html>
+{% block content %}
+<article class="w3-container">
+    <div class="w3-content">
+        {% if dishes %}
+        <h2>These are the dishes today.</h2>
+        {% include 'canteen/dishes.html' with dishes=dishes %}
+        {% else %}
+        <h2>The canteen has no dishes yet.</h2>
+        {% endif %}
+        <a href="#" class="w3-button w3-round-xxlarge w3-green w3-right">Add dish</a>
+    </div>
+</article>
+{% endblock %}
