@@ -9,6 +9,20 @@
     .errorlist {
         color: red;
     }
+
+    input {
+        padding: 10px;
+        display: block;
+        width: 100%;
+        border-radius: 32px;
+        border-style: none;
+        border: 3px solid #8bc34a;
+        margin-bottom: 15px;
+    }
+
+    input:focus {
+        border-color: #4CAF50;
+    }
 </style>
 {% endblock %}
 
@@ -20,13 +34,11 @@
         <p>Make sure that you input correct information about the dish.</p>
         <div class="w3-white w3-padding-16 w3-round-large">
 
-            <label for="name" class="w3-opacity">Name:</label>
-            <input type="text" class="w3-input w3-margin-bottom" name="name"
+            <input type="text" placeholder="Name of the dish" name="name"
                 value="{% if form.name.value %}{{ form.name.value }}{% endif %}" />
             {{ form.name.errors }}
 
-            <label for="price" class="w3-opacity">Price:</label>
-            <input type="number" class="w3-input w3-margin-bottom" name="price"
+            <input type="number" placeholder="Price of the dish" name="price" min="1"
                 value="{% if form.price.value %}{{ form.price.value }}{% endif %}" />
             {{ form.price.errors }}
 
