@@ -22,6 +22,7 @@
 
     input:focus {
         border-color: #4CAF50;
+        background: #d9ffad;
     }
 </style>
 {% endblock %}
@@ -42,14 +43,11 @@
                 value="{% if form.price.value %}{{ form.price.value }}{% endif %}" />
             {{ form.price.errors }}
 
-            <label for="description" class="w3-opacity">Description:</label>
-            <input type="text" class="w3-input w3-margin-bottom" name="description"
+            <input type="text" placeholder="Description" name="description"
                 value="{% if form.description.value %}{{ form.description.value }}{% endif %}" />
             {{ form.description.errors }}
 
-            <label for="photo" class="w3-opacity">Photo:</label>
-            <input type="file" accept="image/*" class="w3-input w3-margin-bottom" name="photo"
-                value="{% if form.photo.value %}{{ form.photo.value }}{% endif %}" />
+            {{ form.photo }}
             {{ form.photo.errors }}
 
         </div>
