@@ -35,7 +35,7 @@
         width: 200px;
         height: 100%;
         object-fit: cover;
-        border-radius: 16px 0px 0px 16px;
+        border-radius: 8px 0px 0px 8px;
     }
 
     #buttons {
@@ -64,7 +64,7 @@
         img {
             width: 100%;
             height: 150px;
-            border-radius: 16px 16px 0px 0px;
+            border-radius: 8px 8px 0px 0px;
         }
     }
 </style>
@@ -76,15 +76,14 @@
         {% if dishes %}
         <h2>These are the dishes for today.</h2>
         {% for d in dishes %}
-        <div class="dishes-flex w3-card-4 w3-border w3-border-green w3-margin-bottom w3-round-xlarge">
+        <div class="dishes-flex w3-card-4 w3-border w3-border-green w3-margin-bottom w3-round-large">
             <div class="dish-image-cont">
                 <img src="{{ d.photo.url }}">
             </div>
             <div class="dish-info" style="flex-grow: 8">
                 <div class="w3-padding" style="flex-grow: 8">
                     <h3>{{ d.name|title }}</h3>
-                    <p>It costs {{ d.price|intcomma }} pesos</p>
-                    <p>{{ d.description }}</p>
+                    <p>It costs {{ d.price|intcomma }} pesos. {{ d.description }}</p>
                     {% if d.sold_out %}
                     <p class="w3-text-red">It is sold out already.</p>
                     {% else %}
