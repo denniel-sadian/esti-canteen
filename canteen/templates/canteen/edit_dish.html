@@ -45,6 +45,15 @@
             height: 200px;
         }
     }
+
+    input[type=checkbox] {
+        margin-bottom: 15px;
+        border: 3px solid green;
+    }
+
+    input[type=file] {
+        font-size: 10px;
+    }
 </style>
 {% endblock %}
 
@@ -61,18 +70,15 @@
         <form enctype="multipart/form-data" method="POST" action="" style="flex-grow: 8" class="w3-padding">
             {% csrf_token %}
             <div class="w3-white w3-padding-16 w3-round-large">
-                <label for="name" class="w3-opacity">Name:</label>
-                <input type="text" class="w3-input w3-margin-bottom" name="name"
+                <input type="text" name="name" placeholder="Name of the dish"
                     value="{% if form.name.value %}{{ form.name.value }}{% endif %}" />
                 {{ form.name.errors }}
 
-                <label for="price" class="w3-opacity">Price:</label>
-                <input type="number" class="w3-input w3-margin-bottom" name="price" min="1"
+                <input type="number" placeholder="Name of the dish" name="price" min="1"
                     value="{% if form.price.value %}{{ form.price.value }}{% endif %}" />
                 {{ form.price.errors }}
 
-                <label for="description" class="w3-opacity">Description:</label>
-                <input type="text" class="w3-input w3-margin-bottom" name="description"
+                <input type="text" placeholder="Price of the dish" name="description"
                     value="{% if form.description.value %}{{ form.description.value }}{% endif %}" />
                 {{ form.description.errors }}
 
@@ -81,7 +87,7 @@
                 {{ form.sold_out.errors }}
 
                 <br />
-                <label for="photo" class="w3-opacity">Photo:</label>
+
                 {{ form.photo }}
                 {{ form.photo.errors }}
 
