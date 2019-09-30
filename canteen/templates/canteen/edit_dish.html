@@ -67,7 +67,7 @@
                 {{ form.name.errors }}
 
                 <label for="price" class="w3-opacity">Price:</label>
-                <input type="number" class="w3-input w3-margin-bottom" name="price"
+                <input type="number" class="w3-input w3-margin-bottom" name="price" min="1"
                     value="{% if form.price.value %}{{ form.price.value }}{% endif %}" />
                 {{ form.price.errors }}
 
