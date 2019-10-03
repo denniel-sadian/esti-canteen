@@ -103,11 +103,8 @@
                 for (f in data)
                     ul.append(
                         $(
-                            '<li><p><i class="fas fa-user-circle"></i> <a class="w3-text-blue" href="/admin/canteen/feedback/' +
-                            data[f].id +
-                            '/change/">' +
+                            '<li><p><i class="fas fa-user-circle"></i> ' +
                             data[f].name +
-                            '</a>: ' +
                             data[f].content +
                             '<br/>(' +
                             new Date(data[f].date).toLocaleString() +
@@ -177,12 +174,12 @@
                     tr.append($('<td class="w3-center w3-border">' +
                         '<button id="' + data[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markServed(' +
                         data[o].id +
-                        ')"><i class="fas fa-check-circle"></i> Served?</button>' +
+                        ')"><i class="fas fa-check-circle"></i> Served</button>' +
                         '</td>'));
                     tr.append($('<td class="w3-center w3-border">' +
                         '<button class="w3-button w3-round-xxlarge w3-red" onclick="prepareForDeleting(' +
                         data[o].id +
-                        ')"><i class="fas fa-times-circle"></i> Delete</button>' +
+                        ')"><i class="fas fa-trash-alt"></i> Delete</button>' +
                         '</td>'));
                     table.append(tr);
                 }
