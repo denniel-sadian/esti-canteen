@@ -136,6 +136,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# STATIC_ROOT = '/home/esticanteen/esti-canteen/static'
+
 
 # Media files
 
