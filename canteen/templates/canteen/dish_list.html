@@ -29,6 +29,21 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
+            background: url("{% static 'canteen/bg.jpg' %}") no-repeat fixed;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        header:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            background: url("{% static 'canteen/wave.png' %}");
+            background-size: cover;
+            background-position: top;
+            height: 80px;
         }
 
         header>div {
@@ -44,11 +59,6 @@
 
         header>div div:nth-child(2) {
             width: 40%;
-        }
-
-        header {
-            background: url("{% static 'canteen/bg.jpg' %}") no-repeat fixed;
-            background-size: cover;
         }
 
         header h1 span,
