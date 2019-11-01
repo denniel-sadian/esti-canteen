@@ -51,6 +51,15 @@
             background-size: cover;
         }
 
+        header h1 span,
+        header p span {
+            background: rgba(76, 175, 79, 0.486);
+        }
+
+        header h1 {
+            font-family: fantasy;
+        }
+
         footer {
             background: linear-gradient(to bottom right, #2196F3, violet);
         }
@@ -108,12 +117,11 @@
                 <img id="logo" src="{% static 'canteen/esti_square.png' %}" width="350" height="350" />
             </div>
             <div>
-                <h1 class="w3-text-white">Welcome to ESTI's Canteen!</h1>
-                <p class="w3-text-white w3-large">It's so good to eat, especially if you've paid well.</p>
-                <p>
-                    <a href="#article" class="w3-button w3-padding w3-round-xxlarge w3-purple">
-                        <i class="fas fa-clipboard-list"></i> Check the menu</a>
+                <h1 class="w3-text-white"><span>Welcome to ESTI's Canteen!</span></h1>
+                <p class="w3-large w3-text-white"><span>It's so good to eat, especially if you've paid well.</span>
                 </p>
+                <a href="#article" class="w3-button w3-padding w3-round-xxlarge w3-purple">
+                    <i class="fas fa-clipboard-list"></i> Check the menu</a>
             </div>
         </div>
     </header>
