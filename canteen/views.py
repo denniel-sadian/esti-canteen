@@ -121,6 +121,7 @@ class UpdateDishView(LoginRequiredMixin, UpdateView):
     View for updating a dish.
     """
     login_url = '/login/'
+    success_url = reverse_lazy('canteen:manage')
     model = Dish
     fields = ['name', 'price', 'description', 'sold_out', 'photo']
     template_name = 'canteen/edit_dish.html'
@@ -131,6 +132,7 @@ class UpdateOrderView(LoginRequiredMixin, UpdateView):
     View for updating an order.
     """
     login_url = '/login/'
+    success_url = reverse_lazy('canteen:orders')
     model = Order
     fields = ['name', 'id_no', 'contact_no', 'count']
     template_name = 'canteen/edit_order.html'
