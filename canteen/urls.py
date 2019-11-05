@@ -26,6 +26,7 @@ urlpatterns = [
     path('manage/', views.ManageView.as_view(), name='manage'),
     path('manage/create/', views.CreateDishView.as_view(), name='create'),
     path('manage/edit/<int:pk>/', views.UpdateDishView.as_view(), name='edit'),
+    path('manage/edit-order/<int:pk>/', views.UpdateOrderView.as_view(), name='edit-order'),
     path('login/', LoginView.as_view(
         template_name='canteen/login.html',
     )),
