@@ -11,9 +11,11 @@ from .models import Order
 
 
 class OrderForm(forms.ModelForm):
-    dish = forms.ModelChoiceField(
-        queryset=Dish.objects.filter(date=datetime.now())
-    )
+    dish = forms.ModelChoiceField(queryset=None)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__( * args, ** kwargs)
+        self.fields['dish'].queryset = Dish.objects.filter(date=self.instance.date)
 
     class Meta:
         model = Order
