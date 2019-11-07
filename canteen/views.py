@@ -18,6 +18,7 @@ from django.db.models import Sum
 from .models import Dish
 from .models import Order
 from .models import Feedback
+from .forms import OrderForm
 
 
 class HomeView(ListView):
@@ -133,8 +134,8 @@ class UpdateOrderView(LoginRequiredMixin, UpdateView):
     """
     login_url = '/login/'
     success_url = reverse_lazy('canteen:orders')
+    form_class = OrderForm
     model = Order
-    fields = ['name', 'id_no', 'contact_no', 'count']
     template_name = 'canteen/edit_order.html'
 
 
