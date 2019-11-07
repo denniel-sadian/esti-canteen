@@ -16,7 +16,8 @@
     {% block style %}{% endblock %}
     <style>
         input[type="text"],
-        input[type="number"] {
+        input[type="number"],
+        select {
             padding: 10px;
             display: block;
             width: 100%;
@@ -27,9 +28,19 @@
         }
 
         input[type="text"]:focus,
-        input[type="number"]:focus {
+        input[type="number"]:focus,
+        select:focus {
             border-color: #4CAF50;
             background: #d9ffad;
+        }
+
+        select {
+            background: white;
+        }
+
+        select,
+        option {
+            text-transform: capitalize;
         }
 
         header a {
