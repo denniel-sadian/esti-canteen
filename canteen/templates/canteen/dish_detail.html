@@ -19,48 +19,58 @@
             width: 100%;
             padding: 0px;
             margin: 0px;
-            background: url("{{ dish.photo.url }}") no-repeat center fixed;
-            background-size: cover;
+            background: linear-gradient(to bottom right, violet, #87CEEB, blue);
+        }
+
+        body {
+            border: 3px solid white;
         }
 
         body>div {
             height: 100%;
+            width: 100%;
             display: flex;
-            flex-direction: column;
+        }
+
+        body>div>div {
+            height: 100%;
+            width: 100%;
+            display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        body>div>div {
-            width: 90%;
-            height: 90%;
-            display: flex;
-            position: relative;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 3px solid white;
+            border-radius: 20px;
         }
 
-        h1 {
-            font-size: 55px;
-            line-height: 1em;
-        }
-
-        body>div>div {
-            overflow-y: auto;
-            background: linear-gradient(to bottom right, violet, #87CEEB, blue);
+        #dish-image {
+            flex-grow: 6;
+            padding: 10px;
         }
 
         #edit-link {
             position: absolute;
-            top: 8px;
-            right: 8px;
+            top: 16px;
+            right: 16px;
             width: 40px;
             height: 40px;
             border-radius: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        #dish-details {
+            flex-direction: column;
+            text-align: center;
+            overflow-y: auto;
+            color: white;
+            position: relative;
         }
 
         .w3-button {
@@ -70,65 +80,84 @@
 
         @media only screen and (min-width: 600px) {
             h1 {
-                font-size: 60px;
-            }
-
-            body>div>div {
-                width: 80%;
-                height: 80%;
+                font-size: 50px;
             }
         }
 
         @media only screen and (min-width: 768px) {
             h1 {
-                font-size: 80px;
+                font-size: 70px;
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            body {
+                border: none;
             }
 
-            body>div>div {
-                width: 70%;
-                height: 70%;
+            body>div {
+                flex-direction: column;
+                padding: 16px;
+            }
+
+            #dish-image {
+                display: none;
+            }
+
+            #dish-details {
+                background: url("{{ dish.photo.url }}") no-repeat center fixed;
+                background-size: cover;
+                border: 3px solid white;
+                border-radius: 32px;
+                box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+            }
+
+            span {
+                background: rgba(128, 128, 128, 0.685);
             }
         }
     </style>
 </head>
 
-<body>
-    <div class="w3-container w3-center w3-animate-zoom">
-        <div class="w3-container w3-card-4 w3-round-xlarge w3-padding-16">
+<body class="w3-animate-opacity">
+    <div>
+        <div id="dish-image" class="w3-animate-top">
+            <img src="{{ dish.photo.url }}" />
+        </div>
+        <div id="dish-details" class="w3-animate-zoom">
             {% if user.is_authenticated %}
             <a id="edit-link" href="{% url 'canteen:edit' dish.id %}" class="w3-text-white w3-button"><i
                     class="fas fa-pencil-alt"></i></a>
             {% endif %}
-            <h1 class="w3-text-white">
-                <i class="fas fa-drumstick-bite"></i><br />
-                {{ dish.name|title }}</h1>
-            {% if dish.sold_out %}
-            <p class="w3-large w3-tag w3-round w3-red">Sold out!</p>
-            <p class="w3-large">Sad, you did not come early.</p>
-            <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">Other dishes</a>
-            {% else %}
-            <p class="w3-margin-bottom w3-large w3-text-white">It costs <span
-                    class="w3-red w3-tag w3-round">{{ dish.price|intcomma }}
-                    pessos</span>.
-                {{ dish.description }}
-                {% if not orders %}
-                No one is ordering it yet. Be the first to order!
-                {% elif orders == 1 %}
-                It has already <span class="w3-teal w3-tag w3-round">{{ orders|intcomma }}
-                    order</span>, as of now.
+            <div class="w3-container">
+                <h1><i class="fas fa-drumstick-bite"></i><br /><span>{{ dish.name|title }}</span></h1>
+                {% if dish.sold_out %}
+                <p class="w3-large w3-tag w3-round w3-red">Sold out!</p>
+                <p class="w3-large"><span>Sad, you did not come early.</span></p>
+                <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">Other dishes</a>
                 {% else %}
-                It has already <span class="w3-teal w3-tag w3-round">{{ orders|intcomma }}
-                    orders</span>, as of now.
-                {% endif %}</p>
-            <div class="w3-margin-top">
-                <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">
-                    <i class="fas fa-list"></i> Other dishes</a>
-                <a href="{% url 'canteen:feedback' %}" class="w3-button w3-round-xxlarge w3-purple">
-                    <i class="fas fa-feather-alt"></i> Feedback</a>
-                <a href="{% url 'canteen:order' dish.id %}" class="w3-button w3-round-xxlarge w3-purple">
-                    <i class="fas fa-check-circle"></i> Order</a>
+                <p class="w3-margin-bottom w3-large"><span>It costs {{ dish.price|intcomma }}
+                        pessos.
+                        {{ dish.description }}
+                        {% if not orders %}
+                        No one is ordering it yet. Be the first to order!
+                        {% elif orders == 1 %}
+                        It has already {{ orders|intcomma }}
+                        order, as of now.
+                        {% else %}
+                        It has already {{ orders|intcomma }}
+                        orders, as of now.
+                        {% endif %}</span></p>
+                <div class="w3-margin-top">
+                    <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">
+                        <i class="fas fa-list"></i> Other dishes</a>
+                    <a href="{% url 'canteen:feedback' %}" class="w3-button w3-round-xxlarge w3-purple">
+                        <i class="fas fa-feather-alt"></i> Feedback</a>
+                    <a href="{% url 'canteen:order' dish.id %}" class="w3-button w3-round-xxlarge w3-purple">
+                        <i class="fas fa-check-circle"></i> Order</a>
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
     </div>
 </body>
