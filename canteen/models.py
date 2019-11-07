@@ -46,7 +46,7 @@ class Order(models.Model):
     """
     The order model.
     """
-    date = models.DateTimeField(auto_now=True)
+    date = models.DateTimeField(auto_now=True, auto_now_add=False)
     name = models.CharField(max_length=100)
     id_no = models.CharField('id no.', max_length=100)
     contact_no = models.CharField(max_length=15)
@@ -59,5 +59,4 @@ class Order(models.Model):
         return f'{self.name} orderred {self.dish}'
     
     def save(self, *args, **kwargs):
-        self.amount = self.count * self.dish.price
         super().save(*args, **kwargs)
