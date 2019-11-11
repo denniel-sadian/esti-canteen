@@ -112,8 +112,11 @@
                 box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
             }
 
-            span {
-                background: rgba(128, 128, 128, 0.685);
+            .standout {
+                background: rgba(128, 128, 128, 0.603);
+                border-radius: 10px;
+                padding: 10px;
+                border: 1px dashed white;
             }
         }
     </style>
@@ -130,24 +133,27 @@
                     class="fas fa-pencil-alt"></i></a>
             {% endif %}
             <div class="w3-container">
-                <h1><i class="fas fa-drumstick-bite"></i><br /><span>{{ dish.name|title }}</span></h1>
+                <h1><i class="fas fa-drumstick-bite"></i></h1>
+                <h1 class="standout">{{ dish.name|title }}</h1>
                 {% if dish.sold_out %}
                 <p class="w3-large w3-tag w3-round w3-red">Sold out!</p>
-                <p class="w3-large"><span>Sad, you did not come early.</span></p>
+                <p class="w3-large"><span class="standout">Sad, you did not come early.</span></p>
                 <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">Other dishes</a>
                 {% else %}
-                <p class="w3-margin-bottom w3-large"><span>It costs {{ dish.price|intcomma }}
-                        pessos.
-                        {{ dish.description }}
-                        {% if not orders %}
-                        No one is ordering it yet. Be the first to order!
-                        {% elif orders == 1 %}
-                        It has already {{ orders|intcomma }}
-                        order, as of now.
-                        {% else %}
-                        It has already {{ orders|intcomma }}
-                        orders, as of now.
-                        {% endif %}</span></p>
+                <p class="w3-margin-bottom w3-large standout">
+                    It costs <span class="w3-tag w3-light-green w3-round-xxlarge">{{ dish.price|intcomma }}
+                        pessos</span>.
+                    {{ dish.description }}
+                    {% if not orders %}
+                    No one is ordering it yet. Be the first to order!
+                    {% elif orders == 1 %}
+                    It has already {{ orders|intcomma }}
+                    order, as of now.
+                    {% else %}
+                    It has already {{ orders|intcomma }}
+                    orders, as of now.
+                    {% endif %}
+                </p>
                 <div class="w3-margin-top">
                     <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">
                         <i class="fas fa-list"></i> Other dishes</a>
