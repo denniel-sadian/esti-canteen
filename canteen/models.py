@@ -59,4 +59,5 @@ class Order(models.Model):
         return f'{self.name} orderred {self.dish}'
     
     def save(self, *args, **kwargs):
+        self.amount = self.count * self.dish.price
         super().save(*args, **kwargs)
