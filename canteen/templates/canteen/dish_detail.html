@@ -141,8 +141,7 @@
                 <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple">Other dishes</a>
                 {% else %}
                 <p class="w3-margin-bottom w3-large standout">
-                    It costs <span class="w3-tag w3-light-green w3-round-xxlarge">{{ dish.price|intcomma }}
-                        pessos</span>.
+                    It costs <span class="w3-tag w3-light-green w3-round-xxlarge">₱ {{ dish.price|intcomma }}</span>.
                     {{ dish.description }}
                     {% if not orders %}
                     No one is ordering it yet. Be the first to order!
