@@ -93,7 +93,7 @@
             <div class="dish-info" style="flex-grow: 8">
                 <div class="w3-padding" style="flex-grow: 8">
                     <h3>{{ d.name|title }}</h3>
-                    <p>It costs {{ d.price|intcomma }} pesos. {{ d.description }}</p>
+                    <p>It costs ₱ {{ d.price|intcomma }}. {{ d.description }}</p>
                     {% if d.sold_out %}
                     <p class="w3-text-red">It is sold out already.</p>
                     {% else %}

@@ -61,8 +61,7 @@
             <div class="w3-center w3-card-4 w3-border w3-border-purple">
                 <div class="dish-image-cont">
                     <img src="{{ dish.photo.url }}" class="dish-image" />
-                    <span class="w3-card-4 w3-tag w3-small w3-round w3-red price">{{ dish.price|intcomma }}
-                        pesos</span>
+                    <span class="w3-card-4 w3-tag w3-small w3-round w3-red price">₱ {{ dish.price|intcomma }}</span>
                 </div>
                 <div class="w3-padding">
                     <h4 class="{% if dish.sold_out %}w3-text-red{% endif %}">
