@@ -138,8 +138,12 @@
                 {% if dish.sold_out %}
                 <p class="w3-large w3-tag w3-round w3-red">Sold out!</p>
                 <p class="w3-large"><span class="standout">Sad, you did not come early.</span></p>
-                <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple"><i
-                        class="fas fa-list"></i> Other dishes</a>
+                <div class="w3-margin-top">
+                    <a href="{% url 'canteen:home' %}#article" class="w3-button w3-round-xxlarge w3-purple"><i
+                            class="fas fa-list"></i> Other dishes</a>
+                    <a href="{% url 'canteen:feedback' %}" class="w3-button w3-round-xxlarge w3-purple">
+                        <i class="fas fa-feather-alt"></i> Feedback</a>
+                </div>
                 {% else %}
                 <p class="w3-margin-bottom w3-large standout">
                     It costs <span class="w3-tag w3-light-green w3-round-xxlarge">₱ {{ dish.price|intcomma }}</span>.
