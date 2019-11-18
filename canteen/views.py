@@ -38,6 +38,13 @@ class HomeView(ListView):
         return Dish.objects.filter(date=datetime.now())
 
 
+class AboutView(TemplateView):
+    """
+    View for simply displaying the about page.
+    """
+    template_name = 'canteen/about.html'
+
+
 class DishView(DetailView):
     """
     View for displaying the dish's detail.
