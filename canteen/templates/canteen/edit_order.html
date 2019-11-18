@@ -26,24 +26,7 @@
         <form method="POST" action="" class="w3-padding">
             {% csrf_token %}
             <div class="w3-white w3-padding-16 w3-round-large">
-                <input type="text" name="name" placeholder="Name"
-                    value="{% if form.name.value %}{{ form.name.value }}{% endif %}" />
-                {{ form.name.errors }}
-
-                <input type="text" placeholder="ID number" name="id_no"
-                    value="{% if form.id_no.value %}{{ form.id_no.value }}{% endif %}" />
-                {{ form.id_no.errors }}
-
-                <input type="text" placeholder="Contact number" name="contact_no"
-                    value="{% if form.contact_no.value %}{{ form.contact_no.value }}{% endif %}" />
-                {{ form.contact_no.errors }}
-
-                <input type="number" placeholder="How many" name="count"
-                    value="{% if form.count.value %}{{ form.count.value }}{% endif %}" />
-                {{ form.count.errors }}
-
-                {{ form.dish }}
-
+                {{ form }}
             </div>
             <hr />
             <div class="w3-right w3-margin-top w3-margin-bottom">

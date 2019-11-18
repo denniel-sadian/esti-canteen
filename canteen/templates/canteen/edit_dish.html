@@ -6,10 +6,6 @@
 
 {% block style %}
 <style>
-    .errorlist {
-        color: red;
-    }
-
     img {
         width: 100%;
         height: 100%;
@@ -45,15 +41,6 @@
             height: 200px;
         }
     }
-
-    input[type=checkbox] {
-        margin-bottom: 15px;
-        border: 3px solid green;
-    }
-
-    input[type=file] {
-        font-size: 10px;
-    }
 </style>
 {% endblock %}
 
@@ -70,27 +57,19 @@
         <form enctype="multipart/form-data" method="POST" action="" style="flex-grow: 8" class="w3-padding">
             {% csrf_token %}
             <div class="w3-white w3-padding-16 w3-round-large">
-                <input type="text" name="name" placeholder="Name of the dish"
-                    value="{% if form.name.value %}{{ form.name.value }}{% endif %}" />
-                {{ form.name.errors }}
-
-                <input type="number" placeholder="Name of the dish" name="price" min="1"
-                    value="{% if form.price.value %}{{ form.price.value }}{% endif %}" />
-                {{ form.price.errors }}
-
-                <input type="text" placeholder="Price of the dish" name="description"
-                    value="{% if form.description.value %}{{ form.description.value }}{% endif %}" />
-                {{ form.description.errors }}
-
-                <label for="sold_out" class="w3-opacity">Sold out:</label>
-                {{ form.sold_out }}
-                {{ form.sold_out.errors }}
-
-                <br />
-
-                {{ form.photo }}
-                {{ form.photo.errors }}
-
+                <label for="name">Name:</label>
+                {{ form.name }}
+                <label for="price">Price:</label>
+                {{ form.price }}
+                <label for="description">Description:</label>
+                {{ form.description }}
+                <label for="photo">Change photo:</label><br />
+                <input type="file" name="photo" accept="image/*" id="id_photo">
+                <label class="container">Sold out
+                    <input type="checkbox" id="id_sold_out" name="sold_out"
+                        {% if form.sold_out.value %}checked="checked" {% endif %}>
+                    <span class="checkmark"></span>
+                </label>
             </div>
             <hr />
             <div class="w3-right w3-margin-top w3-margin-bottom">

@@ -9,10 +9,6 @@
     .errorlist {
         color: red;
     }
-
-    input[type=file] {
-        font-size: 10px;
-    }
 </style>
 {% endblock %}
 
@@ -25,21 +21,7 @@
         <hr />
         <div class="w3-white w3-padding-16 w3-round-large">
 
-            <input type="text" placeholder="Name of the dish" name="name"
-                value="{% if form.name.value %}{{ form.name.value }}{% endif %}" />
-            {{ form.name.errors }}
-
-            <input type="number" placeholder="Price of the dish" name="price" min="1"
-                value="{% if form.price.value %}{{ form.price.value }}{% endif %}" />
-            {{ form.price.errors }}
-
-            <input type="text" placeholder="Description" name="description"
-                value="{% if form.description.value %}{{ form.description.value }}{% endif %}" />
-            {{ form.description.errors }}
-
-            <label for="photo">Photo</label>
-            {{ form.photo }}
-            {{ form.photo.errors }}
+            {{ form }}
 
         </div>
         <hr />
