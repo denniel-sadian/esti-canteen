@@ -162,6 +162,11 @@ REST_FRAMEWORK = {
 LOGOUT_REDIRECT_URL = '/login/'
 
 
+# SORL
+
+THUMBNAIL_FORCE_OVERWRITE = True
+
+
 # Activate Django-Heroku
 
 if there_is_django_heroku:
