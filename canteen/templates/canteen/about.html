@@ -13,125 +13,7 @@
     <script rel="script" src="{% static 'canteen/jquery.min.js' %}"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    {% block style %}{% endblock %}
     <style>
-        .errorlist {
-            color: red;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        input[type=file],
-        select {
-            padding: 10px;
-            display: block;
-            width: 100%;
-            border-radius: 0px 32px 32px 32px;
-            border-style: none;
-            border: 3px solid #8bc34a;
-            margin-bottom: 30px;
-        }
-
-        input[type="text"]:focus,
-        input[type="number"]:focus,
-        input[type=file]:focus,
-        select:focus {
-            border-color: #4CAF50;
-            background: #d9ffad;
-        }
-
-        input[type=file] {
-            font-size: 10px;
-        }
-
-        label {
-            border: 3px solid #8bc34a;
-            padding: 2px;
-            border-radius: 10px 10px 0px 0px;
-        }
-
-        /* Customize the label (the container) */
-        .container {
-            display: block;
-            position: relative;
-            padding-left: 35px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            font-size: 15px;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            border: none;
-            padding: none;
-            border-radius: none;
-        }
-
-        /* Hide the browser's default checkbox */
-        .container input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-            height: 0;
-            width: 0;
-        }
-
-        /* Create a custom checkbox */
-        .checkmark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 25px;
-            width: 25px;
-            border: 1.5px solid #4CAF50;
-            border-radius: 5px;
-            background-color: #eee;
-        }
-
-        /* On mouse-over, add a grey background color */
-        .container:hover input~.checkmark {
-            background-color: #ccc;
-        }
-
-        /* When the checkbox is checked, add a blue background */
-        .container input:checked~.checkmark {
-            background-color: #4CAF50;
-        }
-
-        /* Create the checkmark/indicator (hidden when not checked) */
-        .checkmark:after {
-            content: "";
-            position: absolute;
-            display: none;
-        }
-
-        /* Show the checkmark when checked */
-        .container input:checked~.checkmark:after {
-            display: block;
-        }
-
-        /* Style the checkmark/indicator */
-        .container .checkmark:after {
-            left: 9px;
-            top: 5px;
-            width: 5px;
-            height: 10px;
-            border: solid white;
-            border-width: 0 3px 3px 0;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
-        }
-
-        select {
-            background: white;
-        }
-
-        select,
-        option {
-            text-transform: capitalize;
-        }
-
         header a {
             margin-bottom: 6px;
         }
@@ -181,6 +63,9 @@
             <i class="fas fa-home"></i>Home</a>
         <a href="{% url 'canteen:feedback' %}" class="w3-button w3-margin-top w3-round-xxlarge w3-border">
             <i class="fas fa-feather-alt"></i> Feedback</a>
+        <a href="{% url 'canteen:about' %}" class="w3-button w3-margin-top w3-round-xxlarge w3-border">
+            <i class="fas fa-info-circle"></i> About</a>
+        <p class="w3-text-white w3-opacity"><a href="https://sadian.herokuapp.com">@Sadian</a></p>
     </footer>
 </body>
 
