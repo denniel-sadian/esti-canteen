@@ -103,8 +103,8 @@
                 for (f in data)
                     ul.append(
                         $(
-                            '<li><p><i class="fas fa-user-circle"></i> ' +
-                            data[f].name +
+                            '<li><p><span class="w3-text-red w3-large"><i class="fas fa-user-circle"></i> ' +
+                            data[f].name + '</span><br/>' +
                             data[f].content +
                             '<br/>(' +
                             new Date(data[f].date).toLocaleString() +
