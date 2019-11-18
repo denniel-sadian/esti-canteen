@@ -146,15 +146,6 @@ class UpdateOrderView(LoginRequiredMixin, UpdateView):
     template_name = 'canteen/edit_order.html'
 
 
-class DocumentationView(LoginRequiredMixin, TemplateView):
-    """
-    View for displaying the websites documentation.
-    """
-    login_url = '/admin/login/'
-    redirect_field_name = 'next'
-    template_name = 'canteen/documentation.html'
-
-
 def get_orders(request):
     """
     Utility function for getting orders.
