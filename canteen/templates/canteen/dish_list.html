@@ -83,6 +83,10 @@
                 width: 150px;
                 height: 150px;
             }
+
+            footer h1 {
+                font-size: 25px;
+            }
         }
 
         @media (max-width:992px) and (min-width:601px) {
@@ -116,7 +120,7 @@
             </div>
             <div>
                 <h1 class="w3-text-white"><span>Welcome to ESTI's Canteen!</span></h1>
-                <p class="w3-large w3-text-white"><span>It's so good to eat, especially if you've paid well.</span>
+                <p class="w3-large w3-text-white"><span>Where you can find the best delicacies.</span>
                 </p>
                 <a href="#article" class="w3-button w3-padding w3-round-xxlarge w3-purple">
                     <i class="fas fa-clipboard-list"></i> Check the menu</a>
@@ -149,9 +153,11 @@
         <div class="w3-content">
             <h1 class="w3-text-white">
                 <i class="fas fa-quote-left"></i>
-                Eat well, live well. But don't forget to pay well
+                If more of us valued food and cheer and song above hoarded gold, it
+                would be a merrier world.
                 <i class="fas fa-quote-right"></i>
             </h1>
+            <p class="w3-text-white">― J.R.R. Tolkien</p>
         </div>
         <a href="{% url 'canteen:manage' %}" class="w3-button w3-margin-top w3-round-xxlarge w3-purple">
             <i class="fas fa-tools"></i> Manage</a>
