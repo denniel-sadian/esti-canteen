@@ -11,7 +11,6 @@ urlpatterns = [
     path('order/<int:dish>/', views.OrderView.as_view(), name='order'),
     path('thanks/', views.ThanksView.as_view(), name='thanks'),
     path('orders/', views.RealTimeOrdersView.as_view(), name='orders'),
-    path('documentation/', views.DocumentationView.as_view(), name='documentation'),
     path('about/', views.AboutView.as_view(), name='about'),
     path('feedback/', views.FeedbackView.as_view(), name='feedback'),
     path('json-orders/', views.json_orders, name='json-orders'),
