@@ -13,15 +13,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 
-# Heroku server
-
-there_is_django_heroku = True
-try:
-    import django_heroku
-except ImportError:
-    there_is_django_heroku = False
-
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -165,9 +156,3 @@ LOGOUT_REDIRECT_URL = '/login/'
 # SORL
 
 THUMBNAIL_FORCE_OVERWRITE = True
-
-
-# Activate Django-Heroku
-
-if there_is_django_heroku:
-    django_heroku.settings(locals())
