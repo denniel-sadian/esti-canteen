@@ -1,5 +1,7 @@
 {% extends 'canteen/manage_base.html' %}
 
+{% load thumbnail %}
+
 {% block title %}Editing {{ form.name.value|title }}{% endblock %}
 
 {% block header %}Editing {{ form.name.value|title }}{% endblock %}
@@ -52,7 +54,9 @@
     </div>
     <div id="flex-cont" class="w3-content">
         <div id="image">
-            <img class="w3-round-large w3-border w3-border-green" src="/media/{{ form.photo.value }}" />
+            {% thumbnail form.photo.value "500x500" crop="center" as im %}
+            <img class="w3-round-large w3-border w3-border-green" src="{{ im.url }}">
+            {% endthumbnail %}
         </div>
         <form enctype="multipart/form-data" method="POST" action="" style="flex-grow: 8" class="w3-padding">
             {% csrf_token %}
