@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     'rest_framework',
+    'sorl.thumbnail',
 
     'canteen'
 ]
