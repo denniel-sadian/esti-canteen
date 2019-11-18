@@ -54,7 +54,47 @@
             </p>
         </div>
     </header>
-    {% block content %}{% endblock %}
+
+    <article class="w3-container">
+        <div class="w3-content">
+            <h2>Technologies being used</h2>
+            <div class="w3-row-padding w3-center">
+                <div class="w3-col s4 m3 w3-margin-bottom">
+                    <img src="{% static 'canteen/html.png' %}" width="100" height="auto">
+                    <p>HTML</p>
+                </div>
+                <div class="w3-col s4 m3 w3-margin-bottom">
+                    <img src="{% static 'canteen/css.jpg' %}" width="100" height="auto">
+                    <p>CSS</p>
+                </div>
+                <div class="w3-col s4 m3 w3-margin-bottom">
+                    <img src="{% static 'canteen/js.png' %}" width="100" height="auto">
+                    <p>JavaScript</p>
+                </div>
+                <div class="w3-col s4 m3 w3-margin-bottom">
+                    <img src="{% static 'canteen/jq.png' %}" width="100" height="auto">
+                    <p>jQuery</p>
+                </div>
+                <div class="w3-col s4 m4 w3-margin-bottom">
+                    <img src="{% static 'canteen/py_django.png' %}" width="100" height="auto">
+                    <p>Python and Django</p>
+                </div>
+                <div class="w3-col s4 m4 w3-margin-bottom">
+                    <img src="{% static 'canteen/git.png' %}" width="100" height="auto">
+                    <p>Git</p>
+                </div>
+                <div class="w3-col s6 m4 w3-margin-bottom">
+                    <img src="{% static 'canteen/vscode.png' %}" width="100" height="auto">
+                    <p>VS Code</p>
+                </div>
+                <div class="w3-col s6 m12 w3-margin-bottom">
+                    <img src="{% static 'canteen/pa.png' %}" width="100" height="auto">
+                    <p><a href="pythonanywhere.com">PythonAnywhere.com</a></p>
+                </div>
+            </div>
+        </div>
+    </article>
+
     <footer class="w3-container w3-center w3-padding-64 w3-text-white" style="margin-top: 64px">
         <div class="w3-content">
             <h1 class="w3-text-white">
