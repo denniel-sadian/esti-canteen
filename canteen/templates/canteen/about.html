@@ -40,23 +40,25 @@
     <header class="w3-container w3-text-white" style="margin-bottom: 64px">
         <div class="w3-content w3-center w3-padding-64">
             <img src="{% static 'canteen/esti_icon.png' %}" />
-            <h1>{% block header %}About ESTI Canteen{% endblock %}</h1>
+            <h5>Educational Systems Technological Systems</h5>
+            <h1>The Online Canteen</h1>
             <p>
                 <a href="{% url 'canteen:home' %}" class="w3-button w3-border w3-round-xxlarge"><i
                         class="fa fa-home"></i> Home</a>
-                <a href="{% url 'canteen:manage' %}" class="w3-button w3-border w3-round-xxlarge"><i
-                        class="fa fa-tools"></i> Manage</a>
-                <a href="{% url 'canteen:orders' %}" class="w3-button w3-border w3-round-xxlarge"><i
-                        class="fas fa-clipboard-list"></i> Orders</a>
-                <a href="{% url 'admin:logout' %}" class="w3-button w3-border w3-round-xxlarge"><i
-                        class="fa fa-sign-out-alt"></i> Logout</a>
             </p>
         </div>
     </header>
 
     <article class="w3-container">
-        <div class="w3-content">
-            <h2>Technologies being used</h2>
+        <div class="w3-content w3-center">
+            <h2>About website</h2>
+            <p class="w3-large w3-center">ESTI Online Canteen is a web application developed by the ICT-12 students <a
+                    href="#devs">below</a>. This
+                application fosters the ordering process. Students no longer have to wait in line. Also, students do not
+                need to go down stairs just to know the foods being sold at the canteen, thus, saving them time and
+                energy. This website also features a friendly design. The developers made the interface simple
+                as possible to give the users a fine experience.</p>
+            <h2 style="margin-top: 100px;margin-bottom: 50px">Technologies being used</h2>
             <div class="w3-row-padding w3-center">
                 <div class="w3-col s4 m3 w3-margin-bottom">
                     <img src="{% static 'canteen/html.png' %}" width="100" height="auto">
@@ -90,6 +92,15 @@
                     <img src="{% static 'canteen/pa.png' %}" width="100" height="auto">
                     <p><a href="pythonanywhere.com">PythonAnywhere.com</a></p>
                 </div>
+            </div>
+            <h2 id="devs" style="margin-top: 100px;margin-bottom: 50px">Programmers</h2>
+            <div class="w3-large">
+                <p>Hintay</p>
+                <p>Maac</p>
+                <p>Cruzado</p>
+                <p>Jusayan</p>
+                <p>Saguid</p>
+                <p>Sadian</p>
             </div>
         </div>
     </article>
