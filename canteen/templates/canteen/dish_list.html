@@ -140,8 +140,8 @@
             {% include 'canteen/dishes.html' with dishes=dishes %}
             {% else %}
             <div class="w3-card-4 w3-container w3-orange w3-padding w3-center w3-round">
-                <h1>We're not yet cooking anything.</h1>
-                <p>You came too early! Come back later.</p>
+                <h1><i class="fas fa-clock"></i><br />We're not yet cooking anything.</h1>
+                <p>You came too early! Come back after a few minutes.</p>
             </div>
             {% endif %}
             {% if orders_count %}
