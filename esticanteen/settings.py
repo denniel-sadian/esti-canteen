@@ -24,10 +24,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '66bc3%7li9fg9w$9nkp4@zjr=!yod0$8nu!m0&gdda0po=g11h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'esticanteen.pythonanywhere.com',
+    '127.0.0.1'
 ]
 
 
@@ -128,7 +129,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/home/esticanteen/esti-canteen/static'
+# STATIC_ROOT = '/home/esticanteen/esti-canteen/static'
 
 
 # Media files
