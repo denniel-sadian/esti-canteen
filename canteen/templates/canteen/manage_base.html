@@ -15,6 +15,8 @@
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     {% block style %}{% endblock %}
     <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap);
+
         .errorlist {
             color: red;
         }
@@ -144,6 +146,16 @@
         header,
         footer {
             background: linear-gradient(to bottom right, #2196F3, violet);
+        }
+
+        header h1,
+        footer h1 {
+            font-family: 'Roboto Slab', serif;
+            font-weight: normal;
+        }
+
+        header h1 {
+            font-weight: bold;
         }
 
         @media (max-width:768px) {
