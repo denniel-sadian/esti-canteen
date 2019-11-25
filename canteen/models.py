@@ -4,6 +4,8 @@ Models for the `canteen`
 
 from django.db import models
 from django.urls import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Dish(models.Model):
@@ -61,3 +63,8 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         self.amount = self.count * self.dish.price
         super().save(*args, **kwargs)
+
+
+@receiver(post_save, sender=Order)
+def order_saved(sender, instance, **kwargs):
+    print(instance.name)
