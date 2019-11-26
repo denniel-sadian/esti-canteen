@@ -16,6 +16,8 @@ urlpatterns = [
     path('json-orders/', views.json_orders, name='json-orders'),
     path('json-audit/', views.json_audit, name='json-audit'),
     path('json-feedbacks/', views.json_feedbacks, name='json-feedbacks'),
+    path('api-mark-as-ready/<int:id>/',views.api_mark_order_ready,
+         name='api-ready'),
     path('api-mark-as-served/<int:id>/',views.api_mark_order_served,
          name='api-served'),
     path('api-delete-order/<int:id>/', views.api_delete_order,
