@@ -14,6 +14,7 @@ from django.http import HttpResponseForbidden
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
+from django.utils.datastructures import MultiValueDictKeyError
 
 from .models import Dish
 from .models import Order
@@ -154,10 +155,10 @@ def get_orders(request):
     """
     Utility function for getting orders.
     """
-    if request.GET['date']:
+    try:
         return Order.objects.filter(
             date__date=request.GET['date']).order_by('-date')
-    else:
+    except MultiValueDictKeyError:
         return Order.objects.filter(
             date__date=datetime.now().date()).order_by('-date')
 
