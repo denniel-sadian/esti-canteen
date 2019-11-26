@@ -100,7 +100,7 @@ class RealTimeOrdersView(LoginRequiredMixin, TemplateView):
     """
     View for displaying the template for orders and report.
     """
-    login_url = '/admin/login/'
+    login_url = '/login/'
     redirect_field_name = 'next'
     template_name = 'canteen/real_time_orders.html'
 
