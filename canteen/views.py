@@ -173,6 +173,7 @@ def json_customer_orders(request):
         orders_from_device.append({
             'dish': {
                 'name': order.dish.name,
+                'count': order.count,
                 'price': order.dish.price
             },
             'served': order.served,
