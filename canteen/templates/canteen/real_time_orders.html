@@ -88,7 +88,7 @@
     }
     function markReady(id) {
         orderId = id;
-        $('#' + id).slideUp();
+        $('#_' + id).slideUp();
         $.get('/api-mark-as-ready/' + id + '/');
         structureReport();
     }
@@ -174,10 +174,16 @@
                     tr.append($('<td class="w3-center w3-border">₱ ' + data[o].amount + '</td>'));
                     tr.append($('<td class="w3-center w3-border">' +
                         new Date(data[o].date).toLocaleString() + '</td>'));
+                    tr.append($('<td class="w3-center w3-border">'
+                        + String(data[o].ready ?
+                            '<i class="fas fa-check-circle w3-text-green"></li>' :
+                            '<i class="fas fa-times-circle w3-text-red"></li>') +
+                        '</td>'));
                     tr.append($('<td class="w3-center w3-border">' +
-                        new Date(data[o].date).toLocaleString() + '</td>'));
-                    tr.append($('<td class="w3-center w3-border">' +
-                        new Date(data[o].date).toLocaleString() + '</td>'));
+                        '<button id="_' + data[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markReady(' +
+                        data[o].id +
+                        ')"><i class="fas fa-check-circle"></i> Flip</button>' +
+                        '</td>'));
                     tr.append($('<td class="w3-center w3-border">'
                         + String(data[o].served ?
                             '<i class="fas fa-check-circle w3-text-green"></li>' :
