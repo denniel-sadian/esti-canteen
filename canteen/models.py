@@ -49,6 +49,7 @@ class Order(models.Model):
     The order model.
     """
     date = models.DateTimeField(auto_now_add=True)
+    session = models.CharField(max_length=255)
     name = models.CharField(max_length=100)
     id_no = models.CharField('id no.', max_length=100)
     contact_no = models.CharField(max_length=15)
@@ -56,6 +57,7 @@ class Order(models.Model):
     count = models.IntegerField(default=1)
     amount = models.FloatField(editable=False)
     served = models.BooleanField(default=False)
+    ready = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.name} orderred {self.dish}'
