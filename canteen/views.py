@@ -174,6 +174,7 @@ def json_customer_orders(request):
         try:
             order = orders_today.get(id=o)
             orders_from_device.append({
+                'name': order.name,
                 'dish': {
                     'name': order.dish.name,
                     'count': order.count,
