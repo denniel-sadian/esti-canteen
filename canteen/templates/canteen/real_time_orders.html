@@ -86,6 +86,12 @@
         $.get('/api-mark-as-served/' + id + '/');
         structureReport();
     }
+    function markReady(id) {
+        orderId = id;
+        $('#' + id).slideUp();
+        $.get('/api-mark-as-ready/' + id + '/');
+        structureReport();
+    }
     function prepareForDeleting(id) {
         orderId = id;
         $('#confirm').show();
