@@ -189,7 +189,7 @@
     <script>
         var orders = $('#orders');
         function structureOrders() {
-            var ul = $('<ul></ul>')
+            var ul = $('<ul></ul>');
             $.get("{% url 'canteen:json-customer-orders' %}", function (data, status) {
                 if (status == 'success') {
                     console.log(data);
