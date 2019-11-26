@@ -14,6 +14,7 @@ urlpatterns = [
     path('about/', views.AboutView.as_view(), name='about'),
     path('feedback/', views.FeedbackView.as_view(), name='feedback'),
     path('json-orders/', views.json_orders, name='json-orders'),
+    path('json-customer-orders/', views.json_customer_orders, name='json-customer-orders'),
     path('json-audit/', views.json_audit, name='json-audit'),
     path('json-feedbacks/', views.json_feedbacks, name='json-feedbacks'),
     path('api-mark-as-ready/<int:id>/',views.api_mark_order_ready,
