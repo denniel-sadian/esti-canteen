@@ -180,7 +180,8 @@
                             '<i class="fas fa-times-circle w3-text-red"></li>') +
                         '</td>'));
                     tr.append($('<td class="w3-center w3-border">' +
-                        '<button id="_' + data[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markReady(' +
+                        '<button ' + String(data[o].served ?
+                            'disabled="disabled"' : '') + ' id="' + data[o].id + ' id="_' + data[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markReady(' +
                         data[o].id +
                         ')"><i class="fas fa-check-circle"></i> Flip</button>' +
                         '</td>'));
