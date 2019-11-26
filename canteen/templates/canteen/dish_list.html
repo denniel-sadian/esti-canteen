@@ -193,16 +193,16 @@
                     for (var i in data) {
                         if (data[i].served) {
                             ul.append($(
-                                '<li>Your order "' + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' has been served already.</li>'
+                                '<li>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' has been served already.</li>'
                             ));
                         } else {
                             if (data[i].ready) {
                                 ul.append($(
-                                    '<li>Your order "' + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is ready. You can know get it at the canteen.</li>'
+                                    '<li>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is ready.You can know get it at the canteen.</li > '
                                 ));
                             } else {
                                 ul.append($(
-                                    '<li>Your order "' + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is not yet ready.</li>'
+                                    '<li>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is not yet ready.</li > '
                                 ));
                             }
                         }
