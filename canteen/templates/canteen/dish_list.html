@@ -158,7 +158,6 @@
         <div class="w3-content" style="margin-top: 50px;">
             <h3><i class="fas fa-clipboard-list"></i> These are your orders from this device.</h3>
             <div id="orders">
-
             </div>
         </div>
         {% endif %}
@@ -190,17 +189,30 @@
             var ul = $('<ul></ul>')
             $.get("{% url 'canteen:json-customer-orders' %}", function (data, status) {
                 if (status == 'success') {
+                    console.log(data);
                     for (var i in data) {
-                        ul.append($(
-                            '<li>Your order "' + data.dish.name + '" with the order quantity of ' + data.dish.count + ' and priced as ₱' + data.dish.price + '.</li>'
-                        ));
+                        if (data[i].served) {
+                            ul.append($(
+                                '<li>Your order "' + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' has been served already.</li>'
+                            ));
+                        } else {
+                            if (data[i].ready) {
+                                ul.append($(
+                                    '<li>Your order "' + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is ready. You can know get it at the canteen.</li>'
+                                ));
+                            } else {
+                                ul.append($(
+                                    '<li>Your order "' + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is not yet ready.</li>'
+                                ));
+                            }
+                        }
                     }
                 }
             });
             orders.html(ul);
         }
         $(document).ready(function () {
-            setInterval(structureOrders, 1000);
+            setInterval(structureOrders, 2000);
         });
     </script>
     {% endif %}
