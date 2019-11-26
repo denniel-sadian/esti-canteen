@@ -186,7 +186,8 @@ def json_orders(request):
             },
             'count': order.count,
             'amount': order.amount,
-            'served': order.served
+            'served': order.served,
+            'ready': order.ready
         }
         for order in orders
     ]
