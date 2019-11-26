@@ -247,6 +247,18 @@ def api_mark_order_served(request, id):
     return HttpResponse('Marked as served')
 
 
+def api_marke_order_ready(request, id):
+    """
+    View for marking and unmarking the order as ready.
+    """
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden("You're not authenticated.")
+    order = Order.objects.get(id=id)
+    order.ready = not order.ready
+    order.save()
+    return HttpResponse('Marked as ready')
+
+
 def api_delete_order(request, id):
     """
     View for deleting an order.
