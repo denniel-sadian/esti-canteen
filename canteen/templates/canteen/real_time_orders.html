@@ -154,9 +154,11 @@
                     '<th class="w3-center w3-border"><h4>Quantity</h4></th>' +
                     '<th class="w3-center w3-border"><h4>Amount to Pay</h4></th>' +
                     '<th class="w3-center w3-border"><h4>Date & Time</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Ready</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Mark as Ready</h4></th>' +
                     '<th class="w3-center w3-border"><h4>Served</h4></th>' +
-                    '<th class="w3-center w3-border"><h4>Action 1</h4></th>' +
-                    '<th class="w3-center w3-border"><h4>Action 2</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Mark as Served</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Delete</h4></th>' +
                     '</tr>' +
                     '</table>');
                 for (var o in data) {
@@ -170,6 +172,10 @@
                         '</a></td>'));
                     tr.append($('<td class="w3-center w3-border">' + data[o].count + '</td>'));
                     tr.append($('<td class="w3-center w3-border">₱ ' + data[o].amount + '</td>'));
+                    tr.append($('<td class="w3-center w3-border">' +
+                        new Date(data[o].date).toLocaleString() + '</td>'));
+                    tr.append($('<td class="w3-center w3-border">' +
+                        new Date(data[o].date).toLocaleString() + '</td>'));
                     tr.append($('<td class="w3-center w3-border">' +
                         new Date(data[o].date).toLocaleString() + '</td>'));
                     tr.append($('<td class="w3-center w3-border">'
