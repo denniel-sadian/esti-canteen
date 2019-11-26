@@ -243,7 +243,7 @@ def api_mark_order_served(request, id):
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
     order = Order.objects.get(id=id)
-    if not order.served:
+    if not order.ready:
         return HttpResponseForbidden("This order is not yet ready!")
     order.served = not order.served
     order.save()
