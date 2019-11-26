@@ -154,6 +154,11 @@
             </div>
             {% endif %}
         </div>
+        {% if request.session.orders %}
+        <div class="w3-content" style="margin-top: 50px;">
+            <h3><i class="fas fa-clipboard-list"></i> These are your orders from this device.</h3>
+        </div>
+        {% endif %}
     </article>
 
     <footer class="w3-container w3-center w3-padding-64">
@@ -175,8 +180,10 @@
         <p class="w3-text-white w3-opacity"><a href="https://sadian.herokuapp.com">@Sadian</a></p>
     </footer>
 
+    {% if request.session.orders %}
     <script>
     </script>
+    {% endif %}
 </body>
 
 </html>
