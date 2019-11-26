@@ -169,7 +169,7 @@ def json_customer_orders(request):
     """
     orders_today = get_orders(request)
     orders_from_device = []
-    for o in request.session.orders:
+    for o in request.session.get('orders', []):
         order = orders_today.get(id=o)
         orders_from_device.append({
             'dish': {
