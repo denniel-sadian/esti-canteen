@@ -19,6 +19,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from .models import Dish
 from .models import Order
 from .models import Feedback
+from django.core.exceptions import ObjectDoesNotExist
 from .forms import OrderForm
 
 
@@ -170,16 +171,21 @@ def json_customer_orders(request):
     orders_today = get_orders(request)
     orders_from_device = []
     for o in request.session.get('orders', []):
-        order = orders_today.get(id=o)
-        orders_from_device.append({
-            'dish': {
-                'name': order.dish.name,
-                'count': order.count,
-                'price': order.dish.price
-            },
-            'served': order.served,
-            'ready': order.ready
-        })
+        try:
+            order = orders_today.get(id=o)
+            orders_from_device.append({
+                'dish': {
+                    'name': order.dish.name,
+                    'count': order.count,
+                    'price': order.dish.price
+                },
+                'served': order.served,
+                'ready': order.ready
+            })
+        except ObjectDoesNotExist:
+            request.session.get('orders').remove(o)
+            request.session['orders'] = request.session.get('orders')
+            print('Order deleted unexpectedly.')
     return JsonResponse(orders_from_device, safe=False)
 
 
