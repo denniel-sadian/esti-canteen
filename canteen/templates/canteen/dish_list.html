@@ -185,6 +185,23 @@
 
     {% if request.session.orders %}
     <script>
+        var orders = $('#orders');
+        function structureOrders() {
+            var ul = $('<ul></ul>')
+            $.get("{% url 'canteen:json-customer-orders' %}", function (data, status) {
+                if (status == 'success') {
+                    for (var i in data) {
+                        ul.append($(
+                            '<li>Your order "' + data.dish.name + '" with the order quantity of ' + data.dish.count + ' and priced as ₱' + data.dish.price + '.</li>'
+                        ));
+                    }
+                }
+            });
+            orders.html(ul);
+        }
+        $(document).ready(function () {
+            setInterval(structureOrders, 1000);
+        });
     </script>
     {% endif %}
 </body>
