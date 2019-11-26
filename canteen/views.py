@@ -247,7 +247,7 @@ def api_mark_order_served(request, id):
     return HttpResponse('Marked as served')
 
 
-def api_marke_order_ready(request, id):
+def api_mark_order_ready(request, id):
     """
     View for marking and unmarking the order as ready.
     """
