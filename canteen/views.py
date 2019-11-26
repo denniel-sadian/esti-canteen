@@ -162,6 +162,25 @@ def get_orders(request):
             date__date=datetime.now().date()).order_by('-date')
 
 
+def json_customer_orders(request):
+    """
+    View for giving all the orders from the session.
+    """
+    orders_today = get_orders(request)
+    orders_from_device = []
+    for o in request.session.orders:
+        order = orders_today.get(id=o)
+        orders_from_device.append({
+            'dish': {
+                'name': order.dish.name,
+                'price': order.dish.price
+            },
+            'served': order.served,
+            'ready': order.ready
+        })
+    return JsonResponse(orders_from_device, safe=False)
+
+
 def json_orders(request):
     """
     View for displaying all the current orders.
