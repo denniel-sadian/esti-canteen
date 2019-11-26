@@ -178,7 +178,7 @@ def json_customer_orders(request):
                 'dish': {
                     'name': order.dish.name,
                     'count': order.count,
-                    'price': order.dish.price
+                    'price': order.amount
                 },
                 'served': order.served,
                 'ready': order.ready
