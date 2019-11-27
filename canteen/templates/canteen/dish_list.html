@@ -69,6 +69,22 @@
             font-weight: normal;
         }
 
+        .served {
+            background: #ddffdd;
+            border-left: 3px solid #4CAF50;
+        }
+
+        .ready {
+            background: #ffffcc;
+            border-left: 3px solid #ffeb3b;
+        }
+
+        .notReady {
+            background: #ffdddd;
+            border-left: 3px solid #f44336;
+
+        }
+
         @media (max-width:768px) {
             header h1 {
                 font-size: 50px;
@@ -190,23 +206,23 @@
     <script>
         var orders = $('#orders');
         function structureOrders() {
-            var ul = $('<ul></ul>');
+            var ul = $('<ul class="w3-ul"></ul>');
             $.get("{% url 'canteen:json-customer-orders' %}", function (data, status) {
                 if (status == 'success') {
                     console.log(data);
                     for (var i in data) {
                         if (data[i].served) {
                             ul.append($(
-                                '<li>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' has been served already.</li>'
+                                '<li class="served">' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' has been served already.</li>'
                             ));
                         } else {
                             if (data[i].ready) {
                                 ul.append($(
-                                    '<li>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is now ready to serve.</li > '
+                                    '<li class="ready">' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is now ready to serve.</li > '
                                 ));
                             } else {
                                 ul.append($(
-                                    '<li>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is not yet ready.</li > '
+                                    '<li class="notReady">' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is not yet ready.</li > '
                                 ));
                             }
                         }
