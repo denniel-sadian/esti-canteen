@@ -29,6 +29,10 @@
     td {
         vertical-align: middle !important;
     }
+
+    a {
+        color: blue;
+    }
 </style>
 {% endblock %}
 
@@ -43,16 +47,26 @@
 <article class="w3-container w3-padding-32">
     <div class="w3-content">
         <h2><i class="fas fa-calculator"></i> Audit</h2>
+        <p class="w3-small">This table represents the sales for today. This relies completely with all of the orders
+            listed below.</p>
         <div class="tables" id="audit">
             <p class="w3-large w3-opacity">
                 <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
         </div>
         <h2 style="margin-top: 50px"><i class="fas fa-clipboard-list"></i> Orders</h2>
+        <p class="w3-small">This table lists all of the orders. By default, the orders for today are being listed. You
+            can, however, view
+            the orders from the past by changing the date above. Orders that are not yet ready cannot be marked as
+            served. And orders that have been served already cannot be marked as not yet ready. The flipping buttons are
+            dynamically disabled to avoid confusion. Order records are very vital for auditing, delete them ONLY when
+            needed. If you think that something's wrong with the order, you can click the name of the customer to edit
+            the order.</p>
         <div class="tables" id="orders">
             <p class="w3-large w3-opacity">
                 <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
         </div>
         <h2 style="margin-top: 50px"><i class="fas fa-feather-alt"></i> Feedbacks</h2>
+        <p class="w3-small">These are the feedbacks from the visitors of this website.</p>
         <div id="feedbacks">
             <p class="w3-large w3-opacity">
                 <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
