@@ -23,11 +23,34 @@ from django.core.exceptions import ObjectDoesNotExist
 from .forms import OrderForm
 
 
+def get_orders(request):
+    """
+    Utility function for getting orders.
+    """
+    try:
+        return Order.objects.filter(
+            date__date=request.GET['date']).order_by('-date')
+    except MultiValueDictKeyError:
+        return Order.objects.filter(
+            date__date=datetime.now().date()).order_by('-date')
+
+
 class HomeView(ListView):
     """
     View for listing the dishes at home page.
     """
     context_object_name = 'dishes'
+
+    def get(self, **kwargs):
+        orders_today = get_orders(request)
+        for o in request.session.get('orders', []):
+            try:
+                order = orders_today.get(id=o)
+            except ObjectDoesNotExist:
+                self.request.session.get('orders').remove(o)
+                self.request.session['orders'] = (
+                    self.request.session.get('orders'))
+        return super().get(**kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -152,18 +175,6 @@ class UpdateOrderView(LoginRequiredMixin, UpdateView):
     template_name = 'canteen/edit_order.html'
 
 
-def get_orders(request):
-    """
-    Utility function for getting orders.
-    """
-    try:
-        return Order.objects.filter(
-            date__date=request.GET['date']).order_by('-date')
-    except MultiValueDictKeyError:
-        return Order.objects.filter(
-            date__date=datetime.now().date()).order_by('-date')
-
-
 def json_customer_orders(request):
     """
     View for giving all the orders from the session.
@@ -186,7 +197,6 @@ def json_customer_orders(request):
         except ObjectDoesNotExist:
             request.session.get('orders').remove(o)
             request.session['orders'] = request.session.get('orders')
-            print('Order deleted unexpectedly.')
     return JsonResponse(orders_from_device, safe=False)
 
 
