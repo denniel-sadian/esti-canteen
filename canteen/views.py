@@ -41,7 +41,7 @@ class HomeView(ListView):
     """
     context_object_name = 'dishes'
 
-    def get(self, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         orders_today = get_orders(request)
         for o in request.session.get('orders', []):
             try:
@@ -50,7 +50,7 @@ class HomeView(ListView):
                 self.request.session.get('orders').remove(o)
                 self.request.session['orders'] = (
                     self.request.session.get('orders'))
-        return super().get(**kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
