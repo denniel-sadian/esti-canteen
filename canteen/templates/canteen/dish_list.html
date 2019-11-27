@@ -157,9 +157,10 @@
         {% if request.session.orders %}
         <div class="w3-content" style="margin-top: 50px;">
             <h3><i class="fas fa-clipboard-list"></i> These are the orders from this device.</h3>
-            <p>These orders are only displaying on this device and on the main real-time orders of
-                the
-                admin site.</p>
+            <p class="w3-small">Your orders are only displaying on this device and on the real-time orders of
+                the admin site. Once you submit your order, you can no longer change it. This constraint is implemented
+                to not confuse the staff when packing the orders. However, if you're at the
+                canteen already, you can politely ask the staff to change it for you.</p>
             <div id="orders">
             </div>
         </div>
