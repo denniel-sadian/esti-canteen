@@ -157,7 +157,9 @@ class ManageView(LoginRequiredMixin, ListView):
     context_object_name = 'dishes'
 
     def get_queryset(self):
-        return Dish.objects.filter(date=datetime.now())
+        return Dish.objects.filter(
+            Q(date=datetime.now()) | Q(everyday=True)
+        ).order_by('name')
 
 
 class CreateDishView(LoginRequiredMixin, CreateView):
