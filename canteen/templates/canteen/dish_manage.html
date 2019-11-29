@@ -1,0 +1,35 @@
+{% load static %}
+{% load humanize %}
+{% load thumbnail %}
+
+
+<div class="dishes-flex w3-card-4 w3-border w3-border-green w3-margin-bottom w3-round-large">
+    <div class="dish-image-cont">
+        {% thumbnail dish.photo "150x150" crop="center" as im %}
+        <img src="{{ im.url }}">
+        {% endthumbnail %}
+    </div>
+    <div class="dish-info" style="flex-grow: 8">
+        <div class="w3-padding" style="flex-grow: 8">
+            <h3>{{ dish.name|title }}</h3>
+            <p>It costs <span class="w3-tag w3-round-xxlarge w3-light-green">₱ {{ dish.price|intcomma }}</span>.
+                {{ dish.description }}</p>
+            {% if dish.sold_out %}
+            <p class="w3-pink w3-small w3-tag w3-round-large">Sold out</p>
+            {% else %}
+            <p class="w3-green w3-small w3-tag w3-round-large">Not sold out</p>
+            {% endif %}
+            {% if dish.everyday %}
+            <p class="w3-green w3-small w3-tag w3-round-large">Everyday dish</p>
+            {% else %}
+            <p class="w3-pink w3-small w3-tag w3-round-large">Not an everyday dish</p>
+            {% endif %}
+        </div>
+        <div class="dish-controls">
+            <a href="{% url 'canteen:edit' dish.id %}" class="w3-button w3-blue w3-round-xxlarge"><i
+                    class="fas fa-pencil-alt"></i> <span class="w3-hide-medium">Edit</span></a>
+            <button class="w3-button w3-red w3-round-xxlarge" onclick="prepareForDeleting('{{ dish.id }}')"><i
+                    class="fas fa-trash-alt"></i> <span class="w3-hide-medium">Delete</span></button>
+        </div>
+    </div>
+</div>

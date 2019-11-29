@@ -1,9 +1,5 @@
 {% extends 'canteen/manage_base.html' %}
 
-{% load static %}
-{% load humanize %}
-{% load thumbnail %}
-
 {% block title %}Management of the Dishes{% endblock %}
 
 {% block header %}Management of the Dishes{% endblock %}
@@ -102,36 +98,7 @@
             </div>
         </div>
         {% for d in dishes %}
-        <div class="dishes-flex w3-card-4 w3-border w3-border-green w3-margin-bottom w3-round-large">
-            <div class="dish-image-cont">
-                {% thumbnail d.photo "150x150" crop="center" as im %}
-                <img src="{{ im.url }}">
-                {% endthumbnail %}
-            </div>
-            <div class="dish-info" style="flex-grow: 8">
-                <div class="w3-padding" style="flex-grow: 8">
-                    <h3>{{ d.name|title }}</h3>
-                    <p>It costs <span class="w3-tag w3-round-xxlarge w3-light-green">₱ {{ d.price|intcomma }}</span>.
-                        {{ d.description }}</p>
-                    {% if d.sold_out %}
-                    <p class="w3-pink w3-small w3-tag w3-round-large">Sold out</p>
-                    {% else %}
-                    <p class="w3-green w3-small w3-tag w3-round-large">Not sold out</p>
-                    {% endif %}
-                    {% if d.everyday %}
-                    <p class="w3-green w3-small w3-tag w3-round-large">Everyday dish</p>
-                    {% else %}
-                    <p class="w3-pink w3-small w3-tag w3-round-large">Not an everyday dish</p>
-                    {% endif %}
-                </div>
-                <div class="dish-controls">
-                    <a href="{% url 'canteen:edit' d.id %}" class="w3-button w3-blue w3-round-xxlarge"><i
-                            class="fas fa-pencil-alt"></i> <span class="w3-hide-medium">Edit</span></a>
-                    <button class="w3-button w3-red w3-round-xxlarge" onclick="prepareForDeleting('{{ d.id }}')"><i
-                            class="fas fa-trash-alt"></i> <span class="w3-hide-medium">Delete</span></button>
-                </div>
-            </div>
-        </div>
+        {% include 'canteen/dish_manage.html' with dish=d %}
         {% endfor %}
         <div class="w3-container">
             <hr class="w3-margin-top" />
