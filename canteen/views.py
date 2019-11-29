@@ -113,6 +113,13 @@ class OrderView(CreateView):
         return context
 
 
+class UnableToOrderView(TemplateView):
+    """
+    View for informing the customer that the order can't be allowed.
+    """
+    template_name = 'canteen/unable_to_order.html'
+
+
 class FeedbackView(CreateView):
     """
     View for creating a feedback.
