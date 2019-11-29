@@ -139,6 +139,7 @@
     }
     function deleteFeedbackCompletely(id) {
         $.get('/api-delete-feedback/' + id + '/');
+        $('#feedback-' + id).slideUp();
         structureReport();
     }
     function structureReport() {
@@ -148,7 +149,7 @@
                 for (f in data)
                     ul.append(
                         $(
-                            '<li><p><span class="w3-text-red w3-large"><i class="fas fa-user-circle"></i> ' +
+                            '<li id="feedback-' + data[f].id + '"><p><span class="w3-text-red w3-large"><i class="fas fa-user-circle"></i> ' +
                             data[f].name + '</span><br/>' +
                             data[f].content +
                             '<br/>(' +
