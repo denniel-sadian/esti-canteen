@@ -14,7 +14,7 @@ class Dish(models.Model):
     """
     name = models.CharField(max_length=100)
     price = models.FloatField()
-    date = models.DateField(auto_now=True)
+    date = models.DateField(auto_now_add=True)
     description = models.CharField(max_length=101)
     sold_out = models.BooleanField(default=False)
     everyday = models.BooleanField(default=False)
@@ -36,7 +36,7 @@ class Feedback(models.Model):
     """
     The Feedback model.
     """
-    date = models.DateTimeField(auto_now=True)
+    date = models.DateTimeField(auto_now_add=True)
     contact_no = models.CharField(max_length=15)
     name = models.CharField(max_length=100)
     content = models.TextField()
