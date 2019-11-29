@@ -14,6 +14,7 @@ from django.http import HttpResponseForbidden
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
+from django.db.models import Q
 from django.utils.datastructures import MultiValueDictKeyError
 from django.http.response import HttpResponseRedirect
 
@@ -61,7 +62,9 @@ class HomeView(ListView):
         return context
 
     def get_queryset(self):
-        return Dish.objects.filter(date=datetime.now())
+        return Dish.objects.filter(
+            Q(date=datetime.now()) | Q(everyday=True)
+        ).order_by('-name')
 
 
 class AboutView(TemplateView):
