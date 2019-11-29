@@ -115,7 +115,7 @@
         <h2><i class="fa fa-drumstick-bite"></i> These are the everyday dishes.</h2>
         <p>The dishes that are marked as for everyday will always display on the menue no matter what date they were
             added.</p>
-        {% if dishes %}
+        {% if everyday_dishes %}
         {% for d in everyday_dishes %}
         {% include 'canteen/dish_manage.html' with dish=d %}
         {% endfor %}
