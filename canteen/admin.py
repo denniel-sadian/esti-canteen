@@ -7,7 +7,7 @@ from .models import Feedback
 
 
 class DishAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'description', 'date', 'sold_out')
+    list_display = ('name', 'price', 'description', 'date', 'sold_out', 'everyday')
     search_fields = ['name', 'description', 'price']
 
 
