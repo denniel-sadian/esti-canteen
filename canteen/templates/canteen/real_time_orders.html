@@ -33,6 +33,27 @@
     a {
         color: blue;
     }
+
+    li {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    li button {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        max-width: 40px;
+        max-height: 40px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
 </style>
 {% endblock %}
 
@@ -128,7 +149,7 @@
                             data[f].content +
                             '<br/>(' +
                             new Date(data[f].date).toLocaleString() +
-                            ')</p></li>'
+                            ')</p><button class="w3-button w3-round-xxlarge"><i class="fas fa-trash-alt"></i></button></li>'
                         )
                     );
                 $('#feedbacks').html(ul);
