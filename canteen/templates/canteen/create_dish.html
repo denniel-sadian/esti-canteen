@@ -20,9 +20,19 @@
         <p>Make sure that you input correct information about the dish.</p>
         <hr />
         <div class="w3-white w3-padding-16 w3-round-large">
-
-            {{ form }}
-
+            <label for="name">Name:</label>
+            {{ form.name }}
+            <label for="price">Price:</label>
+            {{ form.price }}
+            <label for="description">Description:</label>
+            {{ form.description }}
+            <label for="photo">Photo:</label>
+            {{ form.photo }}
+            <label class="container">An everyday dish
+                <input type="checkbox" id="id_everyday" name="everyday" {% if form.sold_out.value %}checked="checked"
+                    {% endif %}>
+                <span class="checkmark"></span>
+            </label>
         </div>
         <hr />
         <div class="w3-right w3-margin-top w3-margin-bottom">
