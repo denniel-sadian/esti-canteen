@@ -88,8 +88,14 @@
 {% block content %}
 <article class="w3-container w3-margin-top w3-padding-top">
     <div class="w3-content">
-        {% if dishes %}
-        <h2><i class="fa fa-drumstick-bite"></i> These are the dishes for today.</h2>
+        <h2><i class="fa fa-drumstick-bite"></i> These are the dishes for this date.</h2>
+        <p>You can simply add a dish by clicking the "Add dish" button.</p>
+        <div
+            class="w3-content w3-padding w3-margin-bottom w3-card w3-round-large w3-light-gray w3-border w3-border-green">
+            <h2><i class="fas fa-clock"></i> View Date</h2>
+            <input type="date" id="date" class="w3-input w3-margin-bottom" />
+            <button class="w3-button w3-green w3-round-xxlarge w3-block" onclick="viewDishes()">View dishes</button>
+        </div>
         {% for d in dishes %}
         <div class="dishes-flex w3-card-4 w3-border w3-border-green w3-margin-bottom w3-round-large">
             <div class="dish-image-cont">
@@ -122,10 +128,6 @@
             </div>
         </div>
         {% endfor %}
-        {% else %}
-        <h2>The canteen is not yet cooking anything.</h2>
-        <p>You can add a dish by clicking the green button.</p>
-        {% endif %}
         <div class="w3-container">
             <hr class="w3-margin-top" />
             <a href="{% url 'canteen:create' %}" class="w3-button w3-round-xxlarge w3-green w3-right"><i
@@ -151,6 +153,7 @@
 
 <script>
     var dishId;
+    var dateInput = $('#date');
 
     function prepareForDeleting(id) {
         dishId = id;
@@ -163,5 +166,21 @@
         $('#confirm').slideUp();
         location.reload(true);
     }
+
+    function viewDishes() {
+
+    }
+
+    $(document).ready(function () {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var date = now.getDate();
+        dateInput.val(
+            year + '-' +
+            (month < 10 ? ('0' + month) : month) + '-' +
+            (date < 10 ? ('0' + date) : date)
+        );
+    })
 </script>
 {% endblock %}
