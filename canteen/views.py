@@ -157,9 +157,22 @@ class ManageView(LoginRequiredMixin, ListView):
     context_object_name = 'dishes'
 
     def get_queryset(self):
-        return Dish.objects.filter(
-            Q(date=datetime.now()) | Q(everyday=True)
-        ).order_by('name')
+        try:
+            return Dish.objects.filter(
+                date=self.request.GET['date'],
+                everyday=False
+            ).order_by('name')
+        except MultiValueDictKeyError:
+            return Dish.objects.filter(
+                date=datetime.now(),
+                everyday=False
+            ).order_by('name')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['everyday_dishes'] = Dish.objects.filter(
+            everyday=True).order_by('name')
+        return context
 
 
 class CreateDishView(LoginRequiredMixin, CreateView):
