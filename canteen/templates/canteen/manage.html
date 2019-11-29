@@ -103,14 +103,14 @@
                     <p>It costs <span class="w3-tag w3-round-xxlarge w3-light-green">₱ {{ d.price|intcomma }}</span>.
                         {{ d.description }}</p>
                     {% if d.sold_out %}
-                    <p class="w3-text-red">It is sold out already.</p>
+                    <p class="w3-red w3-tag w3-round-large">It is sold out already.</p>
                     {% else %}
-                    <p class="w3-text-green">It is not sold out yet.</p>
+                    <p class="w3-green w3-tag w3-round-large">It is not sold out yet.</p>
                     {% endif %}
                     {% if d.everyday %}
-                    <p class="w3-text-red">It is an everyday dish.</p>
+                    <p class="w3-green w3-tag w3-round-large">It is an everyday dish.</p>
                     {% else %}
-                    <p class="w3-text-green">It is an everyday dish.</p>
+                    <p class="w3-red w3-tag w3-round-large">It isn't an everyday dish.</p>
                     {% endif %}
                 </div>
                 <div class="dish-controls">
