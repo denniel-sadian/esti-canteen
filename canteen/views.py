@@ -148,7 +148,7 @@ class CreateDishView(LoginRequiredMixin, CreateView):
     """
     login_url = '/login/'
     model = Dish
-    fields = ['name', 'price', 'description', 'photo']
+    fields = ['name', 'price', 'description', 'photo', 'everyday']
     success_url = reverse_lazy('canteen:manage')
     template_name = 'canteen/create_dish.html'
 
@@ -160,7 +160,7 @@ class UpdateDishView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
     success_url = reverse_lazy('canteen:manage')
     model = Dish
-    fields = ['name', 'price', 'description', 'sold_out', 'photo']
+    fields = ['name', 'price', 'description', 'sold_out', 'photo', 'everyday']
     template_name = 'canteen/edit_dish.html'
 
 
