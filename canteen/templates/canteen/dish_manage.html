@@ -15,14 +15,9 @@
             <p>It costs <span class="w3-tag w3-round-xxlarge w3-light-green">₱ {{ dish.price|intcomma }}</span>.
                 {{ dish.description }}</p>
             {% if dish.sold_out %}
-            <p class="w3-pink w3-small w3-tag w3-round-large">Sold out</p>
+            <p class="w3-pink w3-tag w3-round-large">Sold out</p>
             {% else %}
-            <p class="w3-green w3-small w3-tag w3-round-large">Not sold out</p>
-            {% endif %}
-            {% if dish.everyday %}
-            <p class="w3-green w3-small w3-tag w3-round-large">Everyday dish</p>
-            {% else %}
-            <p class="w3-pink w3-small w3-tag w3-round-large">Not an everyday dish</p>
+            <p class="w3-green w3-tag w3-round-large">Not sold out</p>
             {% endif %}
         </div>
         <div class="dish-controls">
