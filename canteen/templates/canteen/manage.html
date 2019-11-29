@@ -107,7 +107,11 @@
                     {% else %}
                     <p class="w3-text-green">It is not sold out yet.</p>
                     {% endif %}
-                    <p></p>
+                    {% if d.everyday %}
+                    <p class="w3-text-red">It is an everyday dish.</p>
+                    {% else %}
+                    <p class="w3-text-green">It is an everyday dish.</p>
+                    {% endif %}
                 </div>
                 <div class="dish-controls">
                     <a href="{% url 'canteen:edit' d.id %}" class="w3-button w3-blue w3-round-xxlarge"><i
