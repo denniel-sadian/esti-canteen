@@ -351,3 +351,13 @@ def api_delete_dish(request, id):
         return HttpResponseForbidden("You're not authenticated.")
     Dish.objects.get(id=id).delete()
     return HttpResponse('Deleted.')
+
+
+def api_delete_feedback(request, id):
+    """
+    View for deleting a feedback.
+    """
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden("You're not authenticated.")
+    Feedback.objects.get(id=id).delete()
+    return HttpResponse('Deleted.')
