@@ -26,6 +26,8 @@ urlpatterns = [
          name='api-delete-order'),
     path('api-delete-dish/<int:id>/', views.api_delete_dish,
          name='api-delete-dish'),
+    path('api-delete-feedback/<int:id>/', views.api_delete_feedback,
+         name='api-delete-feedback'),
     
     path('manage/', views.ManageView.as_view(), name='manage'),
     path('manage/create/', views.CreateDishView.as_view(), name='create'),
