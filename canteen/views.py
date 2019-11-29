@@ -15,6 +15,7 @@ from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
 from django.utils.datastructures import MultiValueDictKeyError
+from django.http.response import HttpResponseRedirect
 
 from .models import Dish
 from .models import Order
@@ -90,6 +91,13 @@ class OrderView(CreateView):
     model = Order
     fields = ['name', 'id_no', 'contact_no', 'count']
     success_url = reverse_lazy('canteen:thanks')
+
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        dish = Dish.objects.get(id=kwargs['dish'])
+        if dish.sold_out:
+            return HttpResponseRedirect(reverse_lazy('canteen:unable-to-order'))
+        return super().get(request, *args, **kwargs)
 
     def form_valid(self, form):
         form.instance.dish = Dish.objects.get(id=self.kwargs['dish'])
