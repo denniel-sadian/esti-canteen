@@ -137,6 +137,10 @@
         structureReport();
         $('#confirm').slideUp();
     }
+    function deleteFeedbackCompletely(id) {
+        $.get('/api-delete-feedback/' + id + '/');
+        structureReport();
+    }
     function structureReport() {
         $.get("{% url 'canteen:json-feedbacks' %}", function (data, status) {
             if (status == 'success') {
@@ -149,7 +153,7 @@
                             data[f].content +
                             '<br/>(' +
                             new Date(data[f].date).toLocaleString() +
-                            ')</p><button class="w3-button w3-round-xxlarge"><i class="fas fa-trash-alt"></i></button></li>'
+                            ')</p><button onclick="deleteFeedbackCompletely(\'' + data[f].id + '\')" class="w3-button w3-round-xxlarge"><i class="fas fa-trash-alt"></i></button></li>'
                         )
                     );
                 $('#feedbacks').html(ul);
