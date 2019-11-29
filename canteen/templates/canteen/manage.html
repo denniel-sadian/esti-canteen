@@ -94,7 +94,12 @@
             class="w3-content w3-padding w3-margin-bottom w3-card w3-round-large w3-light-gray w3-border w3-border-green">
             <h2><i class="fas fa-clock"></i> View Date</h2>
             <input type="date" id="date" class="w3-input w3-margin-bottom" />
-            <button class="w3-button w3-green w3-round-xxlarge w3-block" onclick="viewDishes()">View dishes</button>
+            <div class="w3-container">
+                <a class="w3-button w3-green w3-round-xxlarge w3-right w3-margin-left"
+                    href="{% url 'canteen:manage' %}">Now</a>
+                <button class="w3-button w3-green w3-round-xxlarge w3-right w3-margin-left" onclick="viewDishes()">View
+                    dishes</button>
+            </div>
         </div>
         {% for d in dishes %}
         <div class="dishes-flex w3-card-4 w3-border w3-border-green w3-margin-bottom w3-round-large">
@@ -168,7 +173,7 @@
     }
 
     function viewDishes() {
-
+        location.assign('{% url "canteen:manage" %}?date=' + dateInput.val());
     }
 
     $(document).ready(function () {
