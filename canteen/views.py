@@ -192,6 +192,11 @@ class CreateDishView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('canteen:manage')
     template_name = 'canteen/create_dish.html'
 
+    def form_valid(self, form):
+        form.instance.name = form.instance.name.upper()
+        form.instance.date = datetime.now().date()
+        return super().form_valid(form)
+
 
 class UpdateDishView(LoginRequiredMixin, UpdateView):
     """
