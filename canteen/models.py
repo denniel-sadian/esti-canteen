@@ -6,6 +6,7 @@ from django.db import models
 from django.urls import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.timezone import datetime
 
 
 class Dish(models.Model):
@@ -28,6 +29,8 @@ class Dish(models.Model):
         return self.name
     
     def save(self, *args, **kwargs):
+        if not hasattr(self, 'id'):
+            self.date = datetime.now().date()
         self.name = self.name.lower()
         super().save(*args, **kwargs)
 
