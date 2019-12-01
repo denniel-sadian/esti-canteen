@@ -138,6 +138,10 @@ class FeedbackView(CreateView):
     fields = ['name', 'contact_no', 'content']
     success_url = reverse_lazy('canteen:home')
 
+    def form_valid(self, form):
+        form.instance.name = form.instance.name.upper()
+        return super().form_valid(form)
+
 
 class ThanksView(TemplateView):
     """
