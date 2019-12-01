@@ -200,7 +200,8 @@ class UpdateDishView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
     success_url = reverse_lazy('canteen:manage')
     model = Dish
-    fields = ['name', 'price', 'description', 'sold_out', 'photo', 'everyday']
+    fields = ['name', 'price', 'description', 'sold_out', 'photo',
+              'everyday', 'date']
     template_name = 'canteen/edit_dish.html'
 
 
