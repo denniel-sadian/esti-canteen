@@ -27,12 +27,6 @@ class Dish(models.Model):
 
     def __str__(self):
         return self.name
-    
-    def save(self, *args, **kwargs):
-        if not hasattr(self, 'id'):
-            self.date = datetime.now().date()
-        self.name = self.name.lower()
-        super().save(*args, **kwargs)
 
 
 class Feedback(models.Model):
