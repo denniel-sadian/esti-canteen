@@ -74,6 +74,13 @@ class AboutView(TemplateView):
     template_name = 'canteen/about.html'
 
 
+class PrivacyPolicyView(TemplateView):
+    """
+    View for simply displaying the privacy policy.
+    """
+    template_name = 'canteen/privacypolicy.html'
+
+
 class DishView(DetailView):
     """
     View for displaying the dish's detail.
