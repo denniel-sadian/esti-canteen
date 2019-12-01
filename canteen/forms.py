@@ -5,6 +5,7 @@ Forms for `canteen`
 
 from django import forms
 from django.utils.timezone import datetime
+from django.db.models import Q
 
 from .models import Dish
 from .models import Order
@@ -15,7 +16,8 @@ class OrderForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__( * args, ** kwargs)
-        self.fields['dish'].queryset = Dish.objects.filter(date=self.instance.date)
+        self.fields['dish'].queryset = Dish.objects.filter(
+            Q(date=self.instance.date) | Q(everyday=True))
 
     class Meta:
         model = Order
