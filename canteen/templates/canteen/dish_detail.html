@@ -210,28 +210,9 @@
                     <a href="{% url 'canteen:order' dish.id %}" class="w3-button w3-round-xxlarge w3-purple">
                         <i class="fas fa-check-circle"></i> Order</a>
                 </div>
-                <div class="w3-margin-top share-links">
-                    {% with "https://esticanteen.pythonanywhere.com" as domain %}
-                    <a href="https://web.facebook.com/sharer/sharer.php?u={{ domain }}{% url 'canteen:home' %}">
-                        <i class="fas fa-tools"></i></a>
-                    <a href="https://www.twitter.com/share?url={{ domain }}{% url 'canteen:home' %}">
-                        <i class="fas fa-tools"></i></a>
-                    <a href="https://www.linkedin.com/shareArticle/?mini=true&url={{ domain }}{% url 'canteen:home' %}">
-                        <i class="fas fa-tools"></i></a>
-                    <a href="https://telegram.me/share/?url={{ domain }}{% url 'canteen:home' %}">
-                        <i class="fas fa-tools"></i></a>
-                    <a href="https://api.whatsapp.com/send?text={{ domain }}{% url 'canteen:home' %}">
-                        <i class="fas fa-tools"></i></a>
-                    <a href="https://www.pinterest.ph/pin/find/?url={{ domain }}{% url 'canteen:home' %}">
-                        <i class="fas fa-tools"></i></a>
-                    <a href="https://reddit.com/submit?url={{ domain }}{% url 'canteen:home' %}">
-                        <i class="fas fa-tools"></i></a>
-                    {% endwith %}
-                </div>
-                {% endif %}
+                {% include 'canteen/share_links.html' %}
             </div>
         </div>
-    </div>
 </body>
 
 </html>
