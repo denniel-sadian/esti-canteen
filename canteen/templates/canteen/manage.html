@@ -169,7 +169,7 @@
 
     $(document).ready(function () {
         var url = location.href;
-        if (url.search('='))
+        if (url.search('=') > 0)
             dateInput.val(url.slice(url.search('=') + 1));
         else {
             var now = new Date();
