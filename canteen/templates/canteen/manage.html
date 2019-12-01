@@ -88,7 +88,7 @@
 {% block content %}
 <article class="w3-container w3-margin-top w3-padding-top">
     <div class="w3-content">
-        <h2><i class="fa fa-drumstick-bite"></i> These are the dishes for this date.</h2>
+        <h2 id="dishes-today"><i class="fa fa-drumstick-bite"></i> These are the dishes for this date.</h2>
         <p>The dishes that are not marked as for everyday will only display on the date they were created.</p>
         <div
             class="w3-content w3-padding w3-margin-bottom w3-card w3-round-large w3-light-gray w3-border w3-border-green">
@@ -96,7 +96,7 @@
             <input type="date" id="date" class="w3-input w3-margin-bottom" />
             <div class="w3-container">
                 <a class="w3-button w3-green w3-round-xxlarge w3-right w3-margin-left"
-                    href="{% url 'canteen:manage' %}">Now</a>
+                    href="{% url 'canteen:manage' %}#dishes-today">Now</a>
                 <button class="w3-button w3-green w3-round-xxlarge w3-right w3-margin-left" onclick="viewDishes()">View
                     dishes</button>
             </div>
@@ -164,7 +164,7 @@
     }
 
     function viewDishes() {
-        location.assign('{% url "canteen:manage" %}?date=' + dateInput.val());
+        location.assign('{% url "canteen:manage" %}?date=' + dateInput.val() + '#dishes-today');
     }
 
     $(document).ready(function () {
