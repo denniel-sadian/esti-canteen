@@ -293,6 +293,7 @@ def json_feedbacks(request):
             'id': f.id,
             'name': f.name,
             'content': f.content,
+            'number': f.contact_no,
             'date': f.date
         }
         for f in Feedback.objects.all().order_by('-date')
