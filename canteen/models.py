@@ -46,7 +46,7 @@ class Feedback(models.Model):
 
     def save(self, *args, **kwargs):
         self.name = self.name.upper()
-        super.save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
 
 class Order(models.Model):
