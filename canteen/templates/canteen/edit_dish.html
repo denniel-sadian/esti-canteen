@@ -21,6 +21,21 @@
         width: 50%;
     }
 
+    input[type="date"] {
+        padding: 10px;
+        display: block;
+        width: 100%;
+        border-radius: 0px 32px 32px 32px;
+        border-style: none;
+        border: 3px solid #8bc34a;
+        margin-bottom: 30px;
+    }
+
+    input[type="date"]:focus {
+        border-color: #4CAF50;
+        background: #d9ffad;
+    }
+
     #flex-cont {
         display: flex;
     }
@@ -68,7 +83,10 @@
                 <label for="description">Description:</label>
                 {{ form.description }}
                 <label for="date">Date:</label>
-                {{ form.date }}
+                <input type="date" name="date"
+                    value="{{ form.date.value.year }}-{% if form.date.value.month < 10 %}0{{ form.date.value.month }}{% else %}{{ form.date.value.month }}{% endif %}-{% if form.date.value.day < 10 %}0{{ form.date.value.day }}{% else %}{{ form.date.value.day }}{% endif %}"
+                    required="" id="id_date">
+                {{ form.date.errors }}
                 <label for="photo">Change photo:</label><br />
                 <input type="file" name="photo" accept="image/*" id="id_photo">
                 <label class="container">Sold out
