@@ -14,7 +14,7 @@ class Dish(models.Model):
     """
     name = models.CharField(max_length=100)
     price = models.FloatField()
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField()
     description = models.CharField(max_length=101)
     sold_out = models.BooleanField(default=False)
     everyday = models.BooleanField(default=False)
