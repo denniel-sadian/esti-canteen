@@ -168,15 +168,20 @@
     }
 
     $(document).ready(function () {
-        var now = new Date();
-        var year = now.getFullYear();
-        var month = now.getMonth() + 1;
-        var date = now.getDate();
-        dateInput.val(
-            year + '-' +
-            (month < 10 ? ('0' + month) : month) + '-' +
-            (date < 10 ? ('0' + date) : date)
-        );
+        var url = location.href;
+        if (url.search('='))
+            dateInput.val(url.slice(url.search('=') + 1));
+        else {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1;
+            var date = now.getDate();
+            dateInput.val(
+                year + '-' +
+                (month < 10 ? ('0' + month) : month) + '-' +
+                (date < 10 ? ('0' + date) : date)
+            );
+        }
     })
 </script>
 {% endblock %}
