@@ -13,6 +13,7 @@ urlpatterns = [
     path('orders/', views.RealTimeOrdersView.as_view(), name='orders'),
     path('invalid-order/', views.UnableToOrderView.as_view(), name='unable-to-order'),
     path('about/', views.AboutView.as_view(), name='about'),
+    path('privacy-policy/', views.PrivacyPolicyView.as_view(), name='privacy-policy'),
     path('feedback/', views.FeedbackView.as_view(), name='feedback'),
     path('json-orders/', views.json_orders, name='json-orders'),
     path('json-customer-orders/', views.json_customer_orders, name='json-customer-orders'),
