@@ -4,4 +4,4 @@ lib/
 bin/
 include/
 media/
-static/
+/static
