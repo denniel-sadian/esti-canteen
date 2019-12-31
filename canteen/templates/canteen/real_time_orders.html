@@ -122,23 +122,25 @@
     async function markServed(id) {
         orderId = id;
         $('#' + id).slideUp();
-        await $.get('/api-mark-as-served/' + id + '/');
-        try {
-            reportSocket.send('{}');
-        } catch {
-            location.reload();
-        }
+        await $.get('/api-mark-as-served/' + id + '/', await function (data, status) {
+            try {
+                reportSocket.send('{}');
+            } catch (e) {
+                location.reload();
+            }
+        });
     }
 
     async function markReady(id) {
         orderId = id;
         $('#_' + id).slideUp();
-        await $.get('/api-mark-as-ready/' + id + '/');
-        try {
-            reportSocket.send('{}');
-        } catch {
-            location.reload();
-        }
+        await $.get('/api-mark-as-ready/' + id + '/', await function (data, status) {
+            try {
+                reportSocket.send('{}');
+            } catch (e) {
+                location.reload();
+            }
+        });
     }
 
     function prepareForDeleting(id) {
@@ -147,14 +149,16 @@
     }
 
     async function deleteCompletely() {
-        await $.get('/api-delete-order/' + orderId + '/');
-        orderId = ''
-        try {
-            reportSocket.send('{}');
-        } catch {
-            location.reload();
-        }
-        $('#confirm').slideUp();
+        await $.get('/api-delete-order/' + orderId + '/', await function (data, status) {
+            try {
+                reportSocket.send('{}');
+            } catch (e) {
+                location.reload();
+            }
+            $('#confirm').slideUp();
+            $('#order-row-' + orderId).slideUp();
+            orderId = '';
+        });
     }
 
     async function deleteFeedbackCompletely(id) {
