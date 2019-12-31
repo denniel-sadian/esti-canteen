@@ -276,7 +276,7 @@
     structureReport();
 
     reportSocket.onmessage = function (e) {
-        setTimeout(structureReport, 1000);
+        structureReport();
     };
 </script>
 {% endblock %}

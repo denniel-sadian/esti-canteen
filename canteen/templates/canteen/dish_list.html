@@ -297,7 +297,7 @@
         }
         structureOrders();
         reportSocket.onmessage = function (e) {
-            setTimeout(structureOrders, 1000);
+            structureOrders();
         };
     </script>
     {% endif %}
