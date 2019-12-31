@@ -110,9 +110,8 @@ class OrderView(CreateView):
     def form_valid(self, form):
         form.instance.dish = Dish.objects.get(id=self.kwargs['dish'])
         form.save()
-        orders = self.request.session.get('orders', [])
-        orders.append(form.instance.id)
-        self.request.session['orders'] = orders
+        self.request.session['orders'] = (
+            self.request.session.get('orders').append(form.instance.id))
         return super().form_valid(form)
     
     def get_context_data(self, **kwargs):
