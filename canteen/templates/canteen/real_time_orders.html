@@ -113,6 +113,9 @@
     </div>
 </div>
 <script>
+    var reportSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/update/');
     var dateInput = $('#date');
     var orderId;
 
@@ -120,14 +123,18 @@
         orderId = id;
         $('#' + id).slideUp();
         $.get('/api-mark-as-served/' + id + '/');
-        structureReport();
+        reportSocket.send(JSON.stringify({
+            'message': 'message'
+        }));
     }
 
     function markReady(id) {
         orderId = id;
         $('#_' + id).slideUp();
         $.get('/api-mark-as-ready/' + id + '/');
-        structureReport();
+        reportSocket.send(JSON.stringify({
+            'message': 'message'
+        }));
     }
 
     function prepareForDeleting(id) {
@@ -138,18 +145,23 @@
     function deleteCompletely() {
         $.get('/api-delete-order/' + orderId + '/');
         orderId = ''
-        structureReport();
+        reportSocket.send(JSON.stringify({
+            'message': 'message'
+        }));
         $('#confirm').slideUp();
     }
 
     function deleteFeedbackCompletely(id) {
         $.get('/api-delete-feedback/' + id + '/');
         $('#feedback-' + id).slideUp();
-        structureReport();
+        reportSocket.send(JSON.stringify({
+            'message': 'message'
+        }));
     }
 
     function structureReport() {
         $.get("{% url 'canteen:json-feedbacks' %}", function (data, status) {
+            console.log('Updating feedbacks...');
             if (status == 'success') {
                 var ul = $('<ul class="w3-ul"></ul>');
                 for (f in data)
@@ -167,6 +179,7 @@
             }
         });
         $.get("{% url 'canteen:json-audit' %}?date=" + dateInput.val(), function (data, status) {
+            console.log('Updating audit...');
             if (status == 'success') {
                 var table = $(
                     '<table class="w3-table-all w3-bottombar">' +
@@ -189,6 +202,7 @@
             }
         });
         $.get("{% url 'canteen:json-orders' %}?date=" + dateInput.val(), function (data, status) {
+            console.log('Updating orders...');
             if (status == 'success') {
                 var table = $(
                     '<table class="w3-table-all w3-bottombar">' +
@@ -271,9 +285,12 @@
         );
     }
 
-    $(document).ready(function () {
-        setDateToNow();
-        setInterval(structureReport, 1000);
-    })
+    setDateToNow();
+    structureReport();
+
+    reportSocket.onmessage = function (e) {
+        console.log("Updating...");
+        structureReport();
+    };
 </script>
 {% endblock %}
