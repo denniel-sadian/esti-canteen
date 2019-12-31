@@ -168,4 +168,4 @@ SECURE_SSL_REDIRECT = True
 # CHANNELS
 
 SESSION_SAVE_EVERY_REQUEST = True
-ASGI_APPLICATION = 'mysite.routing.application'
+ASGI_APPLICATION = 'esticanteen.routing.application'
