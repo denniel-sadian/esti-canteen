@@ -155,7 +155,6 @@
         $.get("{% url 'canteen:json-report' %}?date=" + dateInput.val(), function (data, status) {
             console.log('Updating...');
             if (status == 'success') {
-                console.log('Here.');
                 var ul = $('<ul class="w3-ul"></ul>');
                 for (f in data.feedbacks)
                     ul.append(
