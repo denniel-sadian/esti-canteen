@@ -6,7 +6,7 @@
 <head>
     <title>ESTI Canteen Ordering System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
+
     {% with 'https://esticanteen.pythonanywhere.com' as domain %}
     <meta name="og:title" content="ESTI Canteen Ordering System" />
     <meta name="twitter:title" content="ESTI Canteen Ordering System" />
@@ -16,7 +16,7 @@
     <meta name="twitter:image" content="{{ domain }}{% static 'canteen/bg.jpg' %}" />
     <meta name="og:image" content="{{ domain }}{% static 'canteen/bg.jpg' %}" />
     {% endwith %}
-    
+
     <meta name="google-site-verification" content="8KRj0scCxCiNcxjPWlApSIIXTOipt2bT3WcUeVsqv80" />
     <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
     <link rel="icon" href="{% static 'canteen/esti_icon.png' %}" type="image/x-icon" />
@@ -266,6 +266,9 @@
 
     {% if request.session.orders %}
     <script>
+        var reportSocket = new WebSocket(
+            'ws://' + window.location.host +
+            '/ws/update/');
         var orders = $('#orders');
         function structureOrders() {
             var ul = $('<ul class="w3-ul"></ul>');
@@ -292,9 +295,10 @@
             });
             orders.html(ul);
         }
-        $(document).ready(function () {
-            setInterval(structureOrders, 3000);
-        });
+        structureOrders();
+        reportSocket.onmessage = function (e) {
+            structureOrders();
+        };
     </script>
     {% endif %}
 </body>
