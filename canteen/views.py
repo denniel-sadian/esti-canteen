@@ -225,6 +225,67 @@ class UpdateOrderView(LoginRequiredMixin, UpdateView):
     template_name = 'canteen/edit_order.html'
 
 
+def json_report(request):
+    """
+    View for giving the report.
+    """
+
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden("You're not authenticated.")
+    
+    orders = get_orders(request)
+
+    audit = {
+        'total_orders_amount':
+            orders.aggregate(Sum('amount'))['amount__sum'],
+        'total_orders_served_amount':
+            orders.filter(served=True).aggregate(Sum('amount'))['amount__sum']
+    }
+    if not audit['total_orders_amount']:
+        audit['total_orders_amount'] = 0
+    if not audit['total_orders_served_amount']:
+        audit['total_orders_served_amount'] = 0
+    audit['total_amount_still_out'] = (
+            audit['total_orders_amount'] - audit['total_orders_served_amount'])
+
+    orders = [
+        {
+            'id': order.id,
+            'name': order.name,
+            'id_no': order.id_no,
+            'contact_no': order.contact_no,
+            'date': order.date,
+            'dish': {
+                'name': order.dish.name,
+                'id': order.dish.id,
+                'price': order.dish.price
+            },
+            'count': order.count,
+            'amount': order.amount,
+            'served': order.served,
+            'ready': order.ready
+        }
+        for order in orders
+    ]
+
+    feedbacks = [
+        {
+            'id': f.id,
+            'name': f.name,
+            'content': f.content,
+            'number': f.contact_no,
+            'date': f.date
+        }
+        for f in Feedback.objects.all().order_by('-date')
+    ]
+
+    return JsonResponse({
+        'orders': orders,
+        'feedbacks': feedbacks,
+        'audit': audit
+    })
+
+
 def json_customer_orders(request):
     """
     View for giving all the orders from the session.
