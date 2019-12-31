@@ -226,7 +226,7 @@
                     '</tr>' +
                     '</table>');
                 for (var o in data.orders) {
-                    var tr = $('<tr></tr>');
+                    var tr = $('<tr id="order-row-' + data.orders[o].id + '"></tr>');
                     tr.append($('<td class="w3-center w3-border"><a href="/manage/edit-order/' + data.orders[o].id + '/">' + data.orders[o].name + '</a></td>'));
                     tr.append($('<td class="w3-center w3-border">' + data.orders[o].id_no + '</td>'));
                     tr.append($('<td class="w3-center w3-border">' + data.orders[o].contact_no + '</td>'));
