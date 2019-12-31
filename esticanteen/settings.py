@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
 
+    'channels',
     'rest_framework',
     'sorl.thumbnail',
 
@@ -167,3 +168,4 @@ SECURE_SSL_REDIRECT = True
 # CHANNELS
 
 SESSION_SAVE_EVERY_REQUEST = True
+ASGI_APPLICATION = 'mysite.routing.application'
