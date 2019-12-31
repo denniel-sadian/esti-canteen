@@ -204,6 +204,7 @@
             </div>
             {% endif %}
         </div>
+        {{ request.session.orders }}
         {% if request.session.orders %}
         <div class="w3-content" style="margin-top: 50px;">
             <h3><i class="fas fa-clipboard-list"></i> These are the orders from this device.</h3>
@@ -270,9 +271,9 @@
             'ws://' + window.location.host +
             '/ws/update/');
         var orders = $('#orders');
-        function structureOrders() {
+        async function structureOrders() {
             var ul = $('<ul class="w3-ul"></ul>');
-            $.get("{% url 'canteen:json-customer-orders' %}", function (data, status) {
+            await $.get("{% url 'canteen:json-customer-orders' %}", await function (data, status) {
                 if (status == 'success') {
                     for (var i in data) {
                         if (data[i].served) {
@@ -297,7 +298,7 @@
         }
         structureOrders();
         reportSocket.onmessage = function (e) {
-            structureOrders();
+            setTimeout(structureOrders, 500);
         };
     </script>
     {% endif %}

@@ -119,18 +119,26 @@
     var dateInput = $('#date');
     var orderId;
 
-    function markServed(id) {
+    async function markServed(id) {
         orderId = id;
         $('#' + id).slideUp();
-        $.get('/api-mark-as-served/' + id + '/');
-        reportSocket.send('{}');
+        await $.get('/api-mark-as-served/' + id + '/');
+        try {
+            reportSocket.send('{}');
+        } catch {
+            location.reload();
+        }
     }
 
-    function markReady(id) {
+    async function markReady(id) {
         orderId = id;
         $('#_' + id).slideUp();
-        $.get('/api-mark-as-ready/' + id + '/');
-        reportSocket.send('{}');
+        await $.get('/api-mark-as-ready/' + id + '/');
+        try {
+            reportSocket.send('{}');
+        } catch {
+            location.reload();
+        }
     }
 
     function prepareForDeleting(id) {
@@ -138,21 +146,25 @@
         $('#confirm').show();
     }
 
-    function deleteCompletely() {
-        $.get('/api-delete-order/' + orderId + '/');
+    async function deleteCompletely() {
+        await $.get('/api-delete-order/' + orderId + '/');
         orderId = ''
-        reportSocket.send('{}');
+        try {
+            reportSocket.send('{}');
+        } catch {
+            location.reload();
+        }
         $('#confirm').slideUp();
     }
 
-    function deleteFeedbackCompletely(id) {
-        $.get('/api-delete-feedback/' + id + '/');
+    async function deleteFeedbackCompletely(id) {
+        await $.get('/api-delete-feedback/' + id + '/');
         $('#feedback-' + id).slideUp();
         reportSocket.send('{}');
     }
 
-    function structureReport() {
-        $.get("{% url 'canteen:json-report' %}?date=" + dateInput.val(), function (data, status) {
+    async function structureReport() {
+        await $.get("{% url 'canteen:json-report' %}?date=" + dateInput.val(), await function (data, status) {
             console.log('Updating...');
             if (status == 'success') {
                 console.log(data);
@@ -257,6 +269,7 @@
                 }
                 $('#orders').html(ordersTable);
             }
+            console.log('end of update.')
         });
     }
 
@@ -276,7 +289,7 @@
     structureReport();
 
     reportSocket.onmessage = function (e) {
-        structureReport();
+        setTimeout(structureReport, 500);
     };
 </script>
 {% endblock %}
