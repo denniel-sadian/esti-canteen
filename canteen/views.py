@@ -46,9 +46,7 @@ class HomeView(ListView):
     def dispatch(self, request, *args, **kwargs):
         orders_today = get_orders(request)
         for o in request.session.get('orders', []):
-            try:
-                order = orders_today.get(id=o)
-            except ObjectDoesNotExist:
+            if not Order.objects.filter(id=o).exists():
                 self.request.session.get('orders').remove(o)
                 self.request.session['orders'] = (
                     self.request.session.get('orders'))
