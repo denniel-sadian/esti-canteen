@@ -60,7 +60,7 @@
 <div class="w3-container w3-padding-32">
     <div class="w3-content w3-padding w3-card w3-round-large w3-light-gray w3-border w3-border-green">
         <h2><i class="fas fa-clock"></i> View Date</h2>
-        <input type="date" id="date" class="w3-input w3-margin-bottom" />
+        <input type="date" id="date" class="w3-input w3-margin-bottom" onchange="structureReport()" />
         <button class="w3-button w3-green w3-round-xxlarge w3-block" onclick="setDateToNow()">Now</button>
     </div>
 </div>
@@ -160,9 +160,10 @@
     }
 
     function structureReport() {
-        $.get("{% url 'canteen:json-report' %}", function (data, status) {
+        $.get("{% url 'canteen:json-report' %}?date=" + dateInput.val(), function (data, status) {
             console.log('Updating...');
             if (status == 'success') {
+                console.log('Here.');
                 var ul = $('<ul class="w3-ul"></ul>');
                 for (f in data.feedbacks)
                     ul.append(
@@ -176,92 +177,92 @@
                         )
                     );
                 $('#feedbacks').html(ul);
-            }
 
-            var auditTable = $(
-                '<table class="w3-table-all w3-bottombar">' +
-                '<tr>' +
-                '<th class="w3-center w3-border w3-border-green w3-green"><h4>Orders\' total amount</h4></th>' +
-                '<th class="w3-center w3-border w3-border-orange w3-orange"><h4>Total amount received</h4></th>' +
-                '<th class="w3-center w3-border w3-border-red w3-red"><h4>Total amount that isn\'t yet received</h4></th>' +
-                '</tr >' +
-                '<tr>' +
-                '<td class="w3-center w3-border">₱ ' + data.audit.total_orders_amount +
-                '</td>' +
-                '<td class="w3-center w3-border">₱ ' + data.audit.total_orders_served_amount +
-                '</td>' +
-                '<td class="w3-center w3-border">₱ ' + data.audit.total_amount_still_out +
-                '</td>' +
-                '</tr>' +
-                '</table>'
-            );
-            $('#audit').html(auditTable);
+                var auditTable = $(
+                    '<table class="w3-table-all w3-bottombar">' +
+                    '<tr>' +
+                    '<th class="w3-center w3-border w3-border-green w3-green"><h4>Orders\' total amount</h4></th>' +
+                    '<th class="w3-center w3-border w3-border-orange w3-orange"><h4>Total amount received</h4></th>' +
+                    '<th class="w3-center w3-border w3-border-red w3-red"><h4>Total amount that isn\'t yet received</h4></th>' +
+                    '</tr >' +
+                    '<tr>' +
+                    '<td class="w3-center w3-border">₱ ' + data.audit.total_orders_amount +
+                    '</td>' +
+                    '<td class="w3-center w3-border">₱ ' + data.audit.total_orders_served_amount +
+                    '</td>' +
+                    '<td class="w3-center w3-border">₱ ' + data.audit.total_amount_still_out +
+                    '</td>' +
+                    '</tr>' +
+                    '</table>'
+                );
+                $('#audit').html(auditTable);
 
-            var ordersTable = $(
-                '<table class="w3-table-all w3-bottombar">' +
-                '<tr class="w3-black">' +
-                '<th class="w3-center w3-border"><h4>Customer</h4></th>' +
-                '<th class="w3-center w3-border"><h4>ID No.</h4></th>' +
-                '<th class="w3-center w3-border"><h4>Contact No.</h4></th>' +
-                '<th class="w3-center w3-border"><h4>Dish</h4></th>' +
-                '<th class="w3-center w3-border"><h4>Quantity</h4></th>' +
-                '<th class="w3-center w3-border"><h4>Amount to Pay</h4></th>' +
-                '<th class="w3-center w3-border"><h4>Date & Time</h4></th>' +
-                '<th class="w3-center w3-border"><h4>Ready</h4></th>' +
-                '<th class="w3-center w3-border"><h4>Served</h4></th>' +
-                '<th class="w3-center w3-border"><h4>Action I</h4></th>' +
-                '<th class="w3-center w3-border"><h4>Action II</h4></th>' +
-                '<th class="w3-center w3-border"><h4>Action III</h4></th>' +
-                '</tr>' +
-                '</table>');
-            for (var o in data.orders) {
-                var tr = $('<tr></tr>');
-                tr.append($('<td class="w3-center w3-border"><a href="/manage/edit-order/' + data.orders[o].id + '/">' + data.orders[o].name + '</a></td>'));
-                tr.append($('<td class="w3-center w3-border">' + data.orders[o].id_no + '</td>'));
-                tr.append($('<td class="w3-center w3-border">' + data.orders[o].contact_no + '</td>'));
-                tr.append($('<td class="w3-center w3-border"><a href="/manage/edit/'
-                    + data.orders[o].dish.id + '/">' +
-                    data.orders[o].dish.name + ' (₱ ' + data.orders[o].dish.price + ')' +
-                    '</a></td>'));
-                tr.append($('<td class="w3-center w3-border">' + data.orders[o].count + '</td>'));
-                tr.append($('<td class="w3-center w3-border">₱ ' + data.orders[o].amount + '</td>'));
-                tr.append($('<td class="w3-center w3-border">' +
-                    new Date(data.orders[o].date).toLocaleString() + '</td>'));
-                tr.append($('<td class="w3-center w3-border">'
-                    + String(data.orders[o].ready ?
-                        '<i class="fas fa-check-circle w3-text-green"></i>' :
-                        '<i class="fas fa-times-circle w3-text-red"></i>') +
-                    '</td>'));
-                tr.append($('<td class="w3-center w3-border">'
-                    + String(data.orders[o].served ?
-                        '<i class="fas fa-check-circle w3-text-green"></i>' :
-                        '<i class="fas fa-times-circle w3-text-red"></i>') +
-                    '</td>'));
-                tr.append($('<td class="w3-center w3-border">' +
-                    '<button ' + String(data.orders[o].served ?
-                        'disabled="disabled"' : '') + ' id="' + data.orders[o].id + ' id="_' + data.orders[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markReady(' +
-                    data.orders[o].id +
-                    ')">' + String(data.orders[o].ready ?
-                        '<i class="fas fa-times-circle"></i> Mark as not ready' :
-                        '<i class="fas fa-check-circle"></i> Mark as ready') + '</button>' +
-                    '</td>'));
-                tr.append($('<td class="w3-center w3-border">' +
-                    '<button ' + String(data.orders[o].ready ?
-                        '' : 'disabled="disabled"') + ' id="' + data.orders[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markServed(' +
-                    data.orders[o].id +
-                    ')">' + String(data.orders[o].served ?
-                        '<i class="fas fa-times-circle"></i> Mark as not served' :
-                        '<i class="fas fa-check-circle"></i> Mark as served') + '</button>' +
-                    '</td>'));
-                tr.append($('<td class="w3-center w3-border">' +
-                    '<button class="w3-button w3-round-xxlarge w3-red" onclick="prepareForDeleting(' +
-                    data.orders[o].id +
-                    ')"><i class="fas fa-trash-alt"></i> Delete</button>' +
-                    '</td>'));
-                ordersTable.append(tr);
+                var ordersTable = $(
+                    '<table class="w3-table-all w3-bottombar">' +
+                    '<tr class="w3-black">' +
+                    '<th class="w3-center w3-border"><h4>Customer</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>ID No.</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Contact No.</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Dish</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Quantity</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Amount to Pay</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Date & Time</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Ready</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Served</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Action I</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Action II</h4></th>' +
+                    '<th class="w3-center w3-border"><h4>Action III</h4></th>' +
+                    '</tr>' +
+                    '</table>');
+                for (var o in data.orders) {
+                    var tr = $('<tr></tr>');
+                    tr.append($('<td class="w3-center w3-border"><a href="/manage/edit-order/' + data.orders[o].id + '/">' + data.orders[o].name + '</a></td>'));
+                    tr.append($('<td class="w3-center w3-border">' + data.orders[o].id_no + '</td>'));
+                    tr.append($('<td class="w3-center w3-border">' + data.orders[o].contact_no + '</td>'));
+                    tr.append($('<td class="w3-center w3-border"><a href="/manage/edit/'
+                        + data.orders[o].dish.id + '/">' +
+                        data.orders[o].dish.name + ' (₱ ' + data.orders[o].dish.price + ')' +
+                        '</a></td>'));
+                    tr.append($('<td class="w3-center w3-border">' + data.orders[o].count + '</td>'));
+                    tr.append($('<td class="w3-center w3-border">₱ ' + data.orders[o].amount + '</td>'));
+                    tr.append($('<td class="w3-center w3-border">' +
+                        new Date(data.orders[o].date).toLocaleString() + '</td>'));
+                    tr.append($('<td class="w3-center w3-border">'
+                        + String(data.orders[o].ready ?
+                            '<i class="fas fa-check-circle w3-text-green"></i>' :
+                            '<i class="fas fa-times-circle w3-text-red"></i>') +
+                        '</td>'));
+                    tr.append($('<td class="w3-center w3-border">'
+                        + String(data.orders[o].served ?
+                            '<i class="fas fa-check-circle w3-text-green"></i>' :
+                            '<i class="fas fa-times-circle w3-text-red"></i>') +
+                        '</td>'));
+                    tr.append($('<td class="w3-center w3-border">' +
+                        '<button ' + String(data.orders[o].served ?
+                            'disabled="disabled"' : '') + ' id="' + data.orders[o].id + ' id="_' + data.orders[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markReady(' +
+                        data.orders[o].id +
+                        ')">' + String(data.orders[o].ready ?
+                            '<i class="fas fa-times-circle"></i> Mark as not ready' :
+                            '<i class="fas fa-check-circle"></i> Mark as ready') + '</button>' +
+                        '</td>'));
+                    tr.append($('<td class="w3-center w3-border">' +
+                        '<button ' + String(data.orders[o].ready ?
+                            '' : 'disabled="disabled"') + ' id="' + data.orders[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markServed(' +
+                        data.orders[o].id +
+                        ')">' + String(data.orders[o].served ?
+                            '<i class="fas fa-times-circle"></i> Mark as not served' :
+                            '<i class="fas fa-check-circle"></i> Mark as served') + '</button>' +
+                        '</td>'));
+                    tr.append($('<td class="w3-center w3-border">' +
+                        '<button class="w3-button w3-round-xxlarge w3-red" onclick="prepareForDeleting(' +
+                        data.orders[o].id +
+                        ')"><i class="fas fa-trash-alt"></i> Delete</button>' +
+                        '</td>'));
+                    ordersTable.append(tr);
+                }
+                $('#orders').html(ordersTable);
+                $('#' + orderId).slideDown();
             }
-            $('#orders').html(ordersTable);
-            $('#' + orderId).slideDown();
         });
     }
 
