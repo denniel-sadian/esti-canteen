@@ -155,6 +155,8 @@
         $.get("{% url 'canteen:json-report' %}?date=" + dateInput.val(), function (data, status) {
             console.log('Updating...');
             if (status == 'success') {
+                console.log(data);
+                console.log('Updating feedback...');
                 var ul = $('<ul class="w3-ul"></ul>');
                 for (f in data.feedbacks)
                     ul.append(
@@ -169,6 +171,7 @@
                     );
                 $('#feedbacks').html(ul);
 
+                console.log('Updating audit...');
                 var auditTable = $(
                     '<table class="w3-table-all w3-bottombar">' +
                     '<tr>' +
@@ -188,6 +191,7 @@
                 );
                 $('#audit').html(auditTable);
 
+                console.log('Updating orders...');
                 var ordersTable = $(
                     '<table class="w3-table-all w3-bottombar">' +
                     '<tr class="w3-black">' +
@@ -252,7 +256,6 @@
                     ordersTable.append(tr);
                 }
                 $('#orders').html(ordersTable);
-                $('#' + orderId).slideDown();
             }
         });
     }
@@ -273,7 +276,7 @@
     structureReport();
 
     reportSocket.onmessage = function (e) {
-        structureReport();
+        setTimeout(structureReport, 1000);
     };
 </script>
 {% endblock %}
