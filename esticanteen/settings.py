@@ -91,6 +91,8 @@ DATABASES = {
     }
 }
 
+ATOMIC_REQUESTS = True
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
