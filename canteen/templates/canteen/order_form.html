@@ -100,9 +100,7 @@
             'ws://' + window.location.host +
             '/ws/update/');
         function fireUpdate() {
-            reportSocket.send(JSON.stringify({
-                'message': 'message'
-            }));
+            reportSocket.send('{}');
         }
     </script>
 

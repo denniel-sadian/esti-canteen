@@ -123,18 +123,14 @@
         orderId = id;
         $('#' + id).slideUp();
         $.get('/api-mark-as-served/' + id + '/');
-        reportSocket.send(JSON.stringify({
-            'message': 'message'
-        }));
+        reportSocket.send('{}');
     }
 
     function markReady(id) {
         orderId = id;
         $('#_' + id).slideUp();
         $.get('/api-mark-as-ready/' + id + '/');
-        reportSocket.send(JSON.stringify({
-            'message': 'message'
-        }));
+        reportSocket.send('{}');
     }
 
     function prepareForDeleting(id) {
@@ -145,18 +141,14 @@
     function deleteCompletely() {
         $.get('/api-delete-order/' + orderId + '/');
         orderId = ''
-        reportSocket.send(JSON.stringify({
-            'message': 'message'
-        }));
+        reportSocket.send('{}');
         $('#confirm').slideUp();
     }
 
     function deleteFeedbackCompletely(id) {
         $.get('/api-delete-feedback/' + id + '/');
         $('#feedback-' + id).slideUp();
-        reportSocket.send(JSON.stringify({
-            'message': 'message'
-        }));
+        reportSocket.send('{}');
     }
 
     function structureReport() {
