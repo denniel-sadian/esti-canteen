@@ -30,9 +30,11 @@ def get_orders(request):
     Utility function for getting orders.
     """
     try:
+        # Give all orders maded on the given date.
         return Order.objects.filter(
             date__date=request.GET['date']).order_by('-date')
     except MultiValueDictKeyError:
+        # Give all orders today.
         return Order.objects.filter(
             date__date=datetime.now().date()).order_by('-date')
 
@@ -44,6 +46,10 @@ class HomeView(ListView):
     context_object_name = 'dishes'
 
     def dispatch(self, request, *args, **kwargs):
+        """
+        Overriding this method to remove the IDs of those orders
+        that have been deleted already.
+        """
         orders_today = get_orders(request)
         for o in request.session.get('orders', []):
             if not Order.objects.filter(id=o).exists():
@@ -53,6 +59,9 @@ class HomeView(ListView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        """
+        Overriding this method to add the count of the orders today.
+        """
         context = super().get_context_data(**kwargs)
         context['orders_count'] = Order.objects.filter(
             date__date=datetime.now().date()
@@ -60,6 +69,10 @@ class HomeView(ListView):
         return context
 
     def get_queryset(self):
+        """
+        Overriding this method to reverse the order of the
+        dishes by name.
+        """
         return Dish.objects.filter(
             Q(date=datetime.now()) | Q(everyday=True)
         ).order_by('-name')
@@ -86,6 +99,10 @@ class DishView(DetailView):
     model = Dish
 
     def get_context_data(self, **kwargs):
+        """
+        Overriding this method to reverse the order of the
+        dishes by name.
+        """
         context = super().get_context_data(**kwargs)
         context['orders'] = Order.objects.filter(
             dish=self.object).aggregate(Sum('count'))['count__sum']
@@ -101,12 +118,20 @@ class OrderView(CreateView):
     success_url = reverse_lazy('canteen:thanks')
 
     def dispatch(self, request, *args, **kwargs):
+        """
+        Overriding this method to restrict the customer
+        in ordering dishes that are already sold out.
+        """
         self.dish = Dish.objects.get(id=kwargs['dish'])
         if self.dish.sold_out:
             return HttpResponseRedirect(reverse_lazy('canteen:unable-to-order'))
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
+        """
+        Overriding this method to append the order's ID to the customer's
+        session.
+        """
         form.instance.dish = self.dish
         form.save()
         if type(self.request.session.get('orders')) != list:
@@ -117,6 +142,9 @@ class OrderView(CreateView):
         return super().form_valid(form)
     
     def get_context_data(self, **kwargs):
+        """
+        Overriding this method to add the dish in the context.
+        """
         context = super().get_context_data(**kwargs)
         context['dish'] = Dish.objects.get(id=self.kwargs['dish'])
         return context
@@ -138,6 +166,9 @@ class FeedbackView(CreateView):
     success_url = reverse_lazy('canteen:home')
 
     def form_valid(self, form):
+        """
+        Overriding this method to uppercase the name.
+        """
         form.instance.name = form.instance.name.upper()
         return super().form_valid(form)
 
@@ -168,17 +199,24 @@ class ManageView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         try:
+            # Give the dishes that were created on the given date
+            # and are not for everyday.
             return Dish.objects.filter(
                 date=self.request.GET['date'],
                 everyday=False
             ).order_by('name')
         except MultiValueDictKeyError:
+            # Give the dishes that were created today and are not
+            # for everyday.
             return Dish.objects.filter(
                 date=datetime.now(),
                 everyday=False
             ).order_by('name')
     
     def get_context_data(self, **kwargs):
+        """
+        Adding the everyday dishes to the context.
+        """
         context = super().get_context_data(**kwargs)
         context['everyday_dishes'] = Dish.objects.filter(
             everyday=True).order_by('name')
@@ -196,7 +234,9 @@ class CreateDishView(LoginRequiredMixin, CreateView):
     template_name = 'canteen/create_dish.html'
 
     def form_valid(self, form):
+        # Uppercase the name.
         form.instance.name = form.instance.name.upper()
+        # Set the date.
         form.instance.date = datetime.now().date()
         return super().form_valid(form)
 
@@ -229,11 +269,14 @@ def json_report(request):
     View for giving the report.
     """
 
+    # Not allow unauthenticated users.
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
     
+    # Get orders.
     orders = get_orders(request)
 
+    # Form the audit.
     audit = {
         'total_orders_amount':
             orders.aggregate(Sum('amount'))['amount__sum'],
@@ -246,7 +289,8 @@ def json_report(request):
         audit['total_orders_served_amount'] = 0
     audit['total_amount_still_out'] = (
             audit['total_orders_amount'] - audit['total_orders_served_amount'])
-
+    
+    # Form the orders.
     orders = [
         {
             'id': order.id,
@@ -267,6 +311,7 @@ def json_report(request):
         for order in orders
     ]
 
+    # Form the feedbacks.
     feedbacks = [
         {
             'id': f.id,
@@ -289,10 +334,14 @@ def json_customer_orders(request):
     """
     View for giving all the orders from the session.
     """
+
+    # Get orders.
     orders_today = get_orders(request)
     orders_from_device = []
+    
     for o in request.session.get('orders', []):
         try:
+            # Get the orders.
             order = orders_today.get(id=o)
             orders_from_device.append({
                 'name': order.name,
@@ -305,8 +354,10 @@ def json_customer_orders(request):
                 'ready': order.ready
             })
         except ObjectDoesNotExist:
+            # Remove the order's ID if it does not exist anymore.
             request.session.get('orders').remove(o)
             request.session['orders'] = request.session.get('orders')
+    
     return JsonResponse(orders_from_device, safe=False)
 
 
@@ -314,13 +365,22 @@ def api_mark_order_served(request, id):
     """
     View for marking and unmarking the order as served.
     """
+    
+    # Not allow unauthenticated users.
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
+    
+    # Get the order.
     order = Order.objects.get(id=id)
+    
+    # Not marking it as served if it isn't even ready yet.
     if not order.ready:
         return HttpResponseForbidden("This order is not yet ready!")
+    
+    # Mark it as served and save it.
     order.served = not order.served
     order.save()
+
     return HttpResponse('Marked as served')
 
 
@@ -328,11 +388,18 @@ def api_mark_order_ready(request, id):
     """
     View for marking and unmarking the order as ready.
     """
+    
+    # Not marking it as served if it isn't even ready yet.
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
+    
+    # Get the order.
     order = Order.objects.get(id=id)
+    
+    # Mark the order as served and save it.
     order.ready = not order.ready
     order.save()
+
     return HttpResponse('Marked as ready')
 
 
@@ -340,9 +407,14 @@ def api_delete_order(request, id):
     """
     View for deleting an order.
     """
+
+    # Not marking it as served if it isn't even ready yet.
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
+    
+    # Delete the order.
     Order.objects.get(id=id).delete()
+    
     return HttpResponse('Deleted.')
 
 
@@ -350,9 +422,14 @@ def api_delete_dish(request, id):
     """
     View for deleting a dish.
     """
+    
+    # Not marking it as served if it isn't even ready yet.
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
+    
+    # Delete the dish.
     Dish.objects.get(id=id).delete()
+    
     return HttpResponse('Deleted.')
 
 
@@ -360,7 +437,12 @@ def api_delete_feedback(request, id):
     """
     View for deleting a feedback.
     """
+    
+    # Not marking it as served if it isn't even ready yet.
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
+    
+    # Delete the feedback.
     Feedback.objects.get(id=id).delete()
+    
     return HttpResponse('Deleted.')
