@@ -16,6 +16,7 @@ class OrderForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__( * args, ** kwargs)
+        # Get the dishes
         self.fields['dish'].queryset = Dish.objects.filter(
             Q(date=self.instance.date) | Q(everyday=True))
 
