@@ -149,15 +149,15 @@
     }
 
     async function deleteCompletely() {
+        $('#confirm').slideUp();
+        $('#order-row-' + orderId).slideUp();
         await $.get('/api-delete-order/' + orderId + '/', await function (data, status) {
+            orderId = '';
             try {
                 reportSocket.send('{}');
             } catch (e) {
                 location.reload();
             }
-            $('#confirm').slideUp();
-            $('#order-row-' + orderId).slideUp();
-            orderId = '';
         });
     }
 
