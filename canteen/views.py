@@ -100,15 +100,14 @@ class OrderView(CreateView):
     fields = ['name', 'id_no', 'contact_no', 'count']
     success_url = reverse_lazy('canteen:thanks')
 
-    def get(self, request, *args, **kwargs):
-        self.object = None
-        dish = Dish.objects.get(id=kwargs['dish'])
-        if dish.sold_out:
+    def dispatch(self, request, *args, **kwargs):
+        self.dish = Dish.objects.get(id=kwargs['dish'])
+        if self.dish.sold_out:
             return HttpResponseRedirect(reverse_lazy('canteen:unable-to-order'))
-        return super().get(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        form.instance.dish = Dish.objects.get(id=self.kwargs['dish'])
+        form.instance.dish = self.dish
         form.save()
         if type(self.request.session.get('orders')) != list:
             self.request.session['orders'] = []
