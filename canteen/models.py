@@ -67,8 +67,3 @@ class Order(models.Model):
         self.name = self.name.upper()
         self.amount = self.count * self.dish.price
         super().save(*args, **kwargs)
-
-
-@receiver(post_save, sender=Order)
-def order_saved(sender, instance, **kwargs):
-    print(instance.name)
