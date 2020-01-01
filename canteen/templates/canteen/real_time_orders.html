@@ -61,7 +61,8 @@
     <div class="w3-content w3-padding w3-card w3-round-large w3-light-gray w3-border w3-border-green">
         <h2><i class="fas fa-clock"></i> View Date</h2>
         <input type="date" id="date" class="w3-input w3-margin-bottom" onchange="structureReport()" />
-        <button class="w3-button w3-green w3-round-xxlarge w3-block" onclick="setDateToNow()">Now</button>
+        <button class="w3-button w3-green w3-round-xxlarge w3-block"
+            onclick="setDateToNow(); reportSocket.send('{}');">Now</button>
     </div>
 </div>
 <article class="w3-container w3-padding-32">
