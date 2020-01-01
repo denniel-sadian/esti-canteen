@@ -186,4 +186,8 @@ CHANNEL_LAYERS = {
 
 SESSION_ENGINE = "django.contrib.sessions.backends.file"
 
+# Create the temp folder if not yet there.
+if not os.path.isdir(os.path.join(BASE_DIR, 'temp')):
+    os.mkdir(os.path.join(BASE_DIR, 'temp'))
+
 SESSION_FILE_PATH = os.path.join(BASE_DIR, 'temp')
