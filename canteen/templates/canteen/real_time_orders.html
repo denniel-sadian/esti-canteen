@@ -124,11 +124,7 @@
         orderId = id;
         $('#' + id).slideUp();
         await $.get('/api-mark-as-served/' + id + '/', await function (data, status) {
-            try {
-                reportSocket.send('{}');
-            } catch (e) {
-                location.reload();
-            }
+            reportSocket.send('{}');
         });
     }
 
@@ -136,11 +132,7 @@
         orderId = id;
         $('#_' + id).slideUp();
         await $.get('/api-mark-as-ready/' + id + '/', await function (data, status) {
-            try {
-                reportSocket.send('{}');
-            } catch (e) {
-                location.reload();
-            }
+            reportSocket.send('{}');
         });
     }
 
@@ -154,11 +146,7 @@
         $('#order-row-' + orderId).slideUp();
         await $.get('/api-delete-order/' + orderId + '/', await function (data, status) {
             orderId = '';
-            try {
-                reportSocket.send('{}');
-            } catch (e) {
-                location.reload();
-            }
+            reportSocket.send('{}');
         });
     }
 
