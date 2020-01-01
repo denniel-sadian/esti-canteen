@@ -182,3 +182,8 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+
+# SESSIONS
+
+SESSION_ENGINE = "django.contrib.sessions.backends.file"
