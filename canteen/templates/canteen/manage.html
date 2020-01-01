@@ -170,7 +170,7 @@
     $(document).ready(function () {
         var url = location.href;
         if (url.search('=') > 0)
-            dateInput.val(url.slice(url.search('=') + 1));
+            dateInput.val(url.slice(url.search('=') + 1).replace('#dishes-today', ''));
         else {
             var now = new Date();
             var year = now.getFullYear();
