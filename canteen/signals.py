@@ -1,4 +1,5 @@
 from django.db.models.signals import post_save
+from django.db.models.signals import post_delete
 from django.dispatch import receiver
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
@@ -20,6 +21,11 @@ def send():
 
 @receiver(post_save, sender=Order)
 def notify_report(sender, **kwargs):
+    send()
+
+
+@receiver(post_delete, sender=Order)
+def notify_report_on_delete(sender, **kwargs):
     send()
 
 
