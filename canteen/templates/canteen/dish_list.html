@@ -239,6 +239,7 @@
                 await $.get("{% url 'canteen:json-customer-orders' %}", await function (data, status) {
                     if (status == 'success') {
                         console.log('Updating the orders...');
+                        if (!(data.length)) location.reload();
                         for (var i in data) {
                             if (data[i].served) {
                                 ul.append($(
