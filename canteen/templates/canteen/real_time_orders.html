@@ -113,8 +113,9 @@
     </div>
 </div>
 <script>
+    var protocol = location.protocol == 'https:' ? 'wss://' : 'ws://';
     var reportSocket = new WebSocket(
-        'ws://' + window.location.host +
+        protocol + location.host +
         '/ws/update/');
     var dateInput = $('#date');
     var orderId;
