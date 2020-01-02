@@ -13,7 +13,7 @@ channel_layer = get_channel_layer()
 def send():
     async_to_sync(channel_layer.group_send)(
         "report", {
-            "type": "message",
+            "type": "report",
             'message': ''
         }
     )

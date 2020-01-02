@@ -14,8 +14,8 @@ class ReportConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     # Receive message from group
-    async def message(self, event):
+    async def report(self, event):
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
-            'message': ''
+            'message': event['message']
         }))
