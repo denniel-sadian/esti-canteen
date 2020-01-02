@@ -69,8 +69,7 @@
 <body>
 
     <div class="modal">
-        <form method="POST" action="" onsubmit="fireUpdate()"
-            class="w3-animate-zoom w3-container w3-card-4 w3-purple w3-round-large">
+        <form method="POST" action="" class="w3-animate-zoom w3-container w3-card-4 w3-purple w3-round-large">
             {% csrf_token %}
             <h2><i class="fas fa-feather-alt"></i> Feedback</h2>
             <p>Give this site a feedback. Give the service a feedback. We're glad that you're
@@ -98,15 +97,6 @@
         </form>
     </div>
     </div>
-
-    <script>
-        var reportSocket = new WebSocket(
-            'ws://' + window.location.host +
-            '/ws/update/');
-        function fireUpdate() {
-            reportSocket.send('{}');
-        }
-    </script>
 
 </body>
 
