@@ -144,8 +144,8 @@
     }
 
     async function deleteFeedbackCompletely(id) {
-        await $.get('/api-delete-feedback/' + id + '/');
         $('#feedback-' + id).slideUp();
+        await $.get('/api-delete-feedback/' + id + '/');
     }
 
     async function structureReport() {
