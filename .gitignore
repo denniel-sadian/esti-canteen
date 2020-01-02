@@ -5,4 +5,4 @@ bin/
 include/
 media/
 /static
-temp/
+temp/*
