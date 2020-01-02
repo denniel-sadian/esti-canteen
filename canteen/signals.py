@@ -4,15 +4,25 @@ from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 
 from .models import Order
+from .models import Feedback
 
 channel_layer = get_channel_layer()
 
 
-@receiver(post_save, sender=Order)
-def notify_report(sender, **kwargs):
+def send():
     async_to_sync(channel_layer.group_send)(
         "report", {
             "type": "message",
             'message': ''
         }
     )
+
+
+@receiver(post_save, sender=Order)
+def notify_report(sender, **kwargs):
+    send()
+
+
+@receiver(post_save, sender=Feedback)
+def notify_feedbacks(sender, **kwargs):
+    send()
