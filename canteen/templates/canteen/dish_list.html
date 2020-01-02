@@ -229,6 +229,42 @@
             <div id="orders">
             </div>
         </div>
+        <script>
+            var reportSocket = new WebSocket(
+                'ws://' + window.location.host +
+                '/ws/update/');
+            var orders = $('#orders');
+            async function structureOrders() {
+                var ul = $('<ul class="w3-ul"></ul>');
+                await $.get("{% url 'canteen:json-customer-orders' %}", await function (data, status) {
+                    if (status == 'success') {
+                        console.log('Updating the orders...');
+                        for (var i in data) {
+                            if (data[i].served) {
+                                ul.append($(
+                                    '<li class="served"><i class="fas fa-check-circle w3-text-green"></i> <span>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' has been served already.</span></li>'
+                                ));
+                            } else {
+                                if (data[i].ready) {
+                                    ul.append($(
+                                        '<li class="ready"><i class="fas fa-exclamation-circle w3-text-yellow"></i> <span>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is now ready to be served.</span></li > '
+                                    ));
+                                } else {
+                                    ul.append($(
+                                        '<li class="notReady"><i class="fas fa-times-circle w3-text-red"></i> <span>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is not yet ready.</span></li > '
+                                    ));
+                                }
+                            }
+                        }
+                    }
+                });
+                orders.html(ul);
+            }
+            structureOrders();
+            reportSocket.onmessage = function (e) {
+                setTimeout(structureOrders, 500);
+            };
+        </script>
         {% endif %}
     </article>
 
@@ -278,45 +314,6 @@
             <i class="fas fa-info-circle"></i> Privacy Policy</a>
         <p class="w3-text-white w3-opacity"><a href="https://sadian.herokuapp.com">@Sadian</a></p>
     </footer>
-
-    {% if request.session.orders %}
-    <script>
-        var reportSocket = new WebSocket(
-            'ws://' + window.location.host +
-            '/ws/update/');
-        var orders = $('#orders');
-        async function structureOrders() {
-            var ul = $('<ul class="w3-ul"></ul>');
-            await $.get("{% url 'canteen:json-customer-orders' %}", await function (data, status) {
-                if (status == 'success') {
-                    console.log('Updating the orders...');
-                    for (var i in data) {
-                        if (data[i].served) {
-                            ul.append($(
-                                '<li class="served"><i class="fas fa-check-circle w3-text-green"></i> <span>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' has been served already.</span></li>'
-                            ));
-                        } else {
-                            if (data[i].ready) {
-                                ul.append($(
-                                    '<li class="ready"><i class="fas fa-exclamation-circle w3-text-yellow"></i> <span>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is now ready to be served.</span></li > '
-                                ));
-                            } else {
-                                ul.append($(
-                                    '<li class="notReady"><i class="fas fa-times-circle w3-text-red"></i> <span>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is not yet ready.</span></li > '
-                                ));
-                            }
-                        }
-                    }
-                }
-            });
-            orders.html(ul);
-        }
-        structureOrders();
-        reportSocket.onmessage = function (e) {
-            setTimeout(structureOrders, 500);
-        };
-    </script>
-    {% endif %}
 </body>
 
 </html>
