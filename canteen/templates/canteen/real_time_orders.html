@@ -120,16 +120,16 @@
     var dateInput = $('#date');
     var orderId;
 
-    async function markServed(id) {
+    function markServed(id) {
         orderId = id;
         $('#' + id).slideUp();
-        await $.get('/api-mark-as-served/' + id + '/');
+        $.get('/api-mark-as-served/' + id + '/');
     }
 
-    async function markReady(id) {
+    function markReady(id) {
         orderId = id;
         $('#_' + id).slideUp();
-        await $.get('/api-mark-as-ready/' + id + '/');
+        $.get('/api-mark-as-ready/' + id + '/');
     }
 
     function prepareForDeleting(id) {
@@ -137,20 +137,20 @@
         $('#confirm').show();
     }
 
-    async function deleteCompletely() {
+    function deleteCompletely() {
         $('#confirm').slideUp();
         $('#order-row-' + orderId).slideUp();
-        await $.get('/api-delete-order/' + orderId + '/');
+        $.get('/api-delete-order/' + orderId + '/');
         orderId = '';
     }
 
-    async function deleteFeedbackCompletely(id) {
+    function deleteFeedbackCompletely(id) {
         $('#feedback-' + id).slideUp();
-        await $.get('/api-delete-feedback/' + id + '/');
+        $.get('/api-delete-feedback/' + id + '/');
     }
 
-    async function structureReport() {
-        await $.get("{% url 'canteen:json-report' %}?date=" + dateInput.val(), await function (data, status) {
+    function structureReport() {
+        $.get("{% url 'canteen:json-report' %}?date=" + dateInput.val(), function (data, status) {
             console.log('Updating...');
             if (status == 'success') {
                 console.log(data);

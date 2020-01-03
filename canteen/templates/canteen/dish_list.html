@@ -235,9 +235,9 @@
                 protocol + location.host +
                 '/ws/update/');
             var orders = $('#orders');
-            async function structureOrders() {
+            function structureOrders() {
                 var ul = $('<ul class="w3-ul"></ul>');
-                await $.get("{% url 'canteen:json-customer-orders' %}", await function (data, status) {
+                $.get("{% url 'canteen:json-customer-orders' %}", function (data, status) {
                     if (status == 'success') {
                         console.log('Updating the orders...');
                         if (!(data.length)) location.reload();
