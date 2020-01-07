@@ -41,10 +41,6 @@ class Feedback(models.Model):
     def __str__(self):
         return f'by {self.name}'
 
-    def save(self, *args, **kwargs):
-        self.name = self.name.upper()
-        super().save(*args, **kwargs)
-
 
 class Order(models.Model):
     """
