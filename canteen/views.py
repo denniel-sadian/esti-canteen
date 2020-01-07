@@ -133,6 +133,7 @@ class OrderView(CreateView):
         session.
         """
         form.instance.dish = self.dish
+        form.instance.name = form.instance.name.upper()
         form.save()
         if type(self.request.session.get('orders')) != list:
             self.request.session['orders'] = []
