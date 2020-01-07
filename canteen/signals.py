@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 
+from .models import Dish
 from .models import Order
 from .models import Feedback
 
@@ -21,6 +22,11 @@ def send():
 
 @receiver(post_save, sender=Order)
 def notify_report(sender, **kwargs):
+    send()
+
+
+@receiver(post_save, sender=Dish)
+def notify_dish(sender, **kwargs):
     send()
 
 
