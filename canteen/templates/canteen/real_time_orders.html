@@ -272,7 +272,11 @@
     structureReport();
 
     reportSocket.onmessage = function (e) {
-        setTimeout(structureReport, 500);
+        structureReport();
     };
+
+    reportSocket.onerror = function (e) {
+        location.reload();
+    }
 </script>
 {% endblock %}

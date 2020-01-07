@@ -266,6 +266,9 @@
             reportSocket.onmessage = function (e) {
                 setTimeout(structureOrders, 500);
             };
+            reportSocket.onerror = function (e) {
+                location.reload();
+            }
         </script>
         {% endif %}
     </article>
