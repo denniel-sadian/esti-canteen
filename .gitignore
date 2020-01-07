@@ -6,3 +6,4 @@ include/
 media/
 /static
 temp/*
+env/
