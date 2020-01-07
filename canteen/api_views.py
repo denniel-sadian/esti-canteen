@@ -1,4 +1,5 @@
 from django.utils.timezone import datetime
+from django.db.models import Q
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -18,7 +19,8 @@ class DishViewSet(ModelViewSet):
     serializer_class = DishSerializer
 
     def get_queryset(self):
-        return Dish.objects.filter(date=datetime.now())
+        return Dish.objects.filter(
+            Q(date=datetime.now()) | Q(everyday=True))
 
 
 class OrderViewSet(ModelViewSet):
