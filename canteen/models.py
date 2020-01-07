@@ -56,7 +56,6 @@ class Order(models.Model):
     contact_no = models.CharField(max_length=15)
     dish = models.ForeignKey(Dish, related_name='orders', on_delete=models.CASCADE)
     count = models.IntegerField(default=1)
-    amount = models.FloatField(editable=False)
     served = models.BooleanField(default=False)
     ready = models.BooleanField(default=False)
 
@@ -65,5 +64,4 @@ class Order(models.Model):
     
     def save(self, *args, **kwargs):
         self.name = self.name.upper()
-        self.amount = self.count * self.dish.price
         super().save(*args, **kwargs)
