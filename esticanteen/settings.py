@@ -10,8 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+from dotenv import load_dotenv
+
 import os
 
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -47,7 +50,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'sorl.thumbnail',
 
-    'canteen'
+    'canteen.apps.CanteenConfig'
 ]
 
 MIDDLEWARE = [
@@ -165,7 +168,7 @@ THUMBNAIL_FORCE_OVERWRITE = True
 
 # HTTPS
 
-SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = True
 
 
 # CHANNELS
@@ -174,10 +177,7 @@ ASGI_APPLICATION = 'esticanteen.routing.application'
 
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
     },
 }
 

@@ -133,6 +133,7 @@ class OrderView(CreateView):
         session.
         """
         form.instance.dish = self.dish
+        form.instance.name = form.instance.name.upper()
         form.save()
         if type(self.request.session.get('orders')) != list:
             self.request.session['orders'] = []
@@ -278,15 +279,14 @@ def json_report(request):
 
     # Form the audit.
     audit = {
-        'total_orders_amount':
-            orders.aggregate(Sum('amount'))['amount__sum'],
-        'total_orders_served_amount':
-            orders.filter(served=True).aggregate(Sum('amount'))['amount__sum']
+        'total_orders_amount': 0,
+        'total_orders_served_amount': 0
     }
-    if not audit['total_orders_amount']:
-        audit['total_orders_amount'] = 0
-    if not audit['total_orders_served_amount']:
-        audit['total_orders_served_amount'] = 0
+    for order in orders:
+        amount = order.count * order.dish.price
+        if order.served:
+            audit['total_orders_served_amount'] += amount
+        audit['total_orders_amount'] += amount
     audit['total_amount_still_out'] = (
             audit['total_orders_amount'] - audit['total_orders_served_amount'])
     
@@ -304,7 +304,7 @@ def json_report(request):
                 'price': order.dish.price
             },
             'count': order.count,
-            'amount': order.amount,
+            'amount': order.count * order.dish.price,
             'served': order.served,
             'ready': order.ready
         }
@@ -348,7 +348,7 @@ def json_customer_orders(request):
                 'dish': {
                     'name': order.dish.name,
                     'count': order.count,
-                    'price': order.amount
+                    'price': order.count * order.dish.price
                 },
                 'served': order.served,
                 'ready': order.ready

@@ -61,8 +61,7 @@
     <div class="w3-content w3-padding w3-card w3-round-large w3-light-gray w3-border w3-border-green">
         <h2><i class="fas fa-clock"></i> View Date</h2>
         <input type="date" id="date" class="w3-input w3-margin-bottom" onchange="structureReport()" />
-        <button class="w3-button w3-green w3-round-xxlarge w3-block"
-            onclick="setDateToNow(); reportSocket.send('{}');">Now</button>
+        <button class="w3-button w3-green w3-round-xxlarge w3-block" onclick="location.reload()">Now</button>
     </div>
 </div>
 <article class="w3-container w3-padding-32">
@@ -114,26 +113,23 @@
     </div>
 </div>
 <script>
+    var protocol = location.protocol == 'https:' ? 'wss://' : 'ws://';
     var reportSocket = new WebSocket(
-        'ws://' + window.location.host +
+        protocol + location.host +
         '/ws/update/');
     var dateInput = $('#date');
     var orderId;
 
-    async function markServed(id) {
+    function markServed(id) {
         orderId = id;
         $('#' + id).slideUp();
-        await $.get('/api-mark-as-served/' + id + '/', await function (data, status) {
-            reportSocket.send('{}');
-        });
+        $.get('/api-mark-as-served/' + id + '/');
     }
 
-    async function markReady(id) {
+    function markReady(id) {
         orderId = id;
         $('#_' + id).slideUp();
-        await $.get('/api-mark-as-ready/' + id + '/', await function (data, status) {
-            reportSocket.send('{}');
-        });
+        $.get('/api-mark-as-ready/' + id + '/');
     }
 
     function prepareForDeleting(id) {
@@ -141,23 +137,20 @@
         $('#confirm').show();
     }
 
-    async function deleteCompletely() {
+    function deleteCompletely() {
         $('#confirm').slideUp();
         $('#order-row-' + orderId).slideUp();
-        await $.get('/api-delete-order/' + orderId + '/', await function (data, status) {
-            orderId = '';
-            reportSocket.send('{}');
-        });
+        $.get('/api-delete-order/' + orderId + '/');
+        orderId = '';
     }
 
-    async function deleteFeedbackCompletely(id) {
-        await $.get('/api-delete-feedback/' + id + '/');
+    function deleteFeedbackCompletely(id) {
         $('#feedback-' + id).slideUp();
-        reportSocket.send('{}');
+        $.get('/api-delete-feedback/' + id + '/');
     }
 
-    async function structureReport() {
-        await $.get("{% url 'canteen:json-report' %}?date=" + dateInput.val(), await function (data, status) {
+    function structureReport() {
+        $.get("{% url 'canteen:json-report' %}?date=" + dateInput.val(), function (data, status) {
             console.log('Updating...');
             if (status == 'success') {
                 console.log(data);
@@ -279,7 +272,11 @@
     structureReport();
 
     reportSocket.onmessage = function (e) {
-        setTimeout(structureReport, 500);
+        structureReport();
     };
+
+    reportSocket.onerror = function (e) {
+        location.reload();
+    }
 </script>
 {% endblock %}

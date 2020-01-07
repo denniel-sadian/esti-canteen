@@ -41,10 +41,6 @@ class Feedback(models.Model):
     def __str__(self):
         return f'by {self.name}'
 
-    def save(self, *args, **kwargs):
-        self.name = self.name.upper()
-        super().save(*args, **kwargs)
-
 
 class Order(models.Model):
     """
@@ -56,14 +52,8 @@ class Order(models.Model):
     contact_no = models.CharField(max_length=15)
     dish = models.ForeignKey(Dish, related_name='orders', on_delete=models.CASCADE)
     count = models.IntegerField(default=1)
-    amount = models.FloatField(editable=False)
     served = models.BooleanField(default=False)
     ready = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.name} orderred {self.dish}'
-    
-    def save(self, *args, **kwargs):
-        self.name = self.name.upper()
-        self.amount = self.count * self.dish.price
-        super().save(*args, **kwargs)
