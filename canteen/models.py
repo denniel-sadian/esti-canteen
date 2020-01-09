@@ -19,7 +19,7 @@ class Dish(models.Model):
     description = models.CharField(max_length=101)
     sold_out = models.BooleanField(default=False)
     everyday = models.BooleanField(default=False)
-    photo = models.ImageField(upload_to='dishes')
+    photo = models.ImageField()
 
     class Meta:
         verbose_name_plural = 'dishes'
