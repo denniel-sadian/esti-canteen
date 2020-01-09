@@ -267,9 +267,9 @@
                 setTimeout(structureOrders, 500);
             };
 
-            //reportSocket.onerror = function (e) {
-            //    location.reload();
-            //}
+            reportSocket.onerror = function (e) {
+                location.reload();
+            }
         </script>
         {% endif %}
     </article>
