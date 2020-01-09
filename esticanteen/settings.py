@@ -178,9 +178,9 @@ CHANNEL_LAYERS = {
 # GITHUB S3
 
 DEFAULT_FILE_STORAGE = "github_storages.backend.BackendStorages"
-GITHUB_HANDLE = "Your Github Handle"
-ACCESS_TOKEN = "Your Github Access Token"
-GITHUB_REPO_NAME = "Your New Github Public Repository Name"
+GITHUB_HANDLE = "denniel-sadian"
+ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
+GITHUB_REPO_NAME = ""
 
 
 # Activate Django-Heroku.
