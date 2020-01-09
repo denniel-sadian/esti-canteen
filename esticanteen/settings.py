@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 from dotenv import load_dotenv
+import django_heroku
 
 import os
 
@@ -188,3 +189,7 @@ if not os.path.isdir(os.path.join(BASE_DIR, 'temp')):
     os.mkdir(os.path.join(BASE_DIR, 'temp'))
 
 SESSION_FILE_PATH = os.path.join(BASE_DIR, 'temp')
+
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
