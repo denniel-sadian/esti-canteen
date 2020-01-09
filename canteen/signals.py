@@ -1,6 +1,9 @@
 from django.db.models.signals import post_save
 from django.db.models.signals import post_delete
+from django.core.signals import request_started
+from django.core.signals import request_finished
 from django.dispatch import receiver
+from django.db import close_old_connections
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 
@@ -38,3 +41,13 @@ def notify_report_on_delete(sender, **kwargs):
 @receiver(post_save, sender=Feedback)
 def notify_feedbacks(sender, **kwargs):
     send()
+
+
+@receiver(request_started)
+def started_request(**kwargs):
+    close_old_connections()
+
+
+@receiver(request_finished)
+def finished_request(**kwargs):
+    close_old_connections()
