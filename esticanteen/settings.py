@@ -159,11 +159,6 @@ REST_FRAMEWORK = {
 LOGOUT_REDIRECT_URL = '/login/'
 
 
-# HTTPS
-
-SECURE_SSL_REDIRECT = True
-
-
 # CHANNELS
 
 ASGI_APPLICATION = 'esticanteen.routing.application'
