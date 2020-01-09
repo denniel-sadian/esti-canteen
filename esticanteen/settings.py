@@ -32,6 +32,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'esticanteen.pythonanywhere.com',
+    'esticanteen.herokuapp.com',
     '127.0.0.1'
 ]
 
