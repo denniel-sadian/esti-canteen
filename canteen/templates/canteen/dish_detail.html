@@ -178,9 +178,12 @@
 <body class="w3-animate-opacity">
     <div>
         <div id="dish-image" class="w3-animate-top">
-            {% thumbnail dish.photo "500x500" crop="center" as im %}
+            <!--
+{% thumbnail dish.photo "500x500" crop="center" as im %}
             <img src="{{ im.url }}">
             {% endthumbnail %}
+            -->
+            <img src="{{ dish.photo }}">
         </div>
         <div id="dish-details" class="w3-animate-zoom">
             {% if user.is_authenticated %}
