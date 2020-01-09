@@ -174,5 +174,14 @@ CHANNEL_LAYERS = {
     },
 }
 
+
+# GITHUB S3
+
+DEFAULT_FILE_STORAGE = "github_storages.backend.BackendStorages"
+GITHUB_HANDLE = "Your Github Handle"
+ACCESS_TOKEN = "Your Github Access Token"
+GITHUB_REPO_NAME = "Your New Github Public Repository Name"
+
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())
