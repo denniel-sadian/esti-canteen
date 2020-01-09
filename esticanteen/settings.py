@@ -174,6 +174,5 @@ CHANNEL_LAYERS = {
     },
 }
 
-
 # Activate Django-Heroku.
 django_heroku.settings(locals())
