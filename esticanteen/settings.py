@@ -178,8 +178,8 @@ ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
 GITHUB_REPO_NAME = 'esticanteen-bucket'
 
 
-del DATABASES['default']['OPTIONS']['sslmode']
-
-
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+
+del DATABASES['default']['OPTIONS']['sslmode']
