@@ -17,6 +17,7 @@ from django.db.models import Sum
 from django.db.models import Q
 from django.utils.datastructures import MultiValueDictKeyError
 from django.http.response import HttpResponseRedirect
+from django.db import close_old_connections
 
 from .models import Dish
 from .models import Order
@@ -29,6 +30,7 @@ def get_orders(request):
     """
     Utility function for getting orders.
     """
+    close_old_connections()
     try:
         # Give all orders maded on the given date.
         return Order.objects.filter(
@@ -50,6 +52,7 @@ class HomeView(ListView):
         Overriding this method to remove the IDs of those orders
         that have been deleted already.
         """
+        close_old_connections()
         orders_today = get_orders(request)
         for o in request.session.get('orders', []):
             if not Order.objects.filter(id=o).exists():
@@ -62,6 +65,7 @@ class HomeView(ListView):
         """
         Overriding this method to add the count of the orders today.
         """
+        close_old_connections()
         context = super().get_context_data(**kwargs)
         context['orders_count'] = Order.objects.filter(
             date__date=datetime.now().date()
@@ -73,6 +77,7 @@ class HomeView(ListView):
         Overriding this method to reverse the order of the
         dishes by name.
         """
+        close_old_connections()
         return Dish.objects.filter(
             Q(date=datetime.now()) | Q(everyday=True)
         ).order_by('-name')
@@ -103,6 +108,7 @@ class DishView(DetailView):
         Overriding this method to reverse the order of the
         dishes by name.
         """
+        close_old_connections()
         context = super().get_context_data(**kwargs)
         context['orders'] = Order.objects.filter(
             dish=self.object).aggregate(Sum('count'))['count__sum']
@@ -122,6 +128,7 @@ class OrderView(CreateView):
         Overriding this method to restrict the customer
         in ordering dishes that are already sold out.
         """
+        close_old_connections()
         self.dish = Dish.objects.get(id=kwargs['dish'])
         if self.dish.sold_out:
             return HttpResponseRedirect(reverse_lazy('canteen:unable-to-order'))
@@ -146,6 +153,7 @@ class OrderView(CreateView):
         """
         Overriding this method to add the dish in the context.
         """
+        close_old_connections()
         context = super().get_context_data(**kwargs)
         context['dish'] = Dish.objects.get(id=self.kwargs['dish'])
         return context
@@ -199,6 +207,7 @@ class ManageView(LoginRequiredMixin, ListView):
     context_object_name = 'dishes'
 
     def get_queryset(self):
+        close_old_connections()
         try:
             # Give the dishes that were created on the given date
             # and are not for everyday.
@@ -218,6 +227,7 @@ class ManageView(LoginRequiredMixin, ListView):
         """
         Adding the everyday dishes to the context.
         """
+        close_old_connections()
         context = super().get_context_data(**kwargs)
         context['everyday_dishes'] = Dish.objects.filter(
             everyday=True).order_by('name')
@@ -269,6 +279,8 @@ def json_report(request):
     """
     View for giving the report.
     """
+
+    close_old_connections()
 
     # Not allow unauthenticated users.
     if not request.user.is_authenticated:
@@ -323,6 +335,8 @@ def json_report(request):
         for f in Feedback.objects.all().order_by('-date')
     ]
 
+    close_old_connections()
+
     return JsonResponse({
         'orders': orders,
         'feedbacks': feedbacks,
@@ -334,6 +348,8 @@ def json_customer_orders(request):
     """
     View for giving all the orders from the session.
     """
+
+    close_old_connections()
 
     # Get orders.
     orders_today = get_orders(request)
@@ -358,6 +374,8 @@ def json_customer_orders(request):
             request.session.get('orders').remove(o)
             request.session['orders'] = request.session.get('orders')
     
+    close_old_connections()
+    
     return JsonResponse(orders_from_device, safe=False)
 
 
@@ -365,6 +383,8 @@ def api_mark_order_served(request, id):
     """
     View for marking and unmarking the order as served.
     """
+
+    close_old_connections()
     
     # Not allow unauthenticated users.
     if not request.user.is_authenticated:
@@ -381,6 +401,8 @@ def api_mark_order_served(request, id):
     order.served = not order.served
     order.save()
 
+    close_old_connections()
+
     return HttpResponse('Marked as served')
 
 
@@ -388,6 +410,8 @@ def api_mark_order_ready(request, id):
     """
     View for marking and unmarking the order as ready.
     """
+
+    close_old_connections()
     
     # Not marking it as served if it isn't even ready yet.
     if not request.user.is_authenticated:
@@ -400,6 +424,8 @@ def api_mark_order_ready(request, id):
     order.ready = not order.ready
     order.save()
 
+    close_old_connections()
+
     return HttpResponse('Marked as ready')
 
 
@@ -408,12 +434,16 @@ def api_delete_order(request, id):
     View for deleting an order.
     """
 
+    close_old_connections()
+
     # Not marking it as served if it isn't even ready yet.
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You're not authenticated.")
     
     # Delete the order.
     Order.objects.get(id=id).delete()
+
+    close_old_connections()
     
     return HttpResponse('Deleted.')
 
@@ -422,6 +452,8 @@ def api_delete_dish(request, id):
     """
     View for deleting a dish.
     """
+
+    close_old_connections()
     
     # Not marking it as served if it isn't even ready yet.
     if not request.user.is_authenticated:
@@ -429,6 +461,8 @@ def api_delete_dish(request, id):
     
     # Delete the dish.
     Dish.objects.get(id=id).delete()
+
+    close_old_connections()
     
     return HttpResponse('Deleted.')
 
@@ -437,6 +471,8 @@ def api_delete_feedback(request, id):
     """
     View for deleting a feedback.
     """
+
+    close_old_connections()
     
     # Not marking it as served if it isn't even ready yet.
     if not request.user.is_authenticated:
@@ -444,5 +480,7 @@ def api_delete_feedback(request, id):
     
     # Delete the feedback.
     Feedback.objects.get(id=id).delete()
+
+    close_old_connections()
     
     return HttpResponse('Deleted.')
