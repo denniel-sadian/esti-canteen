@@ -179,6 +179,11 @@ ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
 GITHUB_REPO_NAME = 'esticanteen-bucket'
 
 
+# SESSIONS
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
