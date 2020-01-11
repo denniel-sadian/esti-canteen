@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'esticanteen.pythonanywhere.com',
@@ -182,5 +182,5 @@ GITHUB_REPO_NAME = 'esticanteen-bucket'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
-
-del DATABASES['default']['OPTIONS']['sslmode']
+if not DEBUG:
+    del DATABASES['default']['OPTIONS']['sslmode']
