@@ -124,20 +124,14 @@
         orderId = id;
         $('#' + id).slideUp();
         $('#served-spinner-' + id).slideDown();
-        $.get('/api-mark-as-served/' + id + '/', function () {
-            $('#' + id).slideDown();
-            $('#served-spinner-' + id).slideUp();
-        });
+        $.get('/api-mark-as-served/' + id + '/');
     }
 
     function markReady(id) {
         orderId = id;
         $('#ready-btn-' + id).slideUp();
         $('#ready-spinner-' + id).slideDown();
-        $.get('/api-mark-as-ready/' + id + '/', function () {
-            $('#ready-btn-' + id).slideDown();
-            $('#ready-spinner-' + id).slideUp();
-        });
+        $.get('/api-mark-as-ready/' + id + '/');
     }
 
     function prepareForDeleting(id) {
