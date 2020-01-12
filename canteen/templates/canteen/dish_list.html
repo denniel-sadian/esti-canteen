@@ -227,6 +227,7 @@
                 page. Please do not close this tab and your browser if you want to keep track of the orders' status. The
                 orders cannot be edited by you. Only the admins have the authorization to modify them. You,
                 however, can ask the admins to change it for you when you're at the canteen already.</p>
+            <p class="w3-center w3-opacity" id="spinner"><i class="fas fa-spinner w3-spin"></i> Loading updates...</p>
             <div id="orders">
             </div>
         </div>
@@ -262,10 +263,12 @@
                     }
                 });
                 orders.html(ul);
+                $('#spinner').slideUp();
             }
             structureOrders();
             reportSocket.onmessage = function (e) {
-                setTimeout(structureOrders, 500);
+                $('#spinner').slideDown();
+                structureOrders();
             };
 
             reportSocket.onerror = function (e) {
