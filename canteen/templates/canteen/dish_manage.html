@@ -1,10 +1,14 @@
 {% load static %}
 {% load humanize %}
+{% load thumbnail %}
 
 
 <div class="dishes-flex w3-card-4 w3-border w3-border-green w3-margin-bottom w3-round-large">
     <div class="dish-image-cont">
-        <img src="{{ dish.photo }}">
+        <p>{{ dish.photo.url }}</p>
+        {% thumbnail dish.photo.url "40x40" crop="80% top" as im %}
+        <img src="{{ im.url }}">
+        {% endthumbnail %}
     </div>
     <div class="dish-info" style="flex-grow: 8">
         <div class="w3-padding" style="flex-grow: 8">
