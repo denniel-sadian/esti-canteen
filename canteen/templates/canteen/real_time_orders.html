@@ -123,13 +123,21 @@
     function markServed(id) {
         orderId = id;
         $('#' + id).slideUp();
-        $.get('/api-mark-as-served/' + id + '/');
+        $('#served-spinner-' + id).slideDown();
+        $.get('/api-mark-as-served/' + id + '/', function () {
+            $('#' + id).slideDown();
+            $('#served-spinner-' + id).slideUp();
+        });
     }
 
     function markReady(id) {
         orderId = id;
-        $('#_' + id).slideUp();
-        $.get('/api-mark-as-ready/' + id + '/');
+        $('#ready-btn-' + id).slideUp();
+        $('#ready-spinner-' + id).slideDown();
+        $.get('/api-mark-as-ready/' + id + '/', function () {
+            $('#ready-btn-' + id).slideDown();
+            $('#ready-spinner-' + id).slideUp();
+        });
     }
 
     function prepareForDeleting(id) {
@@ -229,14 +237,16 @@
                             '<i class="fas fa-times-circle w3-text-red"></i>') +
                         '</td>'));
                     tr.append($('<td class="w3-center w3-border">' +
+                        '<i class="fas fa-spinner w3-spin w3-large" style="display: none" id="ready-spinner-' + data.orders[o].id + '"></i>' +
                         '<button ' + String(data.orders[o].served ?
-                            'disabled="disabled"' : '') + ' id="' + data.orders[o].id + ' id="_' + data.orders[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markReady(' +
+                            'disabled="disabled"' : '') + ' id="ready-btn-' + data.orders[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markReady(' +
                         data.orders[o].id +
                         ')">' + String(data.orders[o].ready ?
                             '<i class="fas fa-times-circle"></i> Mark as not ready' :
                             '<i class="fas fa-check-circle"></i> Mark as ready') + '</button>' +
                         '</td>'));
                     tr.append($('<td class="w3-center w3-border">' +
+                        '<i class="fas fa-spinner w3-spin w3-large" style="display: none" id="served-spinner-' + data.orders[o].id + '"></i>' +
                         '<button ' + String(data.orders[o].ready ?
                             '' : 'disabled="disabled"') + ' id="' + data.orders[o].id + '" class="w3-button w3-round-xxlarge w3-orange" onclick="markServed(' +
                         data.orders[o].id +
