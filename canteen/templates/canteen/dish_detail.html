@@ -1,5 +1,6 @@
 {% load static %}
 {% load humanize %}
+{% load thumbnail %}
 
 <!DOCTYPE html>
 <html>
@@ -177,7 +178,9 @@
 <body class="w3-animate-opacity">
     <div>
         <div id="dish-image" class="w3-animate-top">
-            <img src="{{ dish.photo }}">
+            {% thumbnail dish.photo.url "500x500" crop="center" as im %}
+            <img src="{{ im.url }}">
+            {% endthumbnail %}
         </div>
         <div id="dish-details" class="w3-animate-zoom">
             {% if user.is_authenticated %}
