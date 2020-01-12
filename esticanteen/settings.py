@@ -50,7 +50,6 @@ INSTALLED_APPS = [
 
     'channels',
     'rest_framework',
-    'sorl.thumbnail',
 
     'canteen.apps.CanteenConfig'
 ]

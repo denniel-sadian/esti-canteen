@@ -1,5 +1,4 @@
 {% load humanize %}
-{% load thumbnail %}
 
 <style>
     #dishes {
@@ -82,9 +81,7 @@
         <a href="{% url 'canteen:not-api-dish-detail' dish.id %}">
             <div class="w3-center w3-card-4 w3-border w3-border-purple">
                 <div class="dish-image-cont {% if dish.sold_out %}opac{% endif %}">
-                    {% thumbnail dish.photo.url "100x100" crop="center" as im %}
-                    <img src="{{ im.url }}" class="dish-image">
-                    {% endthumbnail %}
+                    <img src="{{ dish.photo.url }}" class="dish-image">
                     <span class="w3-card-4 w3-tag w3-round-xxlarge w3-light-green price">₱
                         {{ dish.price|intcomma }}</span>
                 </div>
