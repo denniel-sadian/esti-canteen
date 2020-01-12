@@ -114,7 +114,7 @@
 </div>
 <script>
     var protocol = location.protocol == 'https:' ? 'wss://' : 'ws://';
-    var reportSocket = new WebSocket(
+    var reportSocket = new ReconnectingWebSocket(
         protocol + location.host +
         '/ws/update/');
     var dateInput = $('#date');
