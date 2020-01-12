@@ -183,14 +183,6 @@ GITHUB_REPO_NAME = 'esticanteen-bucket'
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
 
-# SSL
-
-SECURE_SSL_REDIRECT = True
-
-if DEBUG:
-    SECURE_SSL_REDIRECT = False
-
-
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
