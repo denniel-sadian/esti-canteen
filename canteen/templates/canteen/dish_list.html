@@ -274,6 +274,8 @@
             reportSocket.onerror = function (e) {
                 location.reload();
             }
+
+            setInterval(location.reload, 300000);
         </script>
         {% endif %}
     </article>
