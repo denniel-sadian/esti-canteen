@@ -8,15 +8,13 @@
     <title>ESTI Canteen - {{ dish.name|title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    {% with 'https://esticanteen.pythonanywhere.com' as domain %}
     <meta name="og:title" content="ESTI Canteen - {{ dish.name|title }}" />
     <meta name="twitter:title" content="ESTI Canteen - {{ dish.name|title }}" />
     <meta name="description" content="{{ dish.description }}" />
     <meta name="twitter:description" content="{{ dish.description }}" />
     <meta name="og:description" content="{{ dish.description }}" />
-    <meta name="twitter:image" content="{{ domain }}{{ dish.photo.url }}" />
-    <meta name="og:image" content="{{ domain }}{{ dish.photo.url }}" />
-    {% endwith %}
+    <meta name="twitter:image" content="{{ dish.photo.url }}" />
+    <meta name="og:image" content="{{ dish.photo.url }}" />
 
     <link rel="icon" href="{% static 'canteen/esti_icon.png' %}" type="image/x-icon" />
     <link rel="stylesheet" href="{% static 'canteen/w3.css' %}" />
@@ -219,7 +217,7 @@
                         <i class="fas fa-check-circle"></i> Order</a>
                 </div>
                 <div class="w3-margin-top share-links">
-                    {% with "https://esticanteen.pythonanywhere.com" as domain %}
+                    {% with "https://esticanteen.herokuapp.com" as domain %}
                     <a href="https://web.facebook.com/sharer/sharer.php?u={{ domain }}{% url 'canteen:not-api-dish-detail' dish.id %}"
                         title="Share on Facebook!">
                         <i class="fab fa-facebook"></i></a>
