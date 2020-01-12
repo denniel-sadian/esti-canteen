@@ -61,7 +61,8 @@
 <body>
 
     <div class="modal">
-        <form method="POST" action="" class="w3-animate-right w3-container w3-card-4 w3-purple w3-round-large">
+        <form method="POST" action="" onsubmit="disableSubmitButton()"
+            class="w3-animate-right w3-container w3-card-4 w3-purple w3-round-large">
             {% csrf_token %}
             <h2><i class="fas fa-hamburger"></i> Ordering {{ dish.name|title }}</h2>
             <p>What a nice taste you have! Order quickly, we might run out of {{ dish.name|title }}.</p>
@@ -84,15 +85,25 @@
                 {{ form.count.errors }}
             </div>
             <div class="w3-right w3-margin-top w3-margin-bottom">
-                <a href="{% url 'canteen:not-api-dish-detail' dish.id %}" class="w3-button w3-border w3-round-xxlarge">
+                <a href="{% url 'canteen:not-api-dish-detail' dish.id %}" id="go-back-btn"
+                    class="w3-button w3-border w3-round-xxlarge">
                     <i class="fas fa-arrow-alt-circle-left"></i> Go back</a>
-                <button type="submit" class="w3-button w3-blue w3-round-xxlarge">
+                <button type="submit" id="submit-btn" class="w3-button w3-blue w3-round-xxlarge">
                     <i class="fas fa-check-circle"></i> Order
                 </button>
             </div>
         </form>
     </div>
     </div>
+
+    <script>
+        function disableSubmitButton() {
+            $('#go-back-btn').hide();
+            $('#submit-btn').text('Ordering...');
+            $('#submit-btn').attr('disabled', 'disabled');
+            return true;
+        }
+    </script>
 
 </body>
 
