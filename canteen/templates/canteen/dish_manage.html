@@ -5,7 +5,7 @@
 
 <div class="dishes-flex w3-card-4 w3-border w3-border-green w3-margin-bottom w3-round-large">
     <div class="dish-image-cont">
-        {% thumbnail dish.photo.url "100x100" crop="80% top" as im %}
+        {% thumbnail dish.photo.url "100x100" crop="center" as im %}
         <img src="{{ im.url }}">
         {% endthumbnail %}
     </div>
