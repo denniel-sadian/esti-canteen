@@ -187,5 +187,4 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 django_heroku.settings(locals())
 
 
-if not DEBUG:
-    del DATABASES['default']['OPTIONS']['sslmode']
+del DATABASES['default']['OPTIONS']['sslmode']
