@@ -8,6 +8,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.timezone import datetime
 
+from django_resized import ResizedImageField
+
 
 class Dish(models.Model):
     """
@@ -19,7 +21,7 @@ class Dish(models.Model):
     description = models.CharField(max_length=101)
     sold_out = models.BooleanField(default=False)
     everyday = models.BooleanField(default=False)
-    photo = models.ImageField()
+    photo = ResizedImageField(size=[500, 500], force_format='PNG')
 
     class Meta:
         verbose_name_plural = 'dishes'
