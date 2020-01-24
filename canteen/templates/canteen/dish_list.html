@@ -41,30 +41,46 @@
 
         header {
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             background: url("{% static 'canteen/bg.jpg' %}") no-repeat center fixed;
             background-size: cover;
             overflow: hidden;
-        }
-
-        header>div {
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-y: auto;
+        }
+
+        .grid-cont {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            grid-template-areas:
+                "logo text"
+                "bttn bttn";
+            padding-left: 100px;
+            padding-right: 100px;
+        }
+
+        .logo {
+            grid-area: logo;
+            align-self: center;
+            justify-self: end;
+        }
+
+        .text {
+            grid-area: text;
+            align-self: center;
+            justify-self: start;
+        }
+
+        .bttn {
+            grid-area: bttn;
+            align-self: start;
+            justify-self: center;
         }
 
         header h1 {
             line-height: 1.32em;
             font-family: 'Roboto Slab', serif;
             font-weight: bolder;
-        }
-
-        header>div div:nth-child(2) {
-            width: 40%;
         }
 
         header h1 span,
@@ -137,19 +153,25 @@
         }
 
         @media (max-width:768px) {
+
+            /* Small */
             header h1 {
                 font-size: 50px;
             }
 
-            header>div {
-                flex-direction: column;
+            .grid-cont {
+                grid-template-areas:
+                    "logo logo"
+                    "text text"
+                    "bttn bttn";
+                padding-left: 10px;
+                padding-right: 10px;
             }
 
-            header>div div:nth-child(2) {
-                width: 100%;
-            }
-
-            header {
+            .logo,
+            .text,
+            .bttn {
+                justify-self: center;
                 text-align: center;
             }
 
@@ -164,12 +186,22 @@
         }
 
         @media (max-width:992px) and (min-width:601px) {
+
+            /* Medium */
             header h1 {
                 font-size: 70px;
             }
 
-            header {
-                text-align: center;
+            .grid-cont {
+                grid-template-areas:
+                    "logo text"
+                    "bttn bttn";
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .text {
+                text-align: left;
             }
 
             #logo {
@@ -179,6 +211,8 @@
         }
 
         @media (min-width:993px) {
+
+            /* Large */
             header h1 {
                 font-size: 90px;
             }
@@ -187,15 +221,18 @@
 </head>
 
 <body>
+
     <header class="w3-animate-opacity">
-        <div class="w3-container w3-animate-zoom">
-            <div>
+        <div class="grid-cont">
+            <div class="logo">
                 <img id="logo" src="{% static 'canteen/esti_square.png' %}" width="350" height="350" />
             </div>
-            <div>
+            <div class="text">
                 <h1 class="w3-text-white"><span>Welcome to ESTI's Canteen!</span></h1>
                 <p class="w3-large w3-text-white"><span>Where you can find the best delicacies.</span>
                 </p>
+            </div>
+            <div class="bttn">
                 <a href="#article" class="w3-button w3-padding w3-round-xxlarge w3-purple">
                     <i class="fas fa-clipboard-list"></i> See the menu</a>
             </div>
