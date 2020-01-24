@@ -22,8 +22,13 @@
     .dish>a>div {
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
-        border-bottom-left-radius: 35px;
-        border-bottom-right-radius: 35px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+    .dish>a div:last-child {
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
     }
 
     .dish-image-cont {
@@ -85,7 +90,7 @@
                     <span class="w3-card-4 w3-tag w3-round-xxlarge w3-light-green price">₱
                         {{ dish.price|intcomma }}</span>
                 </div>
-                <div class="w3-padding {% if dish.sold_out %}opac{% endif %}">
+                <div class="w3-padding w3-white {% if dish.sold_out %}opac{% endif %}">
                     <h4 class="{% if dish.sold_out %}w3-text-red{% endif %}">
                         {{ dish.name|title }}
                     </h4>

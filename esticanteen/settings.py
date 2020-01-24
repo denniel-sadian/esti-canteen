@@ -172,7 +172,7 @@ CHANNEL_LAYERS = {
 
 # GITHUB S3
 
-DEFAULT_FILE_STORAGE = 'github_storages.backend.BackendStorages'
+# DEFAULT_FILE_STORAGE = 'github_storages.backend.BackendStorages'
 GITHUB_HANDLE = 'denniel-sadian'
 ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
 GITHUB_REPO_NAME = 'esticanteen-bucket'
