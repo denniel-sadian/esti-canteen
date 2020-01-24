@@ -98,8 +98,8 @@
 
     <script>
         function disableSubmitButton() {
-            $('#go-back-btn').hide();
-            $('#submit-btn').text('Ordering...');
+            $('#go-back-btn').fadeOut();
+            $('#submit-btn').html('<i class="fas fa-spinner w3-spin"></i> Ordering...');
             $('#submit-btn').attr('disabled', 'disabled');
             return true;
         }
