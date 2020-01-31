@@ -1,13 +1,46 @@
 <style>
+    .share-links {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .share-links a {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        border-radius: 100%;
+        margin: 3px 5px 3px 5px;
+        transition: 0.5s;
+        text-decoration: none;
+        font-size: 30px;
+    }
+
+    .share-links a:hover {
+        font-size: 50px;
+    }
+
     footer {
         background: linear-gradient(to bottom right, #2196F3, violet);
         padding-top: 64px !important;
-        padding-bottom: 64px !important;
     }
 
     footer h1 {
         font-family: 'Roboto Slab', serif;
         font-weight: normal;
+    }
+
+    .final-footer {
+        display: flex;
+        margin-top: 64px;
+    }
+
+    .final-footer>div {
+        width: 100%;
     }
 
     @media (max-width:768px) {
@@ -19,12 +52,38 @@
         footer h1 {
             font-size: 25px;
         }
+
+        .final-footer {
+            flex-direction: column;
+            margin: none;
+        }
     }
 </style>
 
 <footer class="w3-container w3-center">
-    <div class="w3-margin-bottom share-links">
-        <div class="w3-margin-top share-links">
+    <div class="w3-content">
+        <h1 class="w3-text-white">
+            <i class="fas fa-quote-left"></i>
+            If more of us valued food and cheer and song above hoarded gold, it
+            would be a merrier world.
+            <i class="fas fa-quote-right"></i>
+        </h1>
+        <p class="w3-text-white">― J.R.R. Tolkien</p>
+    </div>
+    <a href="{% url 'canteen:manage' %}" class="w3-text-white w3-button w3-margin-top w3-round-xxlarge w3-border">
+        <i class="fas fa-tools"></i> Manage</a>
+    <a href="{% url 'canteen:feedback' %}" class="w3-text-white w3-button w3-margin-top w3-round-xxlarge w3-border">
+        <i class="fas fa-feather-alt"></i> Feedback</a>
+    <a href="{% url 'canteen:about' %}" class="w3-text-white w3-button w3-margin-top w3-round-xxlarge w3-border">
+        <i class="fas fa-info-circle"></i> About</a>
+    <a href="{% url 'canteen:privacy-policy' %}"
+        class="w3-text-white w3-button w3-margin-top w3-round-xxlarge w3-border">
+        <i class="fas fa-info-circle"></i> Privacy Policy</a>
+    <div class="final-footer w3-content w3-margin-top w3-text-white w3-margin-bottom">
+        <div>
+            <p>2020 <i class="fas fa-copyright"></i> All rights reserved. To God be all the glory.</p>
+        </div>
+        <div class="share-links">
             {% with "https://esticanteen.herokuapp.com" as domain %}
             <a href="https://web.facebook.com/sharer/sharer.php?u={{ domain }}{% url 'canteen:home' %}"
                 title="Share on Facebook!">
@@ -47,23 +106,4 @@
             {% endwith %}
         </div>
     </div>
-    <div class="w3-content">
-        <h1 class="w3-text-white">
-            <i class="fas fa-quote-left"></i>
-            If more of us valued food and cheer and song above hoarded gold, it
-            would be a merrier world.
-            <i class="fas fa-quote-right"></i>
-        </h1>
-        <p class="w3-text-white">― J.R.R. Tolkien</p>
-    </div>
-    <a href="{% url 'canteen:manage' %}" class="w3-text-white w3-button w3-margin-top w3-round-xxlarge w3-border">
-        <i class="fas fa-tools"></i> Manage</a>
-    <a href="{% url 'canteen:feedback' %}" class="w3-text-white w3-button w3-margin-top w3-round-xxlarge w3-border">
-        <i class="fas fa-feather-alt"></i> Feedback</a>
-    <a href="{% url 'canteen:about' %}" class="w3-text-white w3-button w3-margin-top w3-round-xxlarge w3-border">
-        <i class="fas fa-info-circle"></i> About</a>
-    <a href="{% url 'canteen:privacy-policy' %}"
-        class="w3-text-white w3-button w3-margin-top w3-round-xxlarge w3-border">
-        <i class="fas fa-info-circle"></i> Privacy Policy</a>
-    <p class="w3-text-white w3-opacity"><a href="https://sadian.herokuapp.com">@Sadian</a></p>
 </footer>
