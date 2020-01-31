@@ -1,6 +1,8 @@
 <style>
     footer {
         background: linear-gradient(to bottom right, #2196F3, violet);
+        padding-top: 64px !important;
+        padding-bottom: 64px !important;
     }
 
     footer h1 {
@@ -9,13 +11,18 @@
     }
 
     @media (max-width:768px) {
+        footer {
+            padding-top: unset !important;
+            padding-bottom: unset !important;
+        }
+
         footer h1 {
             font-size: 25px;
         }
     }
 </style>
 
-<footer class="w3-container w3-center w3-padding-64">
+<footer class="w3-container w3-center">
     <div class="w3-margin-bottom share-links">
         <div class="w3-margin-top share-links">
             {% with "https://esticanteen.herokuapp.com" as domain %}
@@ -49,13 +56,14 @@
         </h1>
         <p class="w3-text-white">― J.R.R. Tolkien</p>
     </div>
-    <a href="{% url 'canteen:manage' %}" class="w3-button w3-margin-top w3-round-xxlarge w3-purple">
+    <a href="{% url 'canteen:manage' %}" class="w3-text-white w3-button w3-margin-top w3-round-xxlarge w3-border">
         <i class="fas fa-tools"></i> Manage</a>
-    <a href="{% url 'canteen:feedback' %}" class="w3-button w3-margin-top w3-round-xxlarge w3-purple">
+    <a href="{% url 'canteen:feedback' %}" class="w3-text-white w3-button w3-margin-top w3-round-xxlarge w3-border">
         <i class="fas fa-feather-alt"></i> Feedback</a>
-    <a href="{% url 'canteen:about' %}" class="w3-button w3-margin-top w3-round-xxlarge w3-purple">
+    <a href="{% url 'canteen:about' %}" class="w3-text-white w3-button w3-margin-top w3-round-xxlarge w3-border">
         <i class="fas fa-info-circle"></i> About</a>
-    <a href="{% url 'canteen:privacy-policy' %}" class="w3-button w3-margin-top w3-round-xxlarge w3-purple">
+    <a href="{% url 'canteen:privacy-policy' %}"
+        class="w3-text-white w3-button w3-margin-top w3-round-xxlarge w3-border">
         <i class="fas fa-info-circle"></i> Privacy Policy</a>
     <p class="w3-text-white w3-opacity"><a href="https://sadian.herokuapp.com">@Sadian</a></p>
 </footer>
