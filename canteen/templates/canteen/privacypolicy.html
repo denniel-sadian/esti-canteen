@@ -274,26 +274,7 @@
         </div>
     </article>
 
-    <footer class="w3-container w3-center w3-padding-64 w3-text-white" style="margin-top: 64px">
-        <div class="w3-content">
-            <h1 class="w3-text-white">
-                <i class="fas fa-quote-left"></i>
-                If more of us valued food and cheer and song above hoarded gold, it
-                would be a merrier world.
-                <i class="fas fa-quote-right"></i>
-            </h1>
-            <p class="w3-text-white">― J.R.R. Tolkien</p>
-        </div>
-        <a href="{% url 'canteen:home' %}" class="w3-button w3-margin-top w3-round-xxlarge w3-border">
-            <i class="fas fa-home"></i> Home</a>
-        <a href="{% url 'canteen:feedback' %}" class="w3-button w3-margin-top w3-round-xxlarge w3-border">
-            <i class="fas fa-feather-alt"></i> Feedback</a>
-        <a href="{% url 'canteen:about' %}" class="w3-button w3-margin-top w3-round-xxlarge w3-border">
-            <i class="fas fa-info-circle"></i> About</a>
-        <a href="{% url 'canteen:privacy-policy' %}" class="w3-button w3-margin-top w3-round-xxlarge w3-border">
-            <i class="fas fa-info-circle"></i> Privacy Policy</a>
-        <p class="w3-text-white w3-opacity"><a href="https://sadian.herokuapp.com">@Sadian</a></p>
-    </footer>
+    {% include 'canteen/footer.html' %}
 </body>
 
 </html>
