@@ -31,9 +31,24 @@
             height: auto;
         }
 
-        header,
-        footer {
+        header {
             background: linear-gradient(to bottom right, #2196F3, violet);
+        }
+
+        article>div>div {
+            margin-bottom: 64px !important;
+        }
+
+        .code {
+            border: 1px solid orange;
+            border-radius: 8px;
+            padding: 1px 8px 1px 8px;
+            font-family: 'Courier New', Courier, monospace;
+            display: inline-block;
+            line-height: 15px;
+            font-size: 14px;
+            background: khaki;
+            font-weight: bold;
         }
 
         @media (max-width:768px) {
@@ -59,55 +74,91 @@
 
     <article class="w3-container">
         <div class="w3-content">
-            <h2 class="w3-center">About the website</h2>
-            <p>ESTI Canteen Online Ordering System is an art of the ICT-12 students <a href="#devs">below</a>.
-                This application makes the ordering process much faster. Students no longer have to wait in line. Also,
-                students do not need to go down stairs just to know the foods being sold at the canteen, thus, saving
-                them time and energy. This website also features a friendly design. The developers made the interface as
-                simple as possible to give the users a fine experience.</p>
-            <h2 style="margin-top: 100px;margin-bottom: 50px" class="w3-center">Technologies being used</h2>
-            <div class="w3-row-padding w3-center">
-                <div class="w3-col s4 m3 w3-margin-bottom">
-                    <img src="{% static 'canteen/html.png' %}" width="100" height="auto">
-                    <p>HTML</p>
-                </div>
-                <div class="w3-col s4 m3 w3-margin-bottom">
-                    <img src="{% static 'canteen/css.jpg' %}" width="100" height="auto">
-                    <p>CSS</p>
-                </div>
-                <div class="w3-col s4 m3 w3-margin-bottom">
-                    <img src="{% static 'canteen/js.png' %}" width="100" height="auto">
-                    <p>JavaScript</p>
-                </div>
-                <div class="w3-col s4 m3 w3-margin-bottom">
-                    <img src="{% static 'canteen/jq.png' %}" width="100" height="auto">
-                    <p>jQuery</p>
-                </div>
-                <div class="w3-col s4 m4 w3-margin-bottom">
-                    <img src="{% static 'canteen/py_django.png' %}" width="100" height="auto">
-                    <p>Python and Django</p>
-                </div>
-                <div class="w3-col s4 m4 w3-margin-bottom">
-                    <img src="{% static 'canteen/git.png' %}" width="100" height="auto">
-                    <p>Git</p>
-                </div>
-                <div class="w3-col s6 m4 w3-margin-bottom">
-                    <img src="{% static 'canteen/vscode.png' %}" width="100" height="auto">
-                    <p>VS Code</p>
-                </div>
-                <div class="w3-col s6 m12 w3-margin-bottom">
-                    <img src="{% static 'canteen/heroku.png' %}" width="100" height="auto">
-                    <p><a href="heroku.com">Heroku.com</a></p>
+            <div>
+                <h2 class="w3-center">About the website</h2>
+                <p>ESTI Canteen Online Ordering System is an art of the ICT-12 students <a href="#devs">below</a>.
+                    This application makes the ordering process much faster. Students no longer have to wait in line.
+                    Also,
+                    students do not need to go down stairs just to know the foods being sold at the canteen, thus,
+                    saving
+                    them time and energy. This website also features a user-friendly design. The developers made the
+                    interface as simple as possible to give the users a fine experience.</p>
+                <p>The purpose of this web application is to provide a new way of how to order dishes at the canteen.
+                    Its role is to serve as the e-commerce website of the ESTI canteen. The programmers were motivated
+                    to create this web application when they found it very tiring to still go downstairs just to know
+                    what dishes are being sold at the canteen. They are the ICT-12 students whose room is located
+                    on the top of the building. This web application is a practical system to come up with.
+                </p>
+            </div>
+            <div class="w3-center">
+                <h2>Technologies being used</h2>
+                <div class="w3-row-padding w3-center">
+                    <div class="w3-col s4 m3 w3-margin-bottom">
+                        <img src="{% static 'canteen/html.png' %}" width="100" height="auto">
+                        <p>HTML</p>
+                    </div>
+                    <div class="w3-col s4 m3 w3-margin-bottom">
+                        <img src="{% static 'canteen/css.jpg' %}" width="100" height="auto">
+                        <p>CSS</p>
+                    </div>
+                    <div class="w3-col s4 m3 w3-margin-bottom">
+                        <img src="{% static 'canteen/js.png' %}" width="100" height="auto">
+                        <p>JavaScript</p>
+                    </div>
+                    <div class="w3-col s4 m3 w3-margin-bottom">
+                        <img src="{% static 'canteen/jq.png' %}" width="100" height="auto">
+                        <p>jQuery</p>
+                    </div>
+                    <div class="w3-col s4 m4 w3-margin-bottom">
+                        <img src="{% static 'canteen/py_django.png' %}" width="100" height="auto">
+                        <p>Python and Django</p>
+                    </div>
+                    <div class="w3-col s4 m4 w3-margin-bottom">
+                        <img src="{% static 'canteen/git.png' %}" width="100" height="auto">
+                        <p>Git</p>
+                    </div>
+                    <div class="w3-col s6 m4 w3-margin-bottom">
+                        <img src="{% static 'canteen/vscode.png' %}" width="100" height="auto">
+                        <p>VS Code</p>
+                    </div>
+                    <div class="w3-col s6 m12 w3-margin-bottom">
+                        <img src="{% static 'canteen/heroku.png' %}" width="100" height="auto">
+                        <p><a href="heroku.com">Heroku.com</a></p>
+                    </div>
                 </div>
             </div>
-            <h2 id="devs" style="margin-top: 100px;margin-bottom: 50px" class="w3-center">Programmers</h2>
-            <div class="w3-large w3-center">
-                <p>Joylyn Malapad Hintay</p>
-                <p>Jairene Jean Ferolino Maac</p>
-                <p>Cristine Semilla Cruzado</p>
-                <p>Chrislear L. Jusayan</p>
-                <p>Nica Mitch Fidelino Saguid</p>
-                <p>Denniel Luis Saway Sadian</p>
+
+            <div class="w3-center">
+                <h1>Deployment process</h1>
+                <p>Create a Heroku account. An email is needed to create a Heroku account.</p>
+                <p><i class="fas fa-arrow-down"></i></p>
+                <p>Install Python 3.7.1 and Git. Python is the programming language that is mostly used by the website
+                    in the server. While Git is a control version system that records the code changes made by the
+                    programmers. Git is also used for pushing the web app's code to the Heroku server.</p>
+                <p><i class="fas fa-arrow-down"></i></p>
+                <p>Install the Heroku Command Line Interface and login using the terminal command <span
+                        class="code">heroku login</span>.</p>
+                <p><i class="fas fa-arrow-down"></i></p>
+                <p>Prepare the app using terminal command <span class="code">pip freeze > requirements.txt</span>, and a
+                    text file will be created at the root directory of the app.</p>
+                <p><i class="fas fa-arrow-down"></i></p>
+                <p>Create the app on Heroku, which prepares Heroku to receive your source code. Do this using the
+                    terminal command <span class="code">heroku create esticanteen</span>.</p>
+                <p><i class="fas fa-arrow-down"></i></p>
+                <p>Do the final commit in git. This would now include the <span class="code">requirement.txt</span> file
+                    that was generated by Python for you.</p>
+            </div>
+
+            <div class="w3-center">
+                <h2 id="devs">Programmers</h2>
+                <div class="w3-large w3-center">
+                    <p>Joylyn Malapad Hintay</p>
+                    <p>Jairene Jean Ferolino Maac</p>
+                    <p>Cristine Semilla Cruzado</p>
+                    <p>Chrislear L. Jusayan</p>
+                    <p>Nica Mitch Fidelino Saguid</p>
+                    <p>Denniel Luis Saway Sadian</p>
+                </div>
             </div>
         </div>
     </article>
