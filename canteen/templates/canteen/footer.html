@@ -26,7 +26,7 @@
 
     footer {
         background: linear-gradient(to bottom right, #2196F3, violet);
-        padding-top: 64px !important;
+        padding: 64px 0px 0px 0px !important;
     }
 
     footer h1 {
@@ -36,7 +36,6 @@
 
     .final-footer {
         display: flex;
-        margin-top: 64px;
     }
 
     .final-footer>div {
@@ -44,18 +43,19 @@
     }
 
     @media (max-width:768px) {
-        footer {
-            padding-top: unset !important;
-            padding-bottom: unset !important;
-        }
-
         footer h1 {
             font-size: 25px;
         }
 
         .final-footer {
             flex-direction: column;
-            margin: none;
+        }
+
+        .share-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
         }
     }
 </style>
@@ -80,7 +80,7 @@
         class="w3-text-white w3-button w3-margin-top w3-round-xxlarge w3-border">
         <i class="fas fa-info-circle"></i> Privacy Policy</a>
     <div class="final-footer w3-content w3-margin-top w3-text-white w3-margin-bottom">
-        <div>
+        <div class="w3-align-left">
             <p>2020 <i class="fas fa-copyright"></i> All rights reserved. To God be all the glory.</p>
         </div>
         <div class="share-links">
