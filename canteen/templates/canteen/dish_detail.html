@@ -32,17 +32,13 @@
             background: url("{% static 'canteen/detail-bg.jpg' %}");
         }
 
-        body {
-            border: 3px solid white;
-        }
-
-        body>div {
+        body>div:first-child {
             height: 100%;
             width: 100%;
             display: flex;
         }
 
-        body>div>div {
+        body>div:first-child>div {
             height: 100%;
             width: 100%;
             display: flex;
@@ -88,7 +84,7 @@
             margin-bottom: 3px;
         }
 
-        h1 {
+        body>div:first-child h1 {
             font-family: 'Roboto Slab', serif;
             font-weight: normal;
         }
@@ -100,39 +96,14 @@
             border: 1px dashed white;
         }
 
-        .share-links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .share-links a {
-            width: 38px;
-            height: 38px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            border-radius: 100%;
-            margin: 3px 5px 3px 5px;
-            transition: 0.5s;
-            text-decoration: none;
-            font-size: 30px;
-        }
-
-        .share-links a:hover {
-            font-size: 50px;
-        }
-
         @media only screen and (min-width: 600px) {
-            h1 {
+            body>div:first-child h1 {
                 font-size: 50px;
             }
         }
 
         @media only screen and (min-width: 768px) {
-            h1 {
+            body>div:first-child h1 {
                 font-size: 70px;
             }
         }
@@ -142,7 +113,7 @@
                 border: none;
             }
 
-            body>div {
+            body>div:first-child {
                 flex-direction: column;
                 padding: 16px;
             }
@@ -157,16 +128,6 @@
                 border: 3px solid white;
                 border-radius: 32px;
                 box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
-            }
-
-            .share-links a {
-                background: #e91e63;
-                color: white !important;
-                font-size: 20px !important;
-            }
-
-            .share-links a:hover {
-                font-size: 50px !important;
             }
         }
     </style>
@@ -216,34 +177,11 @@
                     <a href="{% url 'canteen:order' dish.id %}" class="w3-button w3-round-xxlarge w3-purple">
                         <i class="fas fa-check-circle"></i> Order</a>
                 </div>
-                <div class="w3-margin-top share-links">
-                    {% with "https://esticanteen.herokuapp.com" as domain %}
-                    <a href="https://web.facebook.com/sharer/sharer.php?u={{ domain }}{% url 'canteen:not-api-dish-detail' dish.id %}"
-                        title="Share on Facebook!">
-                        <i class="fab fa-facebook"></i></a>
-                    <a href="https://www.twitter.com/share?url={{ domain }}{% url 'canteen:not-api-dish-detail' dish.id %}"
-                        title="Share on Twitter!">
-                        <i class="fab fa-twitter"></i></a>
-                    <a title="Share on Linkedin!"
-                        href="https://www.linkedin.com/shareArticle/?mini=true&url={{ domain }}{% url 'canteen:not-api-dish-detail' dish.id %}">
-                        <i class="fab fa-linkedin"></i></a>
-                    <a title="Share on Telegram!"
-                        href="https://telegram.me/share/?url={{ domain }}{% url 'canteen:not-api-dish-detail' dish.id %}">
-                        <i class="fab fa-telegram"></i></a>
-                    <a title="Share on Whatsapp!"
-                        href="https://api.whatsapp.com/send?text={{ domain }}{% url 'canteen:not-api-dish-detail' dish.id %}">
-                        <i class="fab fa-whatsapp"></i></a>
-                    <a title="Share on Pinterest!"
-                        href="https://www.pinterest.ph/pin/find/?url={{ domain }}{% url 'canteen:not-api-dish-detail' dish.id %}">
-                        <i class="fab fa-pinterest"></i></a>
-                    <a title="Share on Reddit!"
-                        href="https://reddit.com/submit?url={{ domain }}{% url 'canteen:not-api-dish-detail' dish.id %}">
-                        <i class="fab fa-reddit"></i></a>
-                    {% endwith %}
-                </div>
                 {% endif %}
             </div>
         </div>
+    </div>
+    {% include 'canteen/footer.html' with canShare=True %}
 </body>
 
 </html>
