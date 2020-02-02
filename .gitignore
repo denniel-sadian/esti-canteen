@@ -8,3 +8,4 @@ media/
 temp/*
 env/
 .env
+.vscode
