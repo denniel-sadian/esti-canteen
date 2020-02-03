@@ -23,6 +23,7 @@ from .models import Dish
 from .models import Order
 from .models import Feedback
 from django.core.exceptions import ObjectDoesNotExist
+from .forms import UpdateOrderForm
 from .forms import OrderForm
 
 
@@ -270,7 +271,7 @@ class UpdateOrderView(LoginRequiredMixin, UpdateView):
     """
     login_url = '/login/'
     success_url = reverse_lazy('canteen:orders')
-    form_class = OrderForm
+    form_class = UpdateOrderForm
     model = Order
     template_name = 'canteen/edit_order.html'
 
