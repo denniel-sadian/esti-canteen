@@ -108,8 +108,11 @@ class DishView(DetailView):
     def get_context_data(self, **kwargs):
         close_old_connections()
         context = super().get_context_data(**kwargs)
+        
+        # get the sum of all orders of this dish
         context['orders'] = Order.objects.filter(
             dish=self.object).aggregate(Sum('count'))['count__sum']
+        
         return context
 
 
@@ -123,21 +126,37 @@ class OrderView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         close_old_connections()
+
+        # get the dish based from the pk
         self.dish = Dish.objects.get(id=kwargs['dish'])
+        
+        # redirect if ordering is not allowed
         if self.dish.sold_out:
             return HttpResponseRedirect(reverse_lazy('canteen:unable-to-order'))
+        
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
+        # assign the dish
         form.instance.dish = self.dish
+        
+        # lower the name
         form.instance.name = form.instance.name.upper()
+        
+        # save it now
         form.save()
+
+        # create the orders holder in the session
         if type(self.request.session.get('orders')) != list:
             self.request.session['orders'] = []
+        
+        # get the orders from the session and add the new pk
         orders = self.request.session.get('orders')
         orders.append(form.instance.id)
+        
+        # assign the order again
         self.request.session['orders'] = orders
-        print('Here')
+        
         return super().form_valid(form)
     
     def get_context_data(self, **kwargs):
