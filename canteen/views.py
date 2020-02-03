@@ -119,8 +119,8 @@ class OrderView(CreateView):
     """
     View for creating orders.
     """
-    model = Order
-    fields = ['name', 'id_no', 'contact_no', 'count']
+    form_class = OrderForm
+    template_name = 'canteen/order_form.html'
     success_url = reverse_lazy('canteen:thanks')
 
     def dispatch(self, request, *args, **kwargs):
