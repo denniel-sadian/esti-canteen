@@ -50,28 +50,39 @@ class HomeView(ListView):
     context_object_name = 'dishes'
 
     def dispatch(self, request, *args, **kwargs):
+        
         close_old_connections()
+        
+        # get the orders
         orders_today = get_orders(request)
+        
         for o in request.session.get('orders', []):
+            # remove the pk of the order if it does not exist
             if not Order.objects.filter(id=o).exists():
                 self.request.session.get('orders').remove(o)
                 self.request.session['orders'] = (
                     self.request.session.get('orders'))
+        
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         close_old_connections()
         context = super().get_context_data(**kwargs)
+        
+        # get the sum of all orders today
         context['orders_count'] = Order.objects.filter(
             date__date=datetime.now().date()
             ).aggregate(Sum('count'))['count__sum']
+        
         return context
 
     def get_queryset(self):
         close_old_connections()
+
+        # order it by name
         return Dish.objects.filter(
             Q(date=datetime.now()) | Q(everyday=True)
-        ).order_by('-name')
+        ).order_by('name')
 
 
 class AboutView(TemplateView):
