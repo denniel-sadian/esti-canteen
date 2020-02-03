@@ -51,7 +51,7 @@ class Order(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=100)
     id_no = models.CharField('id no.', max_length=100)
-    contact_no = models.CharField(max_length=15)
+    contact_no = models.CharField(max_length=12, min_length=11)
     dish = models.ForeignKey(Dish, related_name='orders', on_delete=models.CASCADE)
     count = models.IntegerField(default=1)
     served = models.BooleanField(default=False)
