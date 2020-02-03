@@ -12,6 +12,14 @@ from .models import Order
 
 
 class OrderForm(forms.ModelForm):
+    contact_no = forms.CharField(min_length=11)
+
+    class Meta:
+        model = Order
+        fields = ['name', 'id_no', 'contact_no', 'count', 'dish']
+
+
+class UpdateOrderForm(forms.ModelForm):
     dish = forms.ModelChoiceField(queryset=None)
     contact_no = forms.CharField(min_length=11)
 
