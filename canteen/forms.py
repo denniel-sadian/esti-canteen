@@ -13,6 +13,7 @@ from .models import Order
 
 class OrderForm(forms.ModelForm):
     dish = forms.ModelChoiceField(queryset=None)
+    contact_no = forms.CharField(min_length=11)
 
     def __init__(self, *args, **kwargs):
         super().__init__( * args, ** kwargs)
