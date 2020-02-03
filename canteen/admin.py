@@ -1,3 +1,8 @@
+"""
+Models that are displayed on the django admin site.
+"""
+
+
 from django.contrib import admin
 from django.utils.timezone import datetime
 
