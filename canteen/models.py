@@ -15,10 +15,10 @@ class Dish(models.Model):
     """
     The Dish model.
     """
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
     price = models.FloatField()
     date = models.DateField()
-    description = models.CharField(max_length=101)
+    description = models.CharField(max_length=100)
     sold_out = models.BooleanField(default=False)
     everyday = models.BooleanField(default=False)
     photo = ResizedImageField(size=[400, 400], force_format='PNG')
@@ -37,7 +37,7 @@ class Feedback(models.Model):
     """
     date = models.DateTimeField(auto_now_add=True)
     contact_no = models.CharField(max_length=15)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
     content = models.TextField()
 
     def __str__(self):
