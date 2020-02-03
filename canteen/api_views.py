@@ -1,3 +1,8 @@
+"""
+These are the business logic of the the API.
+"""
+
+
 from django.utils.timezone import datetime
 from django.db.models import Q
 from rest_framework.viewsets import ModelViewSet
