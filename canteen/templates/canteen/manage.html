@@ -164,7 +164,7 @@
     }
 
     function viewDishes() {
-        location.assign("{% url 'canteen: manage - dishes' %}?date=" + dateInput.val() + '#dishes-today');
+        location.assign("{% url 'canteen:manage-dishes' %}?date=" + dateInput.val() + '#dishes-today');
     }
 
     $(document).ready(function () {
