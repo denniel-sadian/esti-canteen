@@ -50,10 +50,6 @@ class HomeView(ListView):
     context_object_name = 'dishes'
 
     def dispatch(self, request, *args, **kwargs):
-        """
-        Overriding this method to remove the IDs of those orders
-        that have been deleted already.
-        """
         close_old_connections()
         orders_today = get_orders(request)
         for o in request.session.get('orders', []):
@@ -64,9 +60,6 @@ class HomeView(ListView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        """
-        Overriding this method to add the count of the orders today.
-        """
         close_old_connections()
         context = super().get_context_data(**kwargs)
         context['orders_count'] = Order.objects.filter(
@@ -75,10 +68,6 @@ class HomeView(ListView):
         return context
 
     def get_queryset(self):
-        """
-        Overriding this method to reverse the order of the
-        dishes by name.
-        """
         close_old_connections()
         return Dish.objects.filter(
             Q(date=datetime.now()) | Q(everyday=True)
@@ -106,10 +95,6 @@ class DishView(DetailView):
     model = Dish
 
     def get_context_data(self, **kwargs):
-        """
-        Overriding this method to reverse the order of the
-        dishes by name.
-        """
         close_old_connections()
         context = super().get_context_data(**kwargs)
         context['orders'] = Order.objects.filter(
@@ -126,10 +111,6 @@ class OrderView(FormView):
     success_url = reverse_lazy('canteen:thanks')
 
     def dispatch(self, request, *args, **kwargs):
-        """
-        Overriding this method to restrict the customer
-        in ordering dishes that are already sold out.
-        """
         close_old_connections()
         self.dish = Dish.objects.get(id=kwargs['dish'])
         if self.dish.sold_out:
@@ -137,10 +118,6 @@ class OrderView(FormView):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        """
-        Overriding this method to append the order's ID to the customer's
-        session.
-        """
         form.instance.dish = self.dish
         form.instance.name = form.instance.name.upper()
         form.save()
@@ -153,9 +130,6 @@ class OrderView(FormView):
         return super().form_valid(form)
     
     def get_context_data(self, **kwargs):
-        """
-        Overriding this method to add the dish in the context.
-        """
         close_old_connections()
         context = super().get_context_data(**kwargs)
         context['dish'] = Dish.objects.get(id=self.kwargs['dish'])
@@ -178,9 +152,6 @@ class FeedbackView(CreateView):
     success_url = reverse_lazy('canteen:home')
 
     def form_valid(self, form):
-        """
-        Overriding this method to uppercase the name.
-        """
         form.instance.name = form.instance.name.upper()
         return super().form_valid(form)
 
