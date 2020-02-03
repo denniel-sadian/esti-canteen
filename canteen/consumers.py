@@ -1,3 +1,8 @@
+"""
+The one and only cosumer class.
+"""
+
+
 from channels.generic.websocket import AsyncWebsocketConsumer
 import json
 
