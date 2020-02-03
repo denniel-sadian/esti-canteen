@@ -18,11 +18,11 @@ from django.db.models import Q
 from django.utils.datastructures import MultiValueDictKeyError
 from django.http.response import HttpResponseRedirect
 from django.db import close_old_connections
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Dish
 from .models import Order
 from .models import Feedback
-from django.core.exceptions import ObjectDoesNotExist
 from .forms import UpdateOrderForm
 from .forms import OrderForm
 
