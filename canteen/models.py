@@ -49,7 +49,7 @@ class Order(models.Model):
     The order model.
     """
     date = models.DateTimeField(auto_now_add=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
     id_no = models.CharField('id no.', max_length=20)
     contact_no = models.CharField(max_length=12)
     dish = models.ForeignKey(Dish, related_name='orders', on_delete=models.CASCADE)
