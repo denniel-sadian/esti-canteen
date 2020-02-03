@@ -21,7 +21,7 @@ class Dish(models.Model):
     description = models.CharField(max_length=101)
     sold_out = models.BooleanField(default=False)
     everyday = models.BooleanField(default=False)
-    photo = ResizedImageField(size=[500, 500], force_format='PNG')
+    photo = ResizedImageField(size=[400, 400], force_format='PNG')
 
     class Meta:
         verbose_name_plural = 'dishes'
