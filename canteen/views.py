@@ -140,7 +140,7 @@ class OrderView(FormView):
         # assign the dish
         form.instance.dish = self.dish
         
-        # lower the name
+        # upper the name
         form.instance.name = form.instance.name.upper()
         
         # save it now
@@ -156,13 +156,16 @@ class OrderView(FormView):
         
         # assign the order again
         self.request.session['orders'] = orders
-        
+
         return super().form_valid(form)
     
     def get_context_data(self, **kwargs):
         close_old_connections()
         context = super().get_context_data(**kwargs)
-        context['dish'] = Dish.objects.get(id=self.kwargs['dish'])
+        
+        # add the chosen dish in the context
+        context['dish'] = self.dish
+        
         return context
 
 
@@ -182,6 +185,7 @@ class FeedbackView(CreateView):
     success_url = reverse_lazy('canteen:home')
 
     def form_valid(self, form):
+        # upper the name
         form.instance.name = form.instance.name.upper()
         return super().form_valid(form)
 
@@ -228,13 +232,13 @@ class ManageView(LoginRequiredMixin, ListView):
             ).order_by('name')
     
     def get_context_data(self, **kwargs):
-        """
-        Adding the everyday dishes to the context.
-        """
         close_old_connections()
         context = super().get_context_data(**kwargs)
+        
+        # add the everyday dishes
         context['everyday_dishes'] = Dish.objects.filter(
             everyday=True).order_by('name')
+        
         return context
 
 
