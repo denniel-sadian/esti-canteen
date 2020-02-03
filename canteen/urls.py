@@ -62,7 +62,7 @@ urlpatterns = [
          name='api-delete-feedback'),
     
     # The managing page of the dishes
-    path('manage/dish/', views.ManageView.as_view(), name='manage'),
+    path('manage/dish/', views.ManageView.as_view(), name='manage-dishes'),
 
     # The form for creating the dish
     path('manage/dish/create/', views.CreateDishView.as_view(), name='create'),
