@@ -11,6 +11,18 @@ from django.utils.timezone import datetime
 from django_resized import ResizedImageField
 
 
+# Signal-related imports
+from django.db.models.signals import post_save
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+from django.db import close_old_connections
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
+
+
+channel_layer = get_channel_layer()
+
+
 class Dish(models.Model):
     """
     The Dish model.
@@ -59,3 +71,35 @@ class Order(models.Model):
 
     def __str__(self):
         return f'{self.name} orderred {self.dish}'
+
+
+# Signal-related functions
+
+
+def send():
+    async_to_sync(channel_layer.group_send)(
+        "report", {
+            "type": "report",
+            'message': ''
+        }
+    )
+
+
+@receiver(post_save, sender=Order)
+def notify_report(sender, **kwargs):
+    send()
+
+
+@receiver(post_save, sender=Dish)
+def notify_dish(sender, **kwargs):
+    send()
+
+
+@receiver(post_delete, sender=Order)
+def notify_report_on_delete(sender, **kwargs):
+    send()
+
+
+@receiver(post_save, sender=Feedback)
+def notify_feedbacks(sender, **kwargs):
+    send()
