@@ -7,7 +7,6 @@ from django.urls import path, include
 from django.contrib.auth.views import LoginView
 
 from . import views
-from . import api_urls
 
 app_name = 'canteen'
 urlpatterns = [
