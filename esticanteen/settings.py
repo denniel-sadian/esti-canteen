@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'channels',
     'rest_framework',
 
-    'canteen.apps.CanteenConfig'
+    'canteen'
 ]
 
 MIDDLEWARE = [
