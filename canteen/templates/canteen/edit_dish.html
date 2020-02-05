@@ -19,21 +19,6 @@
         width: 50%;
     }
 
-    input[type="date"] {
-        padding: 10px;
-        display: block;
-        width: 100%;
-        border-radius: 0px 32px 32px 32px;
-        border-style: none;
-        border: 3px solid #8bc34a;
-        margin-bottom: 30px;
-    }
-
-    input[type="date"]:focus {
-        border-color: #4CAF50;
-        background: #d9ffad;
-    }
-
     #flex-cont {
         display: flex;
     }
@@ -72,19 +57,29 @@
         <form enctype="multipart/form-data" method="POST" action="" style="flex-grow: 8" class="w3-padding">
             {% csrf_token %}
             <div class="w3-white w3-padding-16 w3-round-large">
-                <label for="name">Name:</label>
-                {{ form.name }}
-                <label for="price">Price:</label>
-                {{ form.price }}
-                <label for="description">Description:</label>
-                {{ form.description }}
-                <label for="date">Date:</label>
-                <input type="date" name="date"
-                    value="{{ form.date.value.year }}-{% if form.date.value.month < 10 %}0{{ form.date.value.month }}{% else %}{{ form.date.value.month }}{% endif %}-{% if form.date.value.day < 10 %}0{{ form.date.value.day }}{% else %}{{ form.date.value.day }}{% endif %}"
-                    required="" id="id_date">
+                <span class="input-cont">
+                    <label for="name">Name:</label>
+                    {{ form.name }}
+                </span>
+                <span class="input-cont">
+                    <label for="price">Price:</label>
+                    {{ form.price }}
+                </span>
+                <span class="input-cont">
+                    <label for="description">Description:</label>
+                    {{ form.description }}
+                </span>
+                <span class="input-cont">
+                    <label for="date">Date:</label>
+                    <input type="date" name="date"
+                        value="{{ form.date.value.year }}-{% if form.date.value.month < 10 %}0{{ form.date.value.month }}{% else %}{{ form.date.value.month }}{% endif %}-{% if form.date.value.day < 10 %}0{{ form.date.value.day }}{% else %}{{ form.date.value.day }}{% endif %}"
+                        required="" id="id_date">
+                </span>
                 {{ form.date.errors }}
-                <label for="photo">Change photo:</label><br />
-                <input type="file" name="photo" accept="image/*" id="id_photo">
+                <span class="input-cont">
+                    <label for="photo">Change photo:</label>
+                    <input type="file" name="photo" accept="image/*" id="id_photo">
+                </span>
                 <label class="container">Sold out
                     <input type="checkbox" id="id_sold_out" name="sold_out"
                         {% if form.sold_out.value %}checked="checked" {% endif %}>
