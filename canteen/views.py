@@ -196,6 +196,7 @@ class FeedbackView(FormView):
     """
     form_class = FeedbackForm
     success_url = reverse_lazy('canteen:home')
+    template_name = 'canteen/feedback_form.html'
 
     def form_valid(self, form):
         # upper the name
