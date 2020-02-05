@@ -190,7 +190,7 @@ class UnableToOrderView(TemplateView):
     template_name = 'canteen/unable_to_order.html'
 
 
-class FeedbackView(FormView):
+class FeedbackView(CreateView):
     """
     View for creating a feedback.
     """
