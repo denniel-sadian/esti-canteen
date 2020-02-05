@@ -6,44 +6,39 @@
 
 {% block content %}
 <article class="w3-container w3-margin-top w3-padding-top">
-    <div class="w3-content">
+    <form method="POST" action="" class="w3-content">
+        {% csrf_token %}
         <h2>Please fill in the form</h2>
         <p>Make sure that you input correct information.</p>
-    </div>
-    <div class="w3-content">
-        <form method="POST" action="" class="w3-padding">
-            {% csrf_token %}
-            <div class="w3-white w3-padding-16 w3-round-large">
-                <span class="input-cont">
-                    <label for="name">Name:</label>
-                    {{ form.name }}
-                </span>
-                <span class="input-cont">
-                    <label for="id_no">ID Number:</label>
-                    {{ form.id_no }}
-                </span>
-                <span class="input-cont">
-                    <label for="contact_no">Contact Number:</label>
-                    {{ form.contact_no }}
-                </span>
-                <span class="input-cont">
-                    <label for="count">Quantity:</label>
-                    {{ form.count }}
-                </span>
-                <span class="input-cont">
-                    <label for="dish">Dish Ordered:</label>
-                    {{ form.dish }}
-                </span>
-            </div>
-            <hr />
-            <div class="w3-right w3-margin-top w3-margin-bottom">
-                <a href="{% url 'canteen:manage-dishes' %}" class="w3-button w3-border w3-round-xxlarge">
-                    <i class="fas fa-arrow-alt-circle-left"></i> Go back</a>
-                <button type="submit" class="w3-button w3-green w3-round-xxlarge">
-                    <i class="fas fa-save"></i> Save
-                </button>
-            </div>
-        </form>
-    </div>
+        <hr>
+        <span class="input-cont">
+            <label for="name">Name:</label>
+            {{ form.name }}
+        </span>
+        <span class="input-cont">
+            <label for="id_no">ID Number:</label>
+            {{ form.id_no }}
+        </span>
+        <span class="input-cont">
+            <label for="contact_no">Contact Number:</label>
+            {{ form.contact_no }}
+        </span>
+        <span class="input-cont">
+            <label for="count">Quantity:</label>
+            {{ form.count }}
+        </span>
+        <span class="input-cont">
+            <label for="dish">Dish Ordered:</label>
+            {{ form.dish }}
+        </span>
+        <hr />
+        <div class="w3-right w3-margin-top w3-margin-bottom">
+            <a href="{% url 'canteen:manage-dishes' %}" class="w3-button w3-border w3-round-xxlarge">
+                <i class="fas fa-arrow-alt-circle-left"></i> Go back</a>
+            <button type="submit" class="w3-button w3-green w3-round-xxlarge">
+                <i class="fas fa-save"></i> Save
+            </button>
+        </div>
+    </form>
 </article>
 {% endblock %}
