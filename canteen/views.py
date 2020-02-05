@@ -284,6 +284,13 @@ class UpdateDishView(LoginRequiredMixin, UpdateView):
               'everyday', 'date']
     template_name = 'canteen/edit_dish.html'
 
+    def form_valid(self, form):
+        # Uppercase the name.
+        form.instance.name = form.instance.name.upper()
+        # Set the date.
+        form.instance.date = datetime.now().date()
+        return super().form_valid(form)
+
 
 class UpdateOrderView(LoginRequiredMixin, UpdateView):
     """
@@ -294,6 +301,13 @@ class UpdateOrderView(LoginRequiredMixin, UpdateView):
     form_class = UpdateOrderForm
     model = Order
     template_name = 'canteen/edit_order.html'
+
+    def form_valid(self, form):
+        # Uppercase the name.
+        form.instance.name = form.instance.name.upper()
+        # Set the date.
+        form.instance.date = datetime.now().date()
+        return super().form_valid(form)
 
 
 def json_report(request):
