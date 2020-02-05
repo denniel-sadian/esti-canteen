@@ -24,7 +24,7 @@ class FeedbackForm(forms.ModelForm):
     contact_no = forms.CharField(min_length=11)
 
     class Meta:
-        models = Feedback
+        model = Feedback
         fields = ['name', 'contact_no', 'content']
 
 
