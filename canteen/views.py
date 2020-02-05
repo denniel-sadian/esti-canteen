@@ -29,6 +29,7 @@ from .models import Order
 from .models import Feedback
 from .forms import UpdateOrderForm
 from .forms import OrderForm
+from .forms import FeedbackForm
 
 
 def get_orders(request):
@@ -189,12 +190,11 @@ class UnableToOrderView(TemplateView):
     template_name = 'canteen/unable_to_order.html'
 
 
-class FeedbackView(CreateView):
+class FeedbackView(FormView):
     """
     View for creating a feedback.
     """
-    model = Feedback
-    fields = ['name', 'contact_no', 'content']
+    form_class = FeedbackForm
     success_url = reverse_lazy('canteen:home')
 
     def form_valid(self, form):
