@@ -32,6 +32,35 @@
             align-items: center;
         }
 
+        .input-cont {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            margin-bottom: 15px;
+        }
+
+        .input-cont label {
+            font-weight: bold;
+            font-size: 12px;
+            color: gray;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .input-cont input,
+        .input-cont select {
+            border: 2px solid gray;
+            border-radius: 5px;
+            padding-left: 5px;
+            transition: 0.5s;
+            height: 40px;
+        }
+
+        input:focus,
+        select:focus {
+            background: #d9ffad;
+            border-color: #4CAF50;
+        }
+
         .errorlist {
             color: red;
         }
@@ -67,22 +96,22 @@
             <h2><i class="fas fa-hamburger"></i> Ordering {{ dish.name|title }}</h2>
             <p>What a nice taste you have! Order quickly, we might run out of {{ dish.name|title }}.</p>
             <div class="w3-container w3-white w3-padding-16 w3-round-large">
-                <label for="name" class="w3-opacity">Name:</label>
-                <input type="text" class="w3-input w3-margin-bottom" name="name"
-                    value="{% if form.name.value %}{{ form.name.value }}{% endif %}" />
-                {{ form.name.errors }}
-                <label for=" name" class="w3-opacity">ID number:</label>
-                <input type="text" class="w3-input w3-margin-bottom" name="id_no"
-                    value="{% if form.id_no.value %}{{ form.id_no.value }}{% endif %}" />
-                {{ form.id_no.errors }}
-                <label for="name" class="w3-opacity">Contact No:</label>
-                <input type="text" class="w3-input w3-margin-bottom" name="contact_no"
-                    value="{% if form.contact_no.value %}{{ form.contact_no.value }}{% endif %}" />
-                {{ form.contact_no.errors }}
-                <label for="name" class="w3-opacity">How many orders:</label>
-                <input type="number" class="w3-input" name="count" min="1"
-                    value="{% if form.count.value %}{{ form.count.value }}{% endif %}" />
-                {{ form.count.errors }}
+                <span class="input-cont">
+                    <label for="name">Name:</label>
+                    {{ form.name }}
+                </span>
+                <span class="input-cont">
+                    <label for="id_no">ID Number:</label>
+                    {{ form.id_no }}
+                </span>
+                <span class="input-cont">
+                    <label for="contact_no">Contact Number:</label>
+                    {{ form.contact_no }}
+                </span>
+                <span class="input-cont">
+                    <label for="count">Quantity:</label>
+                    {{ form.count }}
+                </span>
             </div>
             <div class="w3-right w3-margin-top w3-margin-bottom">
                 <a href="{% url 'canteen:not-api-dish-detail' dish.id %}" id="go-back-btn"
