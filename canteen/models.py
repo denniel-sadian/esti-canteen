@@ -48,7 +48,7 @@ class Feedback(models.Model):
     The Feedback model.
     """
     date = models.DateTimeField(auto_now_add=True)
-    contact_no = models.CharField(max_length=15)
+    contact_no = models.CharField(max_length=12)
     name = models.CharField(max_length=50)
     content = models.TextField()
 
