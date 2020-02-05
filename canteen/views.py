@@ -7,7 +7,6 @@ from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
-from django.views.generic.edit import FormView
 from django.http import JsonResponse
 from django.utils.timezone import datetime
 from django.urls import reverse_lazy
@@ -130,7 +129,7 @@ class DishView(DetailView):
         return context
 
 
-class OrderView(FormView):
+class OrderView(CreateView):
     """
     View for creating orders.
     """
