@@ -11,8 +11,9 @@ from django_resized import ResizedImageField
 # Signal-related imports
 from django.db.models.signals import post_save
 from django.db.models.signals import post_delete
-from django.dispatch import receiver
 from django.db import close_old_connections
+from django.dispatch import receiver
+
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 
