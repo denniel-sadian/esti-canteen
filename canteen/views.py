@@ -20,6 +20,9 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.http.response import HttpResponseRedirect
 from django.db import close_old_connections
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.signals import request_started
+from django.core.signals import request_finished
+from django.dispatch import receiver
 
 from .models import Dish
 from .models import Order
@@ -41,6 +44,16 @@ def get_orders(request):
         # Give all orders today.
         return Order.objects.filter(
             date__date=datetime.now().date()).order_by('-date')
+
+
+@receiver(request_started)
+def started_request(**kwargs):
+    close_old_connections()
+
+
+@receiver(request_finished)
+def finished_request(**kwargs):
+    close_old_connections()
 
 
 class HomeView(ListView):
