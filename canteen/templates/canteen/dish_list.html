@@ -254,16 +254,16 @@
                         for (var i in data) {
                             if (data[i].served) {
                                 ul.append($(
-                                    '<li class="served"><i class="fas fa-check-circle w3-text-green"></i> <span>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' has been served already.</span></li>'
+                                    '<li class="served"><i class="fas fa-check-circle w3-text-green"></i> <span>The order of ' + data[i].name + ', which was ' + data[i].dish.name + ', has been served already.</span></li>'
                                 ));
                             } else {
                                 if (data[i].ready) {
                                     ul.append($(
-                                        '<li class="ready"><i class="fas fa-exclamation-circle w3-text-yellow"></i> <span>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is now ready to be served.</span></li > '
+                                        '<li class="ready"><i class="fas fa-exclamation-circle w3-text-yellow"></i> <span>The order of ' + data[i].name + ", which is " + data[i].dish.name + ' with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is now ready to be served.</span></li > '
                                     ));
                                 } else {
                                     ul.append($(
-                                        '<li class="notReady"><i class="fas fa-times-circle w3-text-red"></i> <span>' + data[i].name + "'s order \"" + data[i].dish.name + '" with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is not yet ready.</span></li > '
+                                        '<li class="notReady"><i class="fas fa-times-circle w3-text-red"></i> <span>The order of ' + data[i].name + ", which is " + data[i].dish.name + ' with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is not yet ready.</span></li > '
                                     ));
                                 }
                             }
