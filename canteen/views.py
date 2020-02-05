@@ -2,26 +2,26 @@
 Views for the `canteen`
 """
 
+from django.dispatch import receiver
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
-from django.http import JsonResponse
 from django.utils.timezone import datetime
-from django.urls import reverse_lazy
-from django.http import HttpResponseForbidden
-from django.http import HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Sum
-from django.db.models import Q
 from django.utils.datastructures import MultiValueDictKeyError
+from django.http import JsonResponse
+from django.http import HttpResponseForbidden
 from django.http.response import HttpResponseRedirect
-from django.db import close_old_connections
+from django.http import HttpResponse
+from django.urls import reverse_lazy
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.signals import request_started
 from django.core.signals import request_finished
-from django.dispatch import receiver
+from django.db.models import Sum
+from django.db.models import Q
+from django.db import close_old_connections
 
 from .models import Dish
 from .models import Order
