@@ -80,7 +80,4 @@ urlpatterns = [
     path('login/', LoginView.as_view(
         template_name='canteen/login.html',
     )),
-
-    # The root of the "real" API that is useless
-    path('api/', include(api_urls.urlpatterns))
 ]
