@@ -14,7 +14,26 @@
         <form method="POST" action="" class="w3-padding">
             {% csrf_token %}
             <div class="w3-white w3-padding-16 w3-round-large">
-                {{ form }}
+                <span class="input-cont">
+                    <label for="name">Name:</label>
+                    {{ form.name }}
+                </span>
+                <span class="input-cont">
+                    <label for="id_no">ID Number:</label>
+                    {{ form.id_no }}
+                </span>
+                <span class="input-cont">
+                    <label for="contact_no">Contact Number:</label>
+                    {{ form.contact_no }}
+                </span>
+                <span class="input-cont">
+                    <label for="count">Quantity:</label>
+                    {{ form.count }}
+                </span>
+                <span class="input-cont">
+                    <label for="dish">Dish Ordered:</label>
+                    {{ form.dish }}
+                </span>
             </div>
             <hr />
             <div class="w3-right w3-margin-top w3-margin-bottom">
