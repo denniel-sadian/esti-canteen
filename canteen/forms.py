@@ -9,6 +9,7 @@ from django.db.models import Q
 
 from .models import Dish
 from .models import Order
+from .models import Feedback
 
 
 class OrderForm(forms.ModelForm):
@@ -17,6 +18,14 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['name', 'id_no', 'contact_no', 'count']
+
+
+class FeedbackForm(forms.ModelForm):
+    contact_no = forms.CharField(min_length=11)
+
+    class Meta:
+        models = Feedback
+        fields = ['name', 'contact_no', 'content']
 
 
 class UpdateOrderForm(forms.ModelForm):
