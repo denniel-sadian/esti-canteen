@@ -52,7 +52,7 @@
     </div>
     <div id="flex-cont" class="w3-content">
         <div id="image">
-            <img class="w3-round-large w3-border w3-border-green" src="{{ form.photo.value }}">
+            <img class="w3-round-large w3-border w3-border-green" src="{{ form.photo.value.url }}">
         </div>
         <form enctype="multipart/form-data" method="POST" action="" style="flex-grow: 8" class="w3-padding">
             {% csrf_token %}
