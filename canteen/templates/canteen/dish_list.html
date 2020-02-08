@@ -39,6 +39,10 @@
             background: url("{% static 'canteen/home-bg.jpg' %}");
         }
 
+        .linear-bg {
+            background: linear-gradient(to right, #2196F3, violet);
+        }
+
         header {
             height: 100%;
             background: url("{% static 'canteen/canteen-bg.jpg' %}") no-repeat center fixed;
@@ -199,7 +203,7 @@
                 </p>
             </div>
             <div class="bttn">
-                <a href="#article" class="w3-button w3-padding w3-round-xxlarge w3-light-green">
+                <a href="#article" class="w3-button w3-padding w3-round-xxlarge linear-bg w3-text-white">
                     <i class="fas fa-clipboard-list"></i> See the menu</a>
             </div>
         </div>
