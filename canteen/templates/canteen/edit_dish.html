@@ -70,7 +70,7 @@
                     {{ form.description }}
                 </span>
                 <span class="input-cont">
-                    <label for="date">Date:</label>
+                    <label for="date">For Date:</label>
                     <input type="date" name="date"
                         value="{{ form.date.value.year }}-{% if form.date.value.month < 10 %}0{{ form.date.value.month }}{% else %}{{ form.date.value.month }}{% endif %}-{% if form.date.value.day < 10 %}0{{ form.date.value.day }}{% else %}{{ form.date.value.day }}{% endif %}"
                         required="" id="id_date">
