@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <style>
-        @import url(https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap);
+        @import url(https://fonts.googleapis.com/css?family=Sofia);
 
         html,
         body {
@@ -85,12 +85,12 @@
         }
 
         body>div:first-child h1 {
-            font-family: 'Roboto Slab', serif;
-            font-weight: normal;
+            font-family: 'Sofia';
+            font-weight: 800;
         }
 
         .standout {
-            background: rgba(128, 128, 128, 0.603);
+            background: rgba(128, 128, 128, 0.438);
             border-radius: 10px;
             padding: 10px;
             border: 1px dashed white;
@@ -116,6 +116,10 @@
             body>div:first-child {
                 flex-direction: column;
                 padding: 16px;
+            }
+
+            .standout {
+                background: rgba(128, 128, 128, 0.836)
             }
 
             #dish-image {
@@ -144,7 +148,7 @@
                     class="fas fa-pencil-alt"></i></a>
             {% endif %}
             <div class="w3-container">
-                <h1 style="margin:0px"><i class="fas fa-drumstick-bite"></i></h1>
+                <h1 style="margin:0px"><i class="w3-text-red fas fa-heart"></i></h1>
                 <h1 style="margin-top:0px" class="standout">{{ dish.name|title }}</h1>
                 {% if dish.sold_out %}
                 <p class="w3-large w3-tag w3-round w3-red">SOLD OUT</p>
