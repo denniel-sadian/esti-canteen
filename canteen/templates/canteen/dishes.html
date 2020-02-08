@@ -15,10 +15,14 @@
         position: relative;
         margin: 10px;
         border-radius: 16px;
+        transition: 0.3s;
+        animation: move-up;
     }
 
     .dish-cont:hover {
         cursor: pointer;
+        opacity: 0.5;
+        bottom: 5px;
     }
 
     .dish-cont img {
@@ -37,6 +41,7 @@
         color: white;
         width: 100%;
         border-radius: 0px 0px 12px 12px;
+        padding: 8px;
     }
 
     .dish-cont div h4 {
@@ -96,7 +101,7 @@
     {% for dish in dishes %}
     <div>
         <div onclick="location.assign('{% url 'canteen:not-api-dish-detail' dish.id %}')"
-            class="dish-cont w3-animate-zoom">
+            class="dish-cont w3-animate-zoom w3-card-4">
             {% if dish.sold_out %}
             <div class="sold-out-tag">
                 <h1>SOLD OUT</h1>
