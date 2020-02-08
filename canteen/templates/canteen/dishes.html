@@ -32,18 +32,18 @@
         height: 300px;
         object-fit: cover;
         border-radius: 16px;
-        border: 2px solid #9c27b0;
+        border: 2px solid #2196F3;
     }
 
-    .dish-cont div {
+    .dish-cont div.dish-title {
         position: absolute;
         bottom: 0px;
         text-align: center;
-        background: #9b27b0;
         color: white;
         width: 100%;
         border-radius: 0px 0px 12px 12px;
         padding: 8px;
+        background: linear-gradient(to right, #2196F3, violet);
     }
 
     .dish-cont div h4 {
@@ -64,6 +64,7 @@
         align-items: center;
         position: absolute;
         background: none !important;
+        color: white;
     }
 
     .sold-out-tag h1 {
@@ -77,7 +78,7 @@
         position: absolute;
         top: 10px;
         right: 10px;
-        background: #9c27b0;
+        background: #2196F3;
     }
 
     @media screen and (max-width: 750px) {
@@ -116,7 +117,7 @@
                 alt="{{ dish.name|title }}">
             <span class="w3-card-4 w3-tag w3-round-xxlarge price {% if dish.sold_out %}w3-opacity{% endif %}">₱
                 {{ dish.price|intcomma }}</span>
-            <div class="{% if dish.sold_out %}w3-opacity{% endif %}">
+            <div class="dish-title {% if dish.sold_out %}w3-opacity{% endif %}">
                 <h4>{{ dish.name|title }}</h4>
             </div>
         </div>
