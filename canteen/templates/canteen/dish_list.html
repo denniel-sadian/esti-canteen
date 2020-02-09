@@ -250,7 +250,7 @@
             {% endif %}
         </div>
         {% if request.session.orders %}
-        <div class="w3-content w3-container w3-white" style="margin-top: 50px;">
+        <div class="w3-content w3-container w3-white w3-round" style="margin-top: 50px;">
             <h3><i class="fas fa-clipboard-list"></i> These are the orders from this device.</h3>
             <p class="w3-small">The orders made from this device are only displaying here and on the real-time admin
                 page. Please do not close this tab and your browser if you want to keep track of the orders' status. The
@@ -275,16 +275,16 @@
                         for (var i in data) {
                             if (data[i].served) {
                                 ul.append($(
-                                    '<li class="served"><i class="fas fa-check-circle w3-text-green"></i> <span>The order of ' + data[i].name + ', which was ' + data[i].dish.name + ', has been served already.</span></li>'
+                                    '<li class="served w3-round"><i class="fas fa-check-circle w3-text-green"></i> <span>The order of ' + data[i].name + ', which was ' + data[i].dish.name + ', has been served already.</span></li>'
                                 ));
                             } else {
                                 if (data[i].ready) {
                                     ul.append($(
-                                        '<li class="ready"><i class="fas fa-exclamation-circle w3-text-yellow"></i> <span>The order of ' + data[i].name + ", which is " + data[i].dish.name + ' with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is now ready to be served.</span></li > '
+                                        '<li class="ready w3-round"><i class="fas fa-exclamation-circle w3-text-yellow"></i> <span>The order of ' + data[i].name + ", which is " + data[i].dish.name + ' with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is now ready to be served.</span></li > '
                                     ));
                                 } else {
                                     ul.append($(
-                                        '<li class="notReady"><i class="fas fa-times-circle w3-text-red"></i> <span>The order of ' + data[i].name + ", which is " + data[i].dish.name + ' with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is not yet ready.</span></li > '
+                                        '<li class="notReady w3-round"><i class="fas fa-times-circle w3-text-red"></i> <span>The order of ' + data[i].name + ", which is " + data[i].dish.name + ' with the order quantity of ' + data[i].dish.count + ' and priced as ₱' + data[i].dish.price + ' is not yet ready.</span></li > '
                                     ));
                                 }
                             }
