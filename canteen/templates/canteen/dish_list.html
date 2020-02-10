@@ -213,12 +213,90 @@
                 font-size: 90px;
             }
         }
+
+        .nav-cont {
+            width: 100%;
+            position: fixed;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .navigation {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            max-width: 980px;
+            padding: 10px;
+        }
+
+        .nav-cont .brand {
+            flex-grow: 1;
+            font-family: 'Sofia';
+            font-weight: 800;
+            font-size: 30px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .navigation .brand img {
+            margin-right: 10px;
+        }
+
+        .navigation .brand a {
+            text-decoration: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: #f1f1f17a;
+            border: 2px solid #f1f1f1;
+            color: white;
+            border-radius: 32px;
+            padding: 0px 16px 0px 16px;
+        }
+
+        .navigation .links {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: center;
+            flex-grow: 2;
+        }
+
+        .navigation .links a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            height: 100%;
+            padding: 0px 16px 0px 16px;
+            margin: 0px 5px 0px 5px;
+            background: #f1f1f17a;
+            border: 2px solid #f1f1f1;
+            color: white;
+            border-radius: 32px;
+        }
     </style>
 </head>
 
 <body>
 
-    <header class="w3-animate-opacity">
+    <div class="nav-cont">
+        <nav class="navigation">
+            <div class="brand"><a href="{% url 'canteen:home' %}"><img src="{% static 'canteen/esti_icon.png' %}"
+                        width="25" height="auto"> ESTI Canteen</a>
+            </div>
+            <div class="links">
+                <a href="{% url 'canteen:manage-dishes' %}">Manage</a>
+                <a href="{% url 'canteen:feedback' %}">Feedback</a>
+                <a href="{% url 'canteen:privacy-policy' %}">Privacy Policy</a>
+                <a href="{% url 'canteen:about' %}">About</a>
+            </div>
+        </nav>
+    </div>
+
+    <header>
         <div class="grid-cont">
             <div class="logo">
                 <img id="logo" src="{% static 'canteen/esti_square.png' %}" width="350" height="350" />
