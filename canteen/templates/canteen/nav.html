@@ -156,16 +156,19 @@
         nav.toggleClass('scrolled', $(this).scrollTop() > nav.height());
         $(document).scroll(function () {
             nav.toggleClass('scrolled', $(this).scrollTop() > nav.height());
+            nav.toggleClass('w3-card-4', $(this).scrollTop() > nav.height());
         });
         menuBtn.click(function () {
             if (toggleMenu === 1) {
                 navLinks.slideDown();
                 nav.addClass('scrolled');
+                nav.addClass('w3-card-4');
                 $(this).html('<i class="fa fa-times"></i>');
                 toggleMenu = 0;
             } else {
                 navLinks.slideUp();
                 nav.removeClass('scrolled');
+                nav.removeClass('w3-card-4');
                 $(this).html('<i class="fa fa-bars"></i>');
                 toggleMenu = 1;
             }
