@@ -155,8 +155,8 @@
         var menuBtn = $('#menu-btn');
         nav.toggleClass('scrolled', $(this).scrollTop() > nav.height());
         $(document).scroll(function () {
-            nav.toggleClass('scrolled', $(this).scrollTop() > nav.height());
-            nav.toggleClass('w3-card-4', $(this).scrollTop() > nav.height());
+            nav.toggleClass('scrolled', $(this).scrollTop() > nav.height() || toggleMenu === 0);
+            nav.toggleClass('w3-card-4', $(this).scrollTop() > nav.height() || toggleMenu === 0);
         });
         menuBtn.click(function () {
             if (toggleMenu === 1) {
