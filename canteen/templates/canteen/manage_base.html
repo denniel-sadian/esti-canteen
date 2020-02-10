@@ -179,6 +179,8 @@
             <h1>{% block header %}Welcome to the Managing Site{% endblock %}</h1>
             <p class="w3-large">This page is only accessible by site admins.</p>
             <p>
+                <a href="{% url 'canteen:manage-dishes' %}" class="w3-button w3-border w3-round-xxlarge"><i
+                        class="fa fa-drumstick-bite"></i> Dishes</a>
                 <a href="{% url 'canteen:orders' %}" class="w3-button w3-border w3-round-xxlarge"><i
                         class="fas fa-clipboard-list"></i> Orders & Others</a>
                 <a href="{% url 'admin:logout' %}" class="w3-button w3-border w3-round-xxlarge"><i
