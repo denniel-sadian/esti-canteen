@@ -1,0 +1,171 @@
+<style>
+    /* NAV */
+
+    .nav-cont {
+        width: 100%;
+        position: fixed;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        z-index: 2;
+        transition: 0.3s;
+    }
+
+    .navigation {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        max-width: 980px;
+        padding: 8px;
+    }
+
+    .nav-cont .brand {
+        flex-grow: 1;
+        font-family: 'Sofia';
+        font-weight: 800;
+        font-size: 25px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .navigation .brand img {
+        margin-right: 10px;
+    }
+
+    .navigation .brand a {
+        text-decoration: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.521);
+        border-radius: 32px;
+        padding: 0px 16px 0px 16px;
+    }
+
+    .navigation .links {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        flex-grow: 2;
+    }
+
+    .navigation .links a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        height: 100%;
+        padding: 0px 16px 0px 16px;
+        margin: 0px 5px 0px 5px;
+        border-radius: 32px;
+        background: rgba(255, 255, 255, 0.521);
+    }
+
+    .navigation .links i {
+        padding-right: 5px;
+    }
+
+    .scrolled {
+        background: white !important;
+    }
+
+    .scrolled .links a {
+        background: #9e9e9e3b;
+    }
+
+    #menu-btn {
+        display: none;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        margin: 8px;
+        height: 37px;
+        width: 37px;
+        border-radius: 100%;
+        border: none;
+        background: rgba(255, 255, 255, 0.521);
+        color: black !important;
+        z-index: 3;
+    }
+
+    #menu-btn:hover {
+        background: #f1f1f1;
+    }
+
+    @media (max-width: 800px) {
+        /* NAV Media */
+
+        #menu-btn {
+            display: block;
+        }
+
+        .navigation {
+            flex-direction: column;
+            padding: 0px;
+        }
+
+        .navigation .brand {
+            padding: 8px;
+        }
+
+        .navigation .links {
+            display: none;
+        }
+
+        .navigation .links a {
+            display: block;
+            align-items: center;
+            text-decoration: none;
+            padding: 10px 16px 10px 32px;
+            margin: unset !important;
+            border-radius: 0px !important;
+            background: white !important;
+        }
+
+        .navigation .links a:hover {
+            background: #f1f1f1 !important;
+        }
+    }
+</style>
+
+<button id="menu-btn"><i class="fa fa-bars"></i></button>
+<div class="nav-cont">
+    <nav class="navigation">
+        <div class="brand"><a href="{% url 'canteen:home' %}"><img src="{% static 'canteen/esti_icon.png' %}" width="25"
+                    height="auto"> ESTI Canteen</a>
+        </div>
+        <div class="links">
+            <a href="{% url 'canteen:manage-dishes' %}"><i class="fas fa-tools"></i> Manage</a>
+            <a href="{% url 'canteen:feedback' %}"><i class="fas fa-feather-alt"></i> Feedback</a>
+            <a href="{% url 'canteen:privacy-policy' %}"><i class="fas fa-cookie"></i> Privacy Policy</a>
+            <a href="{% url 'canteen:about' %}"><i class="fas fa-info-circle"></i> About</a>
+        </div>
+    </nav>
+</div>
+
+<script>
+    var toggleMenu = 1;
+    $(document).ready(function () {
+        var nav = $(".nav-cont");
+        var navLinks = $('.navigation .links');
+        var menuBtn = $('#menu-btn');
+        nav.toggleClass('scrolled', $(this).scrollTop() > nav.height());
+        $(document).scroll(function () {
+            nav.toggleClass('scrolled', $(this).scrollTop() > nav.height());
+        });
+        menuBtn.click(function () {
+            if (toggleMenu === 1) {
+                navLinks.slideDown();
+                nav.addClass('scrolled');
+                $(this).html('<i class="fa fa-times"></i>');
+                toggleMenu = 0;
+            } else {
+                navLinks.slideUp();
+                nav.removeClass('scrolled');
+                $(this).html('<i class="fa fa-bars"></i>');
+                toggleMenu = 1;
+            }
+        });
+    })
+</script>
