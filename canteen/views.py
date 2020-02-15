@@ -310,6 +310,22 @@ class UpdateOrderView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
+class ServerErrorView(TemplateView):
+    template_name = 'canteen/500.html'
+
+
+class NotFoundView(TemplateView):
+    template_name = 'canteen/404.html'
+
+
+class PermissionDeniedView(TemplateView):
+    template_name = 'canteen/403.html'
+
+
+class BadRequestView(TemplateView):
+    template_name = 'canteen/400.html'
+
+
 def json_report(request):
     """
     View for giving the report.
