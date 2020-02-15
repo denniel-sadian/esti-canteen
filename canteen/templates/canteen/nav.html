@@ -167,8 +167,10 @@
                 toggleMenu = 0;
             } else {
                 navLinks.slideUp();
-                nav.removeClass('scrolled');
-                nav.removeClass('w3-card-4');
+                if ($(this).scrollTop() > nav.height()) {
+                    nav.removeClass('scrolled');
+                    nav.removeClass('w3-card-4');
+                }
                 $(this).html('<i class="fa fa-bars"></i>');
                 toggleMenu = 1;
             }
