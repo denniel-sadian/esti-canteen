@@ -315,6 +315,18 @@ def not_found_view(request):
     return render(request, 'canteen/404.html')
 
 
+def server_error_view(request):
+    return render(request, 'canteen/500.html')
+
+
+def bad_request_view(request):
+    return render(request, 'canteen/403.html')
+
+
+def permission_denied_view(request):
+    return render(request, 'canteen/400.html')
+
+
 def json_report(request):
     """
     View for giving the report.
