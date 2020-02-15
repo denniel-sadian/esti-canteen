@@ -4,6 +4,7 @@ Views for the `canteen`
 
 from django.dispatch import receiver
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic import ListView
 from django.views.generic import DetailView
@@ -310,20 +311,8 @@ class UpdateOrderView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class ServerErrorView(TemplateView):
-    template_name = 'canteen/500.html'
-
-
-class NotFoundView(TemplateView):
-    template_name = 'canteen/404.html'
-
-
-class PermissionDeniedView(TemplateView):
-    template_name = 'canteen/403.html'
-
-
-class BadRequestView(TemplateView):
-    template_name = 'canteen/400.html'
+def not_found_view(request):
+    return render(request, 'canteen/404.html')
 
 
 def json_report(request):
