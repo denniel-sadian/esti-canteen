@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 
 <!DOCTYPE html>
 <html>
@@ -213,6 +214,111 @@
                 font-size: 90px;
             }
         }
+
+        /* DISHES */
+
+        @import url(https://fonts.googleapis.com/css?family=Sofia);
+
+        #dishes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #dishes>div {
+            width: 33%;
+        }
+
+        .dish-cont {
+            position: relative;
+            margin: 10px;
+            border-radius: 16px;
+            transition: 0.3s;
+            animation: move-up;
+        }
+
+        .dish-cont:hover {
+            cursor: pointer;
+            opacity: 0.5;
+            bottom: 5px;
+        }
+
+        .dish-cont img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 3px solid #ff9800;
+        }
+
+        .dish-cont div.dish-title {
+            position: absolute;
+            bottom: 0px;
+            text-align: center;
+            color: white;
+            width: 100%;
+            border-radius: 0px 0px 12px 12px;
+            padding: 8px;
+            background: linear-gradient(to right, #ff9800, #9c27b0);
+        }
+
+        .dish-cont div h4 {
+            line-height: 1.5em;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            font-family: 'Sofia';
+            font-weight: 800;
+            font-size: 24px;
+        }
+
+        .sold-out-tag {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            background: none !important;
+            color: white;
+        }
+
+        .sold-out-tag h1 {
+            border-radius: 10px;
+            padding: 8px;
+            background: #f44336ed;
+            z-index: 1;
+        }
+
+        .price {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff9800;
+            font-family: 'Sofia';
+            font-weight: 600;
+        }
+
+        @media screen and (max-width: 750px) {
+            #dishes>div {
+                width: 50%;
+            }
+        }
+
+        @media screen and (max-width: 550px) {
+            #dishes>div {
+                width: 100%;
+            }
+
+            .dish-cont {
+                margin-left: unset;
+                margin-right: unset;
+            }
+
+            .dish-cont img {
+                height: 250px;
+            }
+        }
     </style>
 </head>
 
@@ -241,7 +347,28 @@
         <div class="w3-content">
             {% if dishes %}
             <h2><i class="fas fa-clipboard-list"></i> Our menu for today!</h2>
-            {% include 'canteen/dishes.html' with dishes=dishes %}
+            <div id="dishes">
+                {% for dish in dishes %}
+                <div>
+                    <div onclick="location.assign('{% url 'canteen:not-api-dish-detail' dish.id %}')"
+                        class="dish-cont w3-animate-zoom w3-card-4">
+                        {% if dish.sold_out %}
+                        <div class="sold-out-tag">
+                            <h1>SOLD OUT</h1>
+                        </div>
+                        {% endif %}
+                        <img src="{{ dish.photo.url }}" class="w3-image {% if dish.sold_out %}w3-opacity{% endif %}"
+                            alt="{{ dish.name|title }}">
+                        <span
+                            class="w3-card-4 w3-tag w3-round-xxlarge price {% if dish.sold_out %}w3-opacity{% endif %}">₱
+                            {{ dish.price|intcomma }}</span>
+                        <div class="dish-title {% if dish.sold_out %}w3-opacity{% endif %}">
+                            <h4>{{ dish.name|title }}</h4>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
             {% else %}
             <div class="w3-card-4 w3-container w3-orange w3-padding w3-center w3-round">
                 <h1><i class="fas fa-clock"></i><br />We're not yet cooking anything.</h1>
