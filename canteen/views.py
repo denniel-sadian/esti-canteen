@@ -4,7 +4,6 @@ Views for the `canteen`
 
 from django.dispatch import receiver
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic import ListView
 from django.views.generic import DetailView
@@ -309,22 +308,6 @@ class UpdateOrderView(LoginRequiredMixin, UpdateView):
         # Set the date.
         form.instance.date = datetime.now().date()
         return super().form_valid(form)
-
-
-def not_found_view(request):
-    return render(request, 'canteen/404.html')
-
-
-def server_error_view(request):
-    return render(request, 'canteen/500.html')
-
-
-def bad_request_view(request):
-    return render(request, 'canteen/403.html')
-
-
-def permission_denied_view(request):
-    return render(request, 'canteen/400.html')
 
 
 def json_report(request):
