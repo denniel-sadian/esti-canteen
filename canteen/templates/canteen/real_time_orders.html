@@ -54,6 +54,15 @@
         justify-content: center;
         align-items: center;
     }
+
+    .chart-cont {
+        display: flex;
+        justify-content: center;
+    }
+
+    .chart-cont canvas {
+        max-width: 500px;
+    }
 </style>
 {% endblock %}
 
@@ -73,7 +82,9 @@
         <p class="w3-large w3-opacity">
             <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
     </div>
-    <canvas id="audit-chart" width="400" height="400"></canvas>
+    <div class="chart-cont">
+        <canvas id="audit-chart"></canvas>
+    </div>
     <h2 style="margin-top: 50px"><i class="fas fa-clipboard-list"></i> Orders</h2>
     <p class="w3-small">This table lists all of the orders. By default, the orders for today are being listed. You
         can, however, view
@@ -117,22 +128,21 @@
     var reportSocket = new ReconnectingWebSocket(
         protocol + location.host +
         '/ws/update/');
-    var dateInput = $('#date');
-    var ctx = $('#audit-chart');
-    data = {
-        datasets: [{
-            data: [0, 0, 0]
-        }],
-        labels: [
-            'Amount Received',
-            'Yellow',
-            'Blue'
-        ]
-    };
-    var auditChart = new Chart(ctx, {
+    var config = {
         type: 'doughnut',
-        data: data
-    });
+        data: {
+            datasets: [{
+                data: [0, 0],
+                backgroundColor: ['#ff9800', '#f44336']
+            }],
+            labels: [
+                'Amount received',
+                'Amount not yet received'
+            ],
+        }
+    };
+    var auditChart = new Chart($('#audit-chart'), config);
+    var dateInput = $('#date');
     var orderId;
 
     function markServed(id) {
@@ -203,6 +213,11 @@
                     '</tr>' +
                     '</table>'
                 );
+                config.data.datasets[0].data = [
+                    data.audit.total_orders_served_amount,
+                    data.audit.total_amount_still_out
+                ];
+                auditChart.update();
                 $('#audit').html(auditTable);
 
                 var ordersTable = $(
