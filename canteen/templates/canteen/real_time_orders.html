@@ -73,6 +73,7 @@
         <p class="w3-large w3-opacity">
             <i class="fas fa-spinner w3-spin"></i> Loading, please wait...</p>
     </div>
+    <canvas id="audit-chart" width="400" height="400"></canvas>
     <h2 style="margin-top: 50px"><i class="fas fa-clipboard-list"></i> Orders</h2>
     <p class="w3-small">This table lists all of the orders. By default, the orders for today are being listed. You
         can, however, view
@@ -117,6 +118,21 @@
         protocol + location.host +
         '/ws/update/');
     var dateInput = $('#date');
+    var ctx = $('#audit-chart');
+    data = {
+        datasets: [{
+            data: [0, 0, 0]
+        }],
+        labels: [
+            'Amount Received',
+            'Yellow',
+            'Blue'
+        ]
+    };
+    var auditChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: data
+    });
     var orderId;
 
     function markServed(id) {
