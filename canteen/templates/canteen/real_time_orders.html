@@ -57,7 +57,8 @@
 
     .chart-cont {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
     }
 
     .chart-cont canvas {
@@ -84,6 +85,7 @@
     </div>
     <div class="chart-cont">
         <canvas id="audit-chart"></canvas>
+        <p>The above is the auditing chart.</p>
     </div>
     <h2 style="margin-top: 50px"><i class="fas fa-clipboard-list"></i> Orders</h2>
     <p class="w3-small">This table lists all of the orders. By default, the orders for today are being listed. You
