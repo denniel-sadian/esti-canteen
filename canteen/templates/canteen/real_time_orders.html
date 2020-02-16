@@ -133,12 +133,17 @@
         data: {
             datasets: [{
                 data: [0, 0],
-                backgroundColor: ['#ff9800', '#f44336']
+                backgroundColor: ['#ff9800', '#f44336'],
             }],
             labels: [
                 'Amount received',
                 'Amount not yet received'
             ],
+        },
+        options: {
+            tooltips: {
+                enabled: false,
+            }
         }
     };
     var auditChart = new Chart($('#audit-chart'), config);
