@@ -101,16 +101,11 @@
             background: rgba(0, 0, 0, 0.589);
         }
 
-        .white-art,
-        .bg-parallax {
+        .white-art {
             height: 80%;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        .bg-parallax {
-            height: 100%;
         }
 
         .white-art>div {
@@ -120,40 +115,16 @@
             text-align: center;
         }
 
-        .white-art>div img,
-        .bg-parallax>div img {
+        .white-art>div img {
             grid-area: image;
             justify-self: center;
         }
 
-        .white-art>div h1,
-        .bg-parallax>div h1 {
+        .white-art>div h1 {
             grid-area: text;
             align-self: center;
             font-family: "Nunito";
             font-weight: 800;
-        }
-
-        .bg-parallax {
-            background: url("{% static 'canteen/bg.jpg' %}") no-repeat fixed;
-            background-size: cover;
-            overflow: hidden;
-        }
-
-        .bg-parallax>div {
-            display: grid;
-            grid-template-areas:
-                "image text";
-            text-align: center;
-        }
-
-        .bg-parallax img {
-            padding: 20px;
-        }
-
-        .bg-parallax span {
-            background: rgba(0, 0, 0, 0.589);
-            color: white;
         }
 
         .served,
@@ -219,20 +190,17 @@
                 height: 140px;
             }
 
-            .white-art>div,
-            .bg-parallax>div {
+            .white-art>div {
                 grid-template-areas:
                     "image"
                     "text";
             }
 
-            .white-art>div img,
-            .bg-parallax>div img {
+            .white-art>div img {
                 width: 300px;
             }
 
-            .white-art>div h1,
-            .bg-parallax>div h1 {
+            .white-art>div h1 {
                 font-size: 30px !important;
             }
         }
@@ -271,15 +239,13 @@
                 height: 150px;
             }
 
-            .white-art>div,
-            .bg-parallax>div {
+            .white-art>div {
                 grid-template-areas:
                     "image"
                     "text";
             }
 
-            .white-art>div img,
-            .bg-parallax>div img {
+            .white-art>div img {
                 width: 350px;
             }
         }
@@ -324,10 +290,8 @@
     </article>
 
     <article class="bg-parallax">
-        <div class="w3-content">
-            <img src="{% static 'canteen/coffee.png' %}" width="400" height="auto" alt="coffee">
-            <h1><span>At our canteen, we greet you as warm as coffee. You'll always feel comfortable.</span></h1>
-        </div>
+        <img src="{% static 'canteen/coffee.png' %}" width="400" height="auto" alt="coffee">
+        <h1><span>At our canteen, we greet you as warm as coffee. You'll always feel comfortable.</span></h1>
     </article>
 
     {% if request.session.orders %}
