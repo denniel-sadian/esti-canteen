@@ -58,7 +58,7 @@ def finished_request(**kwargs):
 
 class HomeView(ListView):
     """
-    View for listing the dishes at home page.
+    View for listing the dishes.
     """
     context_object_name = 'dishes'
 
