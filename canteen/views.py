@@ -62,13 +62,6 @@ class LandingView(TemplateView):
     """
     template_name = 'canteen/index.html'
 
-
-class MenuView(ListView):
-    """
-    View for listing the dishes.
-    """
-    context_object_name = 'dishes'
-
     def dispatch(self, request, *args, **kwargs):
         
         close_old_connections()
@@ -84,6 +77,13 @@ class MenuView(ListView):
                     self.request.session.get('orders'))
         
         return super().dispatch(request, *args, **kwargs)
+
+
+class MenuView(ListView):
+    """
+    View for listing the dishes.
+    """
+    context_object_name = 'dishes'
 
     def get_context_data(self, **kwargs):
         close_old_connections()
