@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <style>
-        @import url(https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap);
+        @import url(https://fonts.googleapis.com/css?family=Nunito);
 
         html,
         body {
@@ -39,68 +39,20 @@
             background: url("{% static 'canteen/home-bg.jpg' %}");
         }
 
-        .linear-bg {
-            background: linear-gradient(to right, #2196F3, violet);
-        }
-
-        .linear-bg:hover {
-            background: #c6c6c6;
-        }
-
         header {
-            height: 100%;
-            background: url("{% static 'canteen/canteen-bg.jpg' %}") no-repeat center fixed;
-            background-size: cover;
-            overflow: hidden;
+            height: 50%;
+            background: linear-gradient(to bottom right, #2196F3, violet);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            color: white;
         }
 
-        .grid-cont {
-            display: grid;
-            grid-template-columns: 2fr 3fr;
-            grid-template-areas:
-                "logo text"
-                "bttn bttn";
-            padding-left: 100px;
-            padding-right: 100px;
-        }
-
-        .logo {
-            grid-area: logo;
-            align-self: center;
-            justify-self: end;
-        }
-
-        .text {
-            grid-area: text;
-            align-self: center;
-            justify-self: start;
-        }
-
-        .bttn {
-            grid-area: bttn;
-            align-self: start;
-            justify-self: center;
-            width: 100%;
-            text-align: center;
-        }
-
-        .bttn a {
-            width: 100%;
-            max-width: 25%;
-        }
-
-        header h1 {
-            line-height: 1.32em;
-            font-family: 'Roboto Slab', serif;
-            font-weight: bolder;
-        }
-
-        header h1 span,
-        header p span {
-            background: rgba(0, 0, 0, 0.589);
+        header h1,
+        header p {
+            font-family: "Nunito";
+            font-weight: 800;
         }
 
         .served,
@@ -136,82 +88,19 @@
         @media (max-width:768px) {
 
             /* Small */
-            header h1 {
-                font-size: 50px;
-            }
 
-            .grid-cont {
-                grid-template-areas:
-                    "logo logo"
-                    "text text"
-                    "bttn bttn";
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-
-            .logo,
-            .text,
-            .bttn {
-                justify-self: center;
-                text-align: center;
-            }
-
-            .bttn a {
-                width: 100%;
-                max-width: 50%;
-            }
-
-            #logo {
-                width: 140px;
-                height: 140px;
-            }
-
-            footer h1 {
-                font-size: 25px;
-            }
         }
 
         @media (max-width:992px) and (min-width:601px) {
 
             /* Medium */
-            header h1 {
-                font-size: 70px;
-            }
 
-            .grid-cont {
-                grid-template-areas:
-                    "logo logo"
-                    "text text"
-                    "bttn bttn";
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-
-            .logo {
-                justify-self: center;
-            }
-
-            .text {
-                text-align: center;
-            }
-
-            .bttn a {
-                width: 100%;
-                max-width: 30%;
-            }
-
-            #logo {
-                width: 150px;
-                height: 150px;
-            }
         }
 
         @media (min-width:993px) {
 
             /* Large */
-            header h1 {
-                font-size: 90px;
-            }
+
         }
 
         /* DISHES */
@@ -325,20 +214,10 @@
 
     {% include 'canteen/nav.html' %}
 
-    <header class="w3-animate-opacity">
-        <div class="grid-cont">
-            <div class="logo">
-                <img id="logo" src="{% static 'canteen/esti_square.png' %}" width="350" height="350" />
-            </div>
-            <div class="text">
-                <h1 class="w3-text-light-green"><span>Welcome to the ESTI Canteen!</span></h1>
-                <p class="w3-large w3-text-white"><span>Where you can find the best delicacies.</span>
-                </p>
-            </div>
-            <div class="bttn">
-                <a href="#article" class="w3-button w3-padding w3-round-xxlarge linear-bg w3-text-white">
-                    <i class="fas fa-clipboard-list"></i> See the menu</a>
-            </div>
+    <header class="w3-animate-opacity w3-container">
+        <div class="w3-content">
+            <h1>Welcome to the Menu</h1>
+            <p>What do want this day? Order your favorite dish now!</p>
         </div>
     </header>
 
