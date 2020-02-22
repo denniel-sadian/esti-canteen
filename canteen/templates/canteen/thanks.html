@@ -62,8 +62,9 @@
             <p class="w3-large">You can keep track of the status of your order on the home page of the website. Please
                 claim your order as soon as it's marked ready. Thank you!</p>
             <p>
-                <a href="{% url 'canteen:home' %}" class="w3-margin w3-button w3-round-xxlarge w3-purple">
-                    <i class="fas fa-home"></i> Home</a>
+                <a href="{% url 'canteen:home' %}#orders-on-device"
+                    class="w3-margin w3-button w3-round-xxlarge w3-purple">
+                    <i class="fas fa-home"></i> My Orders</a>
                 <a href="{% url 'canteen:feedback' %}" class="w3-button w3-round-xxlarge w3-purple">
                     <i class="fas fa-feather-alt"></i> Feedback</a>
             </p>
