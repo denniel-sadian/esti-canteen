@@ -330,9 +330,9 @@
         </div>
     </article>
 
-    <article>
-        {% if request.session.orders %}
-        <div class="w3-content w3-container w3-white w3-round" style="margin-top: 50px; margin-bottom: 50px;">
+    {% if request.session.orders %}
+    <article class="w3-container" id="orders-on-device">
+        <div class="w3-content w3-white w3-round" style="margin-top: 50px; margin-bottom: 50px;">
             <h3><i class="fas fa-clipboard-list"></i> These are the orders from this device.</h3>
             <p class="w3-small">The orders made from this device are only displaying here and on the real-time admin
                 page. Please do not close this tab and your browser if you want to keep track of the orders' status. The
@@ -386,8 +386,8 @@
                 };
             })
         </script>
-        {% endif %}
     </article>
+    {% endif %}
 
     {% include 'canteen/footer.html' with canShare=True %}
 
