@@ -56,7 +56,7 @@ def finished_request(**kwargs):
     close_old_connections()
 
 
-class HomeView(ListView):
+class MenuView(ListView):
     """
     View for listing the dishes.
     """
