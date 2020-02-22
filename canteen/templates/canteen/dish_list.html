@@ -28,48 +28,33 @@
     <style>
         @import url(https://fonts.googleapis.com/css?family=Nunito);
 
-        html,
-        body {
-            height: 100%;
-            padding: 0px;
-            margin: 0px;
-        }
-
         body {
             background: url("{% static 'canteen/home-bg.jpg' %}");
         }
 
         header {
-            height: 50%;
             background: linear-gradient(to bottom right, #2196F3, violet);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             color: white;
+            padding: 100px 0px 50px 0px !important;
         }
 
         header h1,
         header p {
             font-family: "Nunito";
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 50px;
             font-weight: 800;
         }
 
         @media (max-width:768px) {
 
             /* Small */
-
-        }
-
-        @media (max-width:992px) and (min-width:601px) {
-
-            /* Medium */
-
-        }
-
-        @media (min-width:993px) {
-
-            /* Large */
+            header h1 {
+                font-size: 40px;
+            }
 
         }
 
@@ -187,7 +172,7 @@
     <header class="w3-animate-opacity w3-container">
         <div class="w3-content">
             <h1>Welcome to the Menu</h1>
-            <p>What do want this day? Order your favorite dish now!</p>
+            <p class="w3-large">What do want this day? Order your favorite dish now!</p>
         </div>
     </header>
 
