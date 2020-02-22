@@ -13,7 +13,7 @@ from . import views
 app_name = 'canteen'
 urlpatterns = [
     # The home page
-    path('', views.MenuView.as_view(), name='home'),
+    path('', views.MenuView.as_view(), name='menu'),
     
     # The detail of the dish
     path('<int:pk>/', views.DishView.as_view(), name='not-api-dish-detail'),
