@@ -56,6 +56,13 @@ def finished_request(**kwargs):
     close_old_connections()
 
 
+class LandingView(TemplateView):
+    """
+    View for the landing page of the website.
+    """
+    template_name = 'canteen/index.html'
+
+
 class MenuView(ListView):
     """
     View for listing the dishes.
