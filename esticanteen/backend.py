@@ -5,13 +5,13 @@ import os
 
 class TheStorage(BackendStorages):
 
-    def get_available_name(self, name):
+    def get_valid_name(self, name):
         """
         Returns a filename that's free on the target storage system, and
         available for new content to be written to.
         """
         
-        dir_name, file_name = os.path.split(name)
+        dir_name, file_name = os.path.split(super().get_valid_name(name))
         flength = len(file_name)
         
         if flength > 8:
