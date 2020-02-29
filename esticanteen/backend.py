@@ -1,4 +1,4 @@
-from github_storages import BackendStorages
+from github_storages.backend import BackendStorages
 
 
 class TheStorage(BackendStorages):
