@@ -173,7 +173,6 @@ CHANNEL_LAYERS = {
 # GITHUB S3
 
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-DEFAULT_FILE_STORAGE = 'github_storages.backend.BackendStorages'
 if not DEBUG:
     DEFAULT_FILE_STORAGE = 'github_storages.backend.BackendStorages'
 GITHUB_HANDLE = 'denniel-sadian'
@@ -190,6 +189,5 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 django_heroku.settings(locals())
 
 
-del DATABASES['default']['OPTIONS']['sslmode']
 if not DEBUG:
     del DATABASES['default']['OPTIONS']['sslmode']
