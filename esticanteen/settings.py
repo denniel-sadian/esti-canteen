@@ -177,7 +177,7 @@ if not DEBUG:
     DEFAULT_FILE_STORAGE = 'esticanteen.backend.TheStorage'
 GITHUB_HANDLE = 'denniel-sadian'
 ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
-GITHUB_REPO_NAME = 'esticanteen-bucket'
+GITHUB_REPO_NAME = os.getenv('GITHUB_REPO_NAME', 'esticanteen-bucket')
 
 
 # SESSIONS
