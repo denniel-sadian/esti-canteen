@@ -3,7 +3,7 @@ from github_storages import BackendStorages
 
 class TheStorage(BackendStorages):
 
-    def get_available_name(self, name, *kwargs):
+    def get_available_name(self, name):
         """
         Returns a filename that's free on the target storage system, and
         available for new content to be written to.
