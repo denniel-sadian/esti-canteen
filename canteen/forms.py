@@ -14,7 +14,7 @@ from .models import Feedback
 
 class OrderForm(forms.ModelForm):
     contact_no = forms.CharField(min_length=11)
-    count = forms.IntegerField(min_value=1)
+    count = forms.IntegerField(min_value=1, initial=1)
 
     class Meta:
         model = Order
